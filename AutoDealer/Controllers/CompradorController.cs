@@ -18,7 +18,7 @@ namespace AutoDealer.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Compradores.Where(db.Compradores.Status==1).ToList());
+            return View(db.Compradores.ToList());
         }
 
         //

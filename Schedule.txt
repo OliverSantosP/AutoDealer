@@ -16,7 +16,9 @@
 
 2:00 to Who know. - GTA V and The Sopranos.
 
+2:00 PM - 3:00 PM - Develop while on Car Wash.
 
+1:00 PM - 2: 00 PM - Develop.
 
 
         @Scripts.Render("~/bundles/modernizr")

@@ -28,6 +28,7 @@ namespace AutoDealer.Models
         public string Email { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public int Status { get; set; }
     
         public virtual ICollection<Facturas> Facturas { get; set; }
     }

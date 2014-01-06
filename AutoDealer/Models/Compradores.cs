@@ -11,7 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class Compradores
     {
         public Compradores()
@@ -20,7 +20,6 @@ namespace AutoDealer.Models
         }
     
         public int Id { get; set; }
-        [Required]
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Telefono { get; set; }
@@ -29,6 +28,8 @@ namespace AutoDealer.Models
         public string Email { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public int Status { get; set; }
+    
         public virtual ICollection<Facturas> Facturas { get; set; }
     }
 }

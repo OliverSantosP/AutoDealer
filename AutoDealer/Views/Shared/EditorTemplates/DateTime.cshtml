@@ -1,0 +1,9 @@
+﻿<!--Still not implemented correctly-->
+
+@model System.DateTime?
+<div class="editor-field">
+    @Html.TextBox("", (Model.HasValue ? Model.Value.ToString("MM/dd/yyyy") : string.Empty), new { @class = "dateinput" })
+    @Html.ValidationMessageFor(model => model)
+</div>
+
+
