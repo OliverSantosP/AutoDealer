@@ -1,0 +1,43 @@
+﻿@model AutoDealer.Models.Gastos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Gastos</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TiposDeGastos.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TiposDeGastos.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Precio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Precio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaCreacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaModificacion)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

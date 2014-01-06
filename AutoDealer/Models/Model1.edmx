@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AutoDealerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Automoviles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Suplidor" Type="int" Nullable="false" />
+          <Property Name="Liquidaciones" Type="int" Nullable="false" />
+          <Property Name="Factura" Type="int" Nullable="false" />
+          <Property Name="Showroom" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="Year" Type="date" Nullable="false" />
+          <Property Name="FechaEntrada" Type="datetime" />
+          <Property Name="FechaSalida" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compradores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
+          <Property Name="Direccion" Type="text" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="text" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Direccion" Type="text" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Detalle" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Vendedor" Type="int" Nullable="false" />
+          <Property Name="Comprador" Type="int" Nullable="false" />
+          <Property Name="NCF" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacturasDetalles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Factura" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Descripcion" Type="text" Nullable="false" />
+          <Property Name="Precio" Type="int" />
+          <Property Name="Comprador" Type="int" Nullable="false" />
+          <Property Name="Vendedor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gastos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Automovil" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Liquidaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Detalle" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Liquidaciones_Detalles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Liquidacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Showrooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Empresa" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="text" />
+        </EntityType>
+        <EntityType Name="Suplidores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
+          <Property Name="Direccion" Type="text" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="text" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TiposDeGastos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="text" />
+          <Property Name="Descripcion" Type="text" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
+          <Property Name="Direccion" Type="text" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="text" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Automoviles_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Liquidaciones">
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liquidaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Liquidaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Showrooms">
+          <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Showrooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Showroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Suplidores">
+          <End Role="Suplidores" Type="Self.Suplidores" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplidores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Suplidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Compradores">
+          <End Role="Compradores" Type="Self.Compradores" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compradores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Comprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Detalles">
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacturasDetalles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Detalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Vendedores">
+          <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gastos_TiposGastos">
+          <End Role="TiposDeGastos" Type="Self.TiposDeGastos" Multiplicity="1" />
+          <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDeGastos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gastos">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Liquidaciones_Detalles_Liquidaciones">
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
+          <End Role="Liquidaciones_Detalles" Type="Self.Liquidaciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liquidaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Liquidaciones_Detalles">
+              <PropertyRef Name="Liquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Showrooms_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Showrooms">
+              <PropertyRef Name="Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AutoDealerModelStoreContainer">
+          <EntitySet Name="Automoviles" EntityType="Self.Automoviles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compradores" EntityType="Self.Compradores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Showrooms" EntityType="Self.Showrooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suplidores" EntityType="Self.Suplidores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Automoviles_Facturas" Association="Self.FK_Automoviles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Liquidaciones" Association="Self.FK_Automoviles_Liquidaciones">
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Showrooms" Association="Self.FK_Automoviles_Showrooms">
+            <End Role="Showrooms" EntitySet="Showrooms" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Status" Association="Self.FK_Automoviles_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Suplidores" Association="Self.FK_Automoviles_Suplidores">
+            <End Role="Suplidores" EntitySet="Suplidores" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Compradores" Association="Self.FK_Facturas_Compradores">
+            <End Role="Compradores" EntitySet="Compradores" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Vendedores" Association="Self.FK_Facturas_Vendedores">
+            <End Role="Vendedores" EntitySet="Vendedores" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
+            <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
+            <End Role="Gastos" EntitySet="Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Liquidaciones_Detalles_Liquidaciones" Association="Self.FK_Liquidaciones_Detalles_Liquidaciones">
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+            <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Showrooms" EntitySet="Showrooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AutoDealerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Automoviles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Suplidor" Type="Int32" Nullable="false" />
+          <Property Name="Liquidaciones" Type="Int32" Nullable="false" />
+          <Property Name="Factura" Type="Int32" Nullable="false" />
+          <Property Name="Showroom" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaEntrada" Type="DateTime" Precision="3" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Automoviles_Facturas" FromRole="Automoviles" ToRole="Facturas" />
+          <NavigationProperty Name="Liquidaciones1" Relationship="Self.FK_Automoviles_Liquidaciones" FromRole="Automoviles" ToRole="Liquidaciones" />
+          <NavigationProperty Name="Showrooms" Relationship="Self.FK_Automoviles_Showrooms" FromRole="Automoviles" ToRole="Showrooms" />
+          <NavigationProperty Name="Status1" Relationship="Self.FK_Automoviles_Status" FromRole="Automoviles" ToRole="Status" />
+          <NavigationProperty Name="Suplidores" Relationship="Self.FK_Automoviles_Suplidores" FromRole="Automoviles" ToRole="Suplidores" />
+        </EntityType>
+        <EntityType Name="Compradores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Compradores" FromRole="Compradores" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Showrooms" Relationship="Self.FK_Showrooms_Empresas" FromRole="Empresas" ToRole="Showrooms" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Detalle" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Vendedor" Type="Int32" Nullable="false" />
+          <Property Name="Comprador" Type="Int32" Nullable="false" />
+          <Property Name="NCF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Facturas" FromRole="Facturas" ToRole="Automoviles" />
+          <NavigationProperty Name="Compradores" Relationship="Self.FK_Facturas_Compradores" FromRole="Facturas" ToRole="Compradores" />
+          <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_Facturas_Detalles" FromRole="Facturas" ToRole="FacturasDetalles" />
+          <NavigationProperty Name="Vendedores" Relationship="Self.FK_Facturas_Vendedores" FromRole="Facturas" ToRole="Vendedores" />
+        </EntityType>
+        <EntityType Name="FacturasDetalles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Factura" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Int32" />
+          <Property Name="Comprador" Type="Int32" Nullable="false" />
+          <Property Name="Vendedor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Detalles" FromRole="FacturasDetalles" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Gastos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Automovil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TiposDeGastos" Relationship="Self.FK_Gastos_TiposGastos" FromRole="Gastos" ToRole="TiposDeGastos" />
+        </EntityType>
+        <EntityType Name="Liquidaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detalle" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Liquidaciones" FromRole="Liquidaciones" ToRole="Automoviles" />
+          <NavigationProperty Name="Liquidaciones_Detalles" Relationship="Self.FK_Liquidaciones_Detalles_Liquidaciones" FromRole="Liquidaciones" ToRole="Liquidaciones_Detalles" />
+        </EntityType>
+        <EntityType Name="Liquidaciones_Detalles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Liquidacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Detalles_Liquidaciones" FromRole="Liquidaciones_Detalles" ToRole="Liquidaciones" />
+        </EntityType>
+        <EntityType Name="Showrooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Empresa" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Showrooms" FromRole="Showrooms" ToRole="Automoviles" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Showrooms_Empresas" FromRole="Showrooms" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Status" FromRole="Status" ToRole="Automoviles" />
+        </EntityType>
+        <EntityType Name="Suplidores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Suplidores" FromRole="Suplidores" ToRole="Automoviles" />
+        </EntityType>
+        <EntityType Name="TiposDeGastos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gastos" Relationship="Self.FK_Gastos_TiposGastos" FromRole="TiposDeGastos" ToRole="Gastos" />
+        </EntityType>
+        <EntityType Name="Vendedores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Vendedores" FromRole="Vendedores" ToRole="Facturas" />
+        </EntityType>
+        <Association Name="FK_Automoviles_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Liquidaciones">
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liquidaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Liquidaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Showrooms">
+          <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Showrooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Showroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_Suplidores">
+          <End Role="Suplidores" Type="Self.Suplidores" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplidores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="Suplidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Compradores">
+          <End Role="Compradores" Type="Self.Compradores" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compradores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Comprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Showrooms_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Showrooms">
+              <PropertyRef Name="Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Detalles">
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacturasDetalles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Detalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Vendedores">
+          <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gastos_TiposGastos">
+          <End Role="TiposDeGastos" Type="Self.TiposDeGastos" Multiplicity="1" />
+          <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDeGastos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gastos">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Liquidaciones_Detalles_Liquidaciones">
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
+          <End Role="Liquidaciones_Detalles" Type="Self.Liquidaciones_Detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liquidaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Liquidaciones_Detalles">
+              <PropertyRef Name="Liquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AutoDealerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Automoviles" EntityType="Self.Automoviles" />
+          <EntitySet Name="Compradores" EntityType="Self.Compradores" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" />
+          <EntitySet Name="Gastos" EntityType="Self.Gastos" />
+          <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" />
+          <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" />
+          <EntitySet Name="Showrooms" EntityType="Self.Showrooms" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Suplidores" EntityType="Self.Suplidores" />
+          <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" />
+          <EntitySet Name="Vendedores" EntityType="Self.Vendedores" />
+          <AssociationSet Name="FK_Automoviles_Facturas" Association="Self.FK_Automoviles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Liquidaciones" Association="Self.FK_Automoviles_Liquidaciones">
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Showrooms" Association="Self.FK_Automoviles_Showrooms">
+            <End Role="Showrooms" EntitySet="Showrooms" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Status" Association="Self.FK_Automoviles_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_Suplidores" Association="Self.FK_Automoviles_Suplidores">
+            <End Role="Suplidores" EntitySet="Suplidores" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Compradores" Association="Self.FK_Facturas_Compradores">
+            <End Role="Compradores" EntitySet="Compradores" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Showrooms" EntitySet="Showrooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Vendedores" Association="Self.FK_Facturas_Vendedores">
+            <End Role="Vendedores" EntitySet="Vendedores" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
+            <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
+            <End Role="Gastos" EntitySet="Gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Liquidaciones_Detalles_Liquidaciones" Association="Self.FK_Liquidaciones_Detalles_Liquidaciones">
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+            <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AutoDealerModelStoreContainer" CdmEntityContainer="AutoDealerEntities">
+          <EntitySetMapping Name="Automoviles">
+            <EntityTypeMapping TypeName="AutoDealerModel.Automoviles">
+              <MappingFragment StoreEntitySet="Automoviles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Suplidor" ColumnName="Suplidor" />
+                <ScalarProperty Name="Liquidaciones" ColumnName="Liquidaciones" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="Showroom" ColumnName="Showroom" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compradores">
+            <EntityTypeMapping TypeName="AutoDealerModel.Compradores">
+              <MappingFragment StoreEntitySet="Compradores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="AutoDealerModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="AutoDealerModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Comprador" ColumnName="Comprador" />
+                <ScalarProperty Name="NCF" ColumnName="NCF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasDetalles">
+            <EntityTypeMapping TypeName="AutoDealerModel.FacturasDetalles">
+              <MappingFragment StoreEntitySet="FacturasDetalles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Comprador" ColumnName="Comprador" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gastos">
+            <EntityTypeMapping TypeName="AutoDealerModel.Gastos">
+              <MappingFragment StoreEntitySet="Gastos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Automovil" ColumnName="Automovil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Liquidaciones">
+            <EntityTypeMapping TypeName="AutoDealerModel.Liquidaciones">
+              <MappingFragment StoreEntitySet="Liquidaciones">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Liquidaciones_Detalles">
+            <EntityTypeMapping TypeName="AutoDealerModel.Liquidaciones_Detalles">
+              <MappingFragment StoreEntitySet="Liquidaciones_Detalles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="Liquidacion" ColumnName="Liquidacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Showrooms">
+            <EntityTypeMapping TypeName="AutoDealerModel.Showrooms">
+              <MappingFragment StoreEntitySet="Showrooms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="AutoDealerModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suplidores">
+            <EntityTypeMapping TypeName="AutoDealerModel.Suplidores">
+              <MappingFragment StoreEntitySet="Suplidores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposDeGastos">
+            <EntityTypeMapping TypeName="AutoDealerModel.TiposDeGastos">
+              <MappingFragment StoreEntitySet="TiposDeGastos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendedores">
+            <EntityTypeMapping TypeName="AutoDealerModel.Vendedores">
+              <MappingFragment StoreEntitySet="Vendedores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

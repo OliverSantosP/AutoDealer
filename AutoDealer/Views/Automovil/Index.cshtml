@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AutoDealer.Models.Automoviles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Suplidores.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Liquidaciones1.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Facturas.NCF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Showrooms.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status1.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suplidores.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Liquidaciones1.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Facturas.NCF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Showrooms.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEntrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status1.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

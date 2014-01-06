@@ -1,0 +1,64 @@
+﻿@model AutoDealer.Models.FacturasDetalles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FacturasDetalles</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Factura)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Factura)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaCreacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Precio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Precio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comprador)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comprador)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Vendedor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Vendedor)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

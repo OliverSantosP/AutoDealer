@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AutoDealer.Models.Compradores>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Comprador", "Create", null, new { @class="btn btn-primary"})
+</p>
+
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="panel-title">
+                    <b>@Html.DisplayNameFor(model => model.Nombre)</b>
+                </h3>
+            </div>
+            <div class="col-md-2">
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Telefono)</b></h3>
+            </div>
+            <div class="col-md-3">
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Direccion)</b></h3>
+            </div>
+            <div class="col-md-2">
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Celular)</b></h3>
+            </div>
+            <div class="col-md-1">
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Email)</b></h3>
+            </div>
+        </div>
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="panel-body">
+                <div class="col-md-2">
+                    @Html.ActionLink(item.Nombre + " " + item.Apellido, "Details", new { id = item.Id })
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Celular)
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+                <div class="col-md-1">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+
+
+        
+     

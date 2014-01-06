@@ -1,0 +1,30 @@
+3:00 PM - 4:00 PM - Database creation.
+
+6:00 PM - 7:30 PM - Setting un development enviroment.
+
+7:30 PM - 8:00 PM - Added some FK to the DB and refreshed the model.
+
+8:00 PM - 10:30 PM - Development.
+
+10:30 PM - 11:30 PM - 1 hour brake
+
+11-30 PM - 12:38 AM - Develop
+
+12:38 AM - 1:00 - Hamburguer.
+
+1:00 AM - 2:00 AM Develop.
+
+2:00 to Who know. - GTA V and The Sopranos.
+
+
+
+
+        @Scripts.Render("~/bundles/modernizr")
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
