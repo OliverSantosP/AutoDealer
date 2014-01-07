@@ -10,72 +10,84 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
 
-    <fieldset>
-        <legend>Compradores</legend>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-2">
+                    <h3 class="panel-title">
+                        Compradores
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <fieldset>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Nombre)
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
 
-        @Html.HiddenFor(model => model.Id)
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Apellido)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Apellido)
+                        @Html.ValidationMessageFor(model => model.Apellido)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Telefono)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Telefono)
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Apellido)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Apellido)
-            @Html.ValidationMessageFor(model => model.Apellido)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Direccion)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Direccion)
+                        @Html.ValidationMessageFor(model => model.Direccion)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Telefono)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Telefono)
-            @Html.ValidationMessageFor(model => model.Telefono)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Celular)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Celular)
+                        @Html.ValidationMessageFor(model => model.Celular)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Direccion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Direccion)
-            @Html.ValidationMessageFor(model => model.Direccion)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Celular)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Celular)
-            @Html.ValidationMessageFor(model => model.Celular)
-        </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FechaCreacion)
+                    </div>
+                    <div class="editor-label">
+                        @Html.EditorFor(model => model.FechaCreacion)
+                        @Html.ValidationMessageFor(model => model.FechaCreacion)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
+                    <p>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </p>
+                </fieldset>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-label">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    </div>
 }
 <div>
     @Html.ActionLink("Back to List", "Index")

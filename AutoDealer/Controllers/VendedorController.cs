@@ -18,7 +18,7 @@ namespace AutoDealer.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Vendedores.ToList());
+            return View(db.Vendedores.Where(Vendedores=> Vendedores.Status==1).OrderBy(Vendedores=> Vendedores.FechaCreacion).Take(100).ToList());
         }
 
         //

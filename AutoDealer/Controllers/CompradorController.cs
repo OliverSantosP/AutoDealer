@@ -13,14 +13,16 @@ namespace AutoDealer.Controllers
     {
         private AutoDealerEntities db = new AutoDealerEntities();
 
-        //
-        // GET: /Comprador/
-
-        public ActionResult Index()
+        public ActionResult Index(string Buscar)
         {
-            return View(db.Compradores.ToList());
-        }
+            var compradores = db.Compradores.Where(Compradores => Compradores.Status == 1).OrderBy(Compradores => Compradores.FechaCreacion).Take(100);
 
+            if (!String.IsNullOrEmpty(Buscar))
+            {
+                compradores = compradores.Where(Compradores => Compradores.Nombre.Contains(Buscar));
+            }
+            return View(compradores.ToList());
+        }
         //
         // GET: /Comprador/Details/5
 
@@ -49,15 +51,10 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Compradores compradores)
         {
-            if (string.IsNullOrEmpty(compradores.Nombre))
-                ModelState.AddModelError("name", "El nombre es obligatorio.");
-            if (compradores.Celular.Length != 12)
-                ModelState.AddModelError("celular", "El celular debe de tener 10 digitos. Ejemplo: 809-655-3434.");
-            if (compradores.Telefono.Length != 12)
-                ModelState.AddModelError("telefono", "El telefono debe de tener 10 digitos. Ejemplo: 809-655-3434.");
             if (ModelState.IsValid)
             {
                 compradores.FechaCreacion = System.DateTime.Now;
+                compradores.Status = 1;
                 db.Compradores.Add(compradores);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,17 +83,12 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Compradores compradores)
         {
-            if (string.IsNullOrEmpty(compradores.Nombre))
-                ModelState.AddModelError("name", "El nombre es obligatorio.");
-            if (compradores.Celular.Length != 12)
-                ModelState.AddModelError("celular", "El celular debe de tener 10 digitos. Ejemplo: 809-655-3434.");
-            if (compradores.Telefono.Length != 12)
-                ModelState.AddModelError("telefono", "El telefono debe de tener 10 digitos. Ejemplo: 809-655-3434.");
 
             if (ModelState.IsValid)
             {
                 db.Entry(compradores).State = EntityState.Modified;
                 compradores.FechaModificacion = System.DateTime.Now;
+                compradores.Status = 1;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -124,7 +116,7 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Compradores compradores = db.Compradores.Find(id);
-            db.Compradores.Remove(compradores);
+            compradores.Status = 0;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

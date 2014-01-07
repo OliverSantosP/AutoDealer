@@ -7,10 +7,19 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Crear Comprador", "Create", null, new { @class="btn btn-primary"})
+    @Html.ActionLink("Crear Comprador", "Create", null, new { @class = "btn btn-primary" })
+    @using (Html.BeginForm("Index", "comprador", FormMethod.Get, "Buscar"))
+    {
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" placeholder="Buscar" id="Buscar" name="Buscar">
+        </div>
+    }
 </p>
 
-    <div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
             <div class="col-md-2">
@@ -67,5 +76,5 @@
 
 
 
-        
-     
+
+

@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 namespace AutoDealer.Models
 {
     using System;
@@ -20,10 +21,14 @@ namespace AutoDealer.Models
         }
     
         public int Id { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public string Apellido { get; set; }
+        [StringLength(12)]
         public string Telefono { get; set; }
         public string Direccion { get; set; }
+        [StringLength(12)]
         public string Celular { get; set; }
         public string Email { get; set; }
         public System.DateTime FechaCreacion { get; set; }
