@@ -7,69 +7,95 @@
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Compradores</legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="panel-title">
+                    Compradores
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Nombre)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nombre)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Apellido)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Apellido)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Apellido)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Telefono)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Telefono)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Telefono)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Direccion)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Direccion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Direccion)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Celular)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Celular)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Celular)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Celular)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Email)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Email)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaCreacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaCreacion)
-    </div>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.FechaModificacion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FechaModificacion)
+        </div>
+        <br>
+        <input type="submit" value="Delete" class="btn btn-danger" />
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaModificacion)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaModificacion)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Delete" /> |
+</div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         @Html.ActionLink("Back to List", "Index")
-    </p>
-}
+    }
