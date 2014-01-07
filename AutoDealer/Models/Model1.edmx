@@ -21,6 +21,7 @@
           <Property Name="FechaSalida" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="TipoAutomovil" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="int" />
         </EntityType>
         <EntityType Name="Compradores">
           <Key>
@@ -546,6 +547,7 @@
           <NavigationProperty Name="Automoviles1" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles" ToRole="Automoviles1" />
           <NavigationProperty Name="Automoviles2" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles1" ToRole="Automoviles" />
           <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_Automoviles_TiposAutomoviles" FromRole="Automoviles" ToRole="TiposAutomoviles" />
+          <Property Name="Precio" Type="Int32" />
         </EntityType>
         <EntityType Name="Compradores">
           <Key>
@@ -1082,6 +1084,7 @@
           <EntitySetMapping Name="Automoviles">
             <EntityTypeMapping TypeName="AutoDealerModel.Automoviles">
               <MappingFragment StoreEntitySet="Automoviles">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="TipoAutomovil" ColumnName="TipoAutomovil" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Suplidor" ColumnName="Suplidor" />

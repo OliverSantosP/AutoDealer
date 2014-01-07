@@ -13,6 +13,20 @@ namespace AutoDealer
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+                "ModelosList",
+                "Automovil/Modelos/List/{Id}",
+                new { controller = "Home", action = "ModelosList", Id = "" }
+            );
+
+
+            routes.MapRoute(
+                "FabricantesList",
+                "Automovil/Fabricantes/List",
+                new { controller = "Home", action = "FabricantesList" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

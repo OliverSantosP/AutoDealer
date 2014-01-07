@@ -11,6 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Fabricantes
     {
@@ -19,6 +20,13 @@ namespace AutoDealer.Models
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
     
+        public static List<Fabricantes> GetFabricantes()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Fabricantes> Lista = new List<Fabricantes>();
+            Lista = db.Fabricantes.ToList();
+            return Lista;
+        }
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Status { get; set; }

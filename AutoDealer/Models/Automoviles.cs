@@ -6,7 +6,7 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
+
 namespace AutoDealer.Models
 {
     using System;
@@ -21,17 +21,12 @@ namespace AutoDealer.Models
         public int Showroom { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public System.DateTime FechaModificacion { get; set; }
-
-        [Display(Name = "Año")]
         public System.DateTime Year { get; set; }
-
-        [Display(Name = "Entrada")]
         public Nullable<System.DateTime> FechaEntrada { get; set; }
         public Nullable<System.DateTime> FechaSalida { get; set; }
         public int Status { get; set; }
-
-        [Display(Name = "Vehiculo")]
         public int TipoAutomovil { get; set; }
+        public Nullable<int> Precio { get; set; }
     
         public virtual Facturas Facturas { get; set; }
         public virtual Liquidaciones Liquidaciones1 { get; set; }

@@ -3,52 +3,83 @@
 @{
     ViewBag.Title = "Index";
 }
+<!--Codigo para los filtros por Fabricante y modelo-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/Automovil/FabricantesList", function (data) {
+                var items = "<option>Fabricante</option>";
+                $.each(data, function (i, fabricante) {
+                    items += "<option value='" + fabricante.Value + "'>" + fabricante.Text + "</option>";
+                });
+                $("#Fabricantes").html(items);
+            });
+
+            $("#Fabricantes").change(function () {
+                $.getJSON("/Automovil/ModelosList/" + $("#Fabricantes > option:selected").attr("value"), function (data) {
+                    var items = "<option>Modelo</option>";
+                    $.each(data, function (i, modelo) {
+                        items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
+                    });
+                    $("#Modelos").html(items);
+                });
+            });
+        }) </script>
+}
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="btn btn-primary" href="/Automovil/Create">Crear Automovil</a>
+
+    <!--Options List-->
+    @using (Html.BeginForm())
+    {
+        <div class="btn-group">
+            <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+        </div>
+        <div class="btn-group">
+            <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+        </div>
+
+    }
 </p>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
             <div class="col-md-2">
-                <h3 class="panel-title">
-                    @Html.DisplayNameFor(model => model.TipoAutomovil)
-                </h3>
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.TipoAutomovil)</b></h3>
             </div>
             <div class="col-md-1">
-                @Html.DisplayNameFor(model => model.Year)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Year)</b></h3>
             </div>
             <div class="col-md-2">
-                @Html.DisplayNameFor(model => model.Suplidor)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Suplidor)</b></h3>
             </div>
             <div class="col-md-2">
-                @Html.DisplayNameFor(model => model.Showroom)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Showroom)</b></h3>
             </div>
             <div class="col-md-2">
-                @Html.DisplayNameFor(model => model.FechaEntrada)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.FechaEntrada)</b></h3>
             </div>
             <div class="col-md-1">
-                @Html.DisplayNameFor(model => model.Liquidaciones)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Factura)</b></h3>
             </div>
             <div class="col-md-1">
-                @Html.DisplayNameFor(model => model.Factura)
+                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Precio)</b></h3>
             </div>
             <div class="col-md-1">
-                Test
             </div>
         </div>
     </div>
 
     <ul class="list-group">
         @foreach (var item in Model)
-                {
+        {
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-md-2">
-                        @item.TiposAutomoviles.Fabricantes.Nombre
-                        @item.TiposAutomoviles.Modelos.Nombre
+                        @Html.ActionLink(item.TiposAutomoviles.Fabricantes.Nombre + " " + item.TiposAutomoviles.Modelos.Nombre, "Details", new { id = item.Id })
                     </div>
                     <div class="col-md-1">
                         @item.Year.ToString("yyyy")
@@ -63,18 +94,17 @@
                         @Html.DisplayFor(modelItem => item.FechaEntrada)
                     </div>
                     <div class="col-md-1">
-                        @Html.DisplayFor(modelItem => item.Liquidaciones)
-                    </div>
-                    <div class="col-md-1">
                         @Html.DisplayFor(modelItem => item.Factura)
                     </div>
                     <div class="col-md-1">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </div>
+                    <div class="col-md-1">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
                     </div>
                 </div>
-                </li>
-                }
-        </ul><!--Listgroup-->
-    </div><!--Panel-->
+            </li>
+        }
+    </ul><!--Listgroup-->
+</div><!--Panel-->

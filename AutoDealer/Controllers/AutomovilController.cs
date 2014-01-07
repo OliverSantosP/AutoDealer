@@ -21,6 +21,38 @@ namespace AutoDealer.Controllers
             return View(db.Automoviles.ToList());
         }
 
+        public ActionResult FabricantesList()
+        {
+            List<Fabricantes> fabricantes = Fabricantes.GetFabricantes();
+
+            if (HttpContext.Request.IsAjaxRequest())
+            {
+                return Json(new SelectList(
+                            fabricantes,
+                            "Id",
+                            "Nombre"), JsonRequestBehavior.AllowGet
+                            );
+            }
+
+            return View(fabricantes);
+        }
+
+        public ActionResult ModelosList(int Id)
+        {
+            List<Modelos> modelos = Modelos.GetModelos(Id);
+
+            if (HttpContext.Request.IsAjaxRequest())
+            {
+                return Json(new SelectList(
+                            modelos,
+                            "Id",
+                            "Nombre"), JsonRequestBehavior.AllowGet
+                            );
+            }
+
+            return View(modelos);
+        }
+
         //
         // GET: /Automovil/Details/5
 
