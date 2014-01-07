@@ -18,15 +18,8 @@
 
 2:00 PM - 3:00 PM - Develop while on Car Wash.
 
-1:00 PM - 2: 00 PM - Develop.
+1:00 PM - 3: 00 PM - Develop.
 
+4:00 - 5:37 PM - Develop. Datepicker issue solved using partial views.
 
-        @Scripts.Render("~/bundles/modernizr")
-<div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
+4:00 PM - 09:00 PM - All the views for Compradores finished. I'm tired. I'm done for today.
