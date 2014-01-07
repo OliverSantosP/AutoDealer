@@ -9,85 +9,72 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Suplidor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Liquidaciones)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Factura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Showroom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaModificacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaEntrada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaSalida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoAutomovil)
-        </th>
-        <th></th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="panel-title">
+                    @Html.DisplayNameFor(model => model.TipoAutomovil)
+                </h3>
+            </div>
+            <div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Year)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayNameFor(model => model.Suplidor)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayNameFor(model => model.Showroom)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayNameFor(model => model.FechaEntrada)
+            </div>
+            <div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Liquidaciones)
+            </div>
+            <div class="col-md-1">
+                @Html.DisplayNameFor(model => model.Factura)
+            </div>
+            <div class="col-md-1">
+                Test
+            </div>
+        </div>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Suplidor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Liquidaciones)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Factura)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Showroom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaModificacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaEntrada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaSalida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoAutomovil)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    <ul class="list-group">
+        @foreach (var item in Model)
+                {
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        @item.TiposAutomoviles.Fabricantes.Nombre
+                        @item.TiposAutomoviles.Modelos.Nombre
+                    </div>
+                    <div class="col-md-1">
+                        @item.Year.ToString("yyyy")
+                    </div>
+                    <div class="col-md-2">
+                        @item.Suplidores.Nombre
+                    </div>
+                    <div class="col-md-2">
+                        @item.Showrooms.Nombre
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DisplayFor(modelItem => item.FechaEntrada)
+                    </div>
+                    <div class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.Liquidaciones)
+                    </div>
+                    <div class="col-md-1">
+                        @Html.DisplayFor(modelItem => item.Factura)
+                    </div>
+                    <div class="col-md-1">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                </div>
+                </li>
+                }
+        </ul><!--Listgroup-->
+    </div><!--Panel-->
