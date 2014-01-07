@@ -11,31 +11,31 @@
     <legend>Automoviles</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Suplidores.Nombre)
+         @Html.DisplayNameFor(model => model.Suplidor)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Suplidores.Nombre)
+        @Html.DisplayFor(model => model.Suplidor)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Liquidaciones1.Id)
+         @Html.DisplayNameFor(model => model.Liquidaciones)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Liquidaciones1.Id)
+        @Html.DisplayFor(model => model.Liquidaciones)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Facturas.NCF)
+         @Html.DisplayNameFor(model => model.Factura)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Facturas.NCF)
+        @Html.DisplayFor(model => model.Factura)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Showrooms.Nombre)
+         @Html.DisplayNameFor(model => model.Showroom)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Showrooms.Nombre)
+        @Html.DisplayFor(model => model.Showroom)
     </div>
 
     <div class="display-label">
@@ -74,10 +74,17 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status1.Nombre)
+         @Html.DisplayNameFor(model => model.Status)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Status1.Nombre)
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoAutomovil)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoAutomovil)
     </div>
 </fieldset>
 @using (Html.BeginForm()) {

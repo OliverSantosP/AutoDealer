@@ -14,34 +14,34 @@
         <legend>Automoviles</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Suplidor, "Suplidores")
+            @Html.LabelFor(model => model.Suplidor)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Suplidor", String.Empty)
+            @Html.EditorFor(model => model.Suplidor)
             @Html.ValidationMessageFor(model => model.Suplidor)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Liquidaciones, "Liquidaciones1")
+            @Html.LabelFor(model => model.Liquidaciones)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Liquidaciones", String.Empty)
+            @Html.EditorFor(model => model.Liquidaciones)
             @Html.ValidationMessageFor(model => model.Liquidaciones)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Factura, "Facturas")
+            @Html.LabelFor(model => model.Factura)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Factura", String.Empty)
+            @Html.EditorFor(model => model.Factura)
             @Html.ValidationMessageFor(model => model.Factura)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Showroom, "Showrooms")
+            @Html.LabelFor(model => model.Showroom)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Showroom", String.Empty)
+            @Html.EditorFor(model => model.Showroom)
             @Html.ValidationMessageFor(model => model.Showroom)
         </div>
 
@@ -86,11 +86,19 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Status, "Status1")
+            @Html.LabelFor(model => model.Status)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Status", String.Empty)
+            @Html.EditorFor(model => model.Status)
             @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoAutomovil)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TipoAutomovil)
+            @Html.ValidationMessageFor(model => model.TipoAutomovil)
         </div>
 
         <p>

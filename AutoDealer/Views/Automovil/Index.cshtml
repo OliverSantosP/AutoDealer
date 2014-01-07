@@ -12,16 +12,16 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Suplidores.Nombre)
+            @Html.DisplayNameFor(model => model.Suplidor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Liquidaciones1.Id)
+            @Html.DisplayNameFor(model => model.Liquidaciones)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Facturas.NCF)
+            @Html.DisplayNameFor(model => model.Factura)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Showrooms.Nombre)
+            @Html.DisplayNameFor(model => model.Showroom)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -39,7 +39,10 @@
             @Html.DisplayNameFor(model => model.FechaSalida)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status1.Nombre)
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoAutomovil)
         </th>
         <th></th>
     </tr>
@@ -47,16 +50,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Suplidores.Nombre)
+            @Html.DisplayFor(modelItem => item.Suplidor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Liquidaciones1.Id)
+            @Html.DisplayFor(modelItem => item.Liquidaciones)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Facturas.NCF)
+            @Html.DisplayFor(modelItem => item.Factura)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Showrooms.Nombre)
+            @Html.DisplayFor(modelItem => item.Showroom)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaCreacion)
@@ -74,7 +77,10 @@
             @Html.DisplayFor(modelItem => item.FechaSalida)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status1.Nombre)
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoAutomovil)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

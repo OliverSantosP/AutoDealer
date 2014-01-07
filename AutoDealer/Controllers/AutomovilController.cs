@@ -18,8 +18,7 @@ namespace AutoDealer.Controllers
 
         public ActionResult Index()
         {
-            var automoviles = db.Automoviles.Include(a => a.Facturas).Include(a => a.Liquidaciones1).Include(a => a.Showrooms).Include(a => a.Status1).Include(a => a.Suplidores);
-            return View(automoviles.ToList());
+            return View(db.Automoviles.ToList());
         }
 
         //
@@ -40,11 +39,6 @@ namespace AutoDealer.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF");
-            ViewBag.Liquidaciones = new SelectList(db.Liquidaciones, "Id", "Id");
-            ViewBag.Showroom = new SelectList(db.Showrooms, "Id", "Nombre");
-            ViewBag.Status = new SelectList(db.Status, "Id", "Nombre");
-            ViewBag.Suplidor = new SelectList(db.Suplidores, "Id", "Nombre");
             return View();
         }
 
@@ -62,11 +56,6 @@ namespace AutoDealer.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", automoviles.Factura);
-            ViewBag.Liquidaciones = new SelectList(db.Liquidaciones, "Id", "Id", automoviles.Liquidaciones);
-            ViewBag.Showroom = new SelectList(db.Showrooms, "Id", "Nombre", automoviles.Showroom);
-            ViewBag.Status = new SelectList(db.Status, "Id", "Nombre", automoviles.Status);
-            ViewBag.Suplidor = new SelectList(db.Suplidores, "Id", "Nombre", automoviles.Suplidor);
             return View(automoviles);
         }
 
@@ -80,11 +69,6 @@ namespace AutoDealer.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", automoviles.Factura);
-            ViewBag.Liquidaciones = new SelectList(db.Liquidaciones, "Id", "Id", automoviles.Liquidaciones);
-            ViewBag.Showroom = new SelectList(db.Showrooms, "Id", "Nombre", automoviles.Showroom);
-            ViewBag.Status = new SelectList(db.Status, "Id", "Nombre", automoviles.Status);
-            ViewBag.Suplidor = new SelectList(db.Suplidores, "Id", "Nombre", automoviles.Suplidor);
             return View(automoviles);
         }
 
@@ -101,11 +85,6 @@ namespace AutoDealer.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", automoviles.Factura);
-            ViewBag.Liquidaciones = new SelectList(db.Liquidaciones, "Id", "Id", automoviles.Liquidaciones);
-            ViewBag.Showroom = new SelectList(db.Showrooms, "Id", "Nombre", automoviles.Showroom);
-            ViewBag.Status = new SelectList(db.Status, "Id", "Nombre", automoviles.Status);
-            ViewBag.Suplidor = new SelectList(db.Suplidores, "Id", "Nombre", automoviles.Suplidor);
             return View(automoviles);
         }
 

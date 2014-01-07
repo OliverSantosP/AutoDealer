@@ -12,23 +12,22 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Status
+    public partial class TiposAutomoviles
     {
-        public Status()
+        public TiposAutomoviles()
         {
             this.Automoviles = new HashSet<Automoviles>();
-            this.Fabricantes = new HashSet<Fabricantes>();
-            this.Modelos = new HashSet<Modelos>();
-            this.Trim = new HashSet<Trim>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public int Fabricante { get; set; }
+        public int Modelo { get; set; }
+        public Nullable<int> Trim { get; set; }
+        public int Status { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual ICollection<Fabricantes> Fabricantes { get; set; }
-        public virtual ICollection<Modelos> Modelos { get; set; }
-        public virtual ICollection<Trim> Trim { get; set; }
+        public virtual Fabricantes Fabricantes { get; set; }
+        public virtual Modelos Modelos { get; set; }
+        public virtual Trim Trim1 { get; set; }
     }
 }

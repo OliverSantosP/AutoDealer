@@ -20,6 +20,7 @@
           <Property Name="FechaEntrada" Type="datetime" />
           <Property Name="FechaSalida" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="TipoAutomovil" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Compradores">
           <Key>
@@ -45,6 +46,14 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="int" />
           <Property Name="Direccion" Type="text" />
+        </EntityType>
+        <EntityType Name="Fabricantes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -102,6 +111,14 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Liquidacion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Modelos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Showrooms">
           <Key>
             <PropertyRef Name="Id" />
@@ -135,6 +152,16 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="TiposAutomoviles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fabricante" Type="int" Nullable="false" />
+          <Property Name="Modelo" Type="int" Nullable="false" />
+          <Property Name="Trim" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TiposDeGastos">
           <Key>
             <PropertyRef Name="Id" />
@@ -142,6 +169,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="text" />
           <Property Name="Descripcion" Type="text" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vendedores">
@@ -159,6 +195,18 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Automoviles_Automoviles">
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="1" />
+          <End Role="Automoviles1" Type="Self.Automoviles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Automoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Automoviles_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
           <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
@@ -216,6 +264,30 @@
             </Principal>
             <Dependent Role="Automoviles">
               <PropertyRef Name="Suplidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_TiposAutomoviles">
+          <End Role="TiposAutomoviles" Type="Self.TiposAutomoviles" Multiplicity="1" />
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposAutomoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="TipoAutomovil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fabricantes_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Fabricantes" Type="Self.Fabricantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fabricantes">
+              <PropertyRef Name="Status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -279,6 +351,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Modelos_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Modelos" Type="Self.Modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modelos">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Showrooms_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
           <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
@@ -291,20 +375,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TiposAutomoviles_Fabricantes">
+          <End Role="Fabricantes" Type="Self.Fabricantes" Multiplicity="1" />
+          <End Role="TiposAutomoviles" Type="Self.TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Fabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposAutomoviles_Modelos">
+          <End Role="Modelos" Type="Self.Modelos" Multiplicity="1" />
+          <End Role="TiposAutomoviles" Type="Self.TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Modelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposAutomoviles_Trim">
+          <End Role="Trim" Type="Self.Trim" Multiplicity="0..1" />
+          <End Role="TiposAutomoviles" Type="Self.TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Trim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trim_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Trim" Type="Self.Trim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trim">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AutoDealerModelStoreContainer">
           <EntitySet Name="Automoviles" EntityType="Self.Automoviles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Compradores" EntityType="Self.Compradores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fabricantes" EntityType="Self.Fabricantes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Showrooms" EntityType="Self.Showrooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplidores" EntityType="Self.Suplidores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposAutomoviles" EntityType="Self.TiposAutomoviles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trim" EntityType="Self.Trim" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Automoviles_Automoviles" Association="Self.FK_Automoviles_Automoviles">
+            <End Role="Automoviles" EntitySet="Automoviles" />
+            <End Role="Automoviles1" EntitySet="Automoviles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Automoviles_Facturas" Association="Self.FK_Automoviles_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Automoviles" EntitySet="Automoviles" />
@@ -324,6 +464,14 @@
           <AssociationSet Name="FK_Automoviles_Suplidores" Association="Self.FK_Automoviles_Suplidores">
             <End Role="Suplidores" EntitySet="Suplidores" />
             <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_TiposAutomoviles" Association="Self.FK_Automoviles_TiposAutomoviles">
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fabricantes_Status" Association="Self.FK_Fabricantes_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Fabricantes" EntitySet="Fabricantes" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Compradores" Association="Self.FK_Facturas_Compradores">
             <End Role="Compradores" EntitySet="Compradores" />
@@ -345,9 +493,29 @@
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
             <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Modelos_Status" Association="Self.FK_Modelos_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Modelos" EntitySet="Modelos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Showrooms" EntitySet="Showrooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Fabricantes" Association="Self.FK_TiposAutomoviles_Fabricantes">
+            <End Role="Fabricantes" EntitySet="Fabricantes" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Modelos" Association="Self.FK_TiposAutomoviles_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Trim" Association="Self.FK_TiposAutomoviles_Trim">
+            <End Role="Trim" EntitySet="Trim" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trim_Status" Association="Self.FK_Trim_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trim" EntitySet="Trim" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -374,6 +542,10 @@
           <NavigationProperty Name="Showrooms" Relationship="Self.FK_Automoviles_Showrooms" FromRole="Automoviles" ToRole="Showrooms" />
           <NavigationProperty Name="Status1" Relationship="Self.FK_Automoviles_Status" FromRole="Automoviles" ToRole="Status" />
           <NavigationProperty Name="Suplidores" Relationship="Self.FK_Automoviles_Suplidores" FromRole="Automoviles" ToRole="Suplidores" />
+          <Property Name="TipoAutomovil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Automoviles1" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles" ToRole="Automoviles1" />
+          <NavigationProperty Name="Automoviles2" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles1" ToRole="Automoviles" />
+          <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_Automoviles_TiposAutomoviles" FromRole="Automoviles" ToRole="TiposAutomoviles" />
         </EntityType>
         <EntityType Name="Compradores">
           <Key>
@@ -487,6 +659,9 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Status" FromRole="Status" ToRole="Automoviles" />
+          <NavigationProperty Name="Fabricantes" Relationship="AutoDealerModel.FK_Fabricantes_Status" FromRole="Status" ToRole="Fabricantes" />
+          <NavigationProperty Name="Modelos" Relationship="AutoDealerModel.FK_Modelos_Status" FromRole="Status" ToRole="Modelos" />
+          <NavigationProperty Name="Trim" Relationship="AutoDealerModel.FK_Trim_Status" FromRole="Status" ToRole="Trim" />
         </EntityType>
         <EntityType Name="Suplidores">
           <Key>
@@ -720,7 +895,184 @@
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
             <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
           </AssociationSet>
+          <EntitySet Name="Fabricantes" EntityType="AutoDealerModel.Fabricantes" />
+          <EntitySet Name="Modelos" EntityType="AutoDealerModel.Modelos" />
+          <EntitySet Name="TiposAutomoviles" EntityType="AutoDealerModel.TiposAutomoviles" />
+          <EntitySet Name="Trim" EntityType="AutoDealerModel.Trim" />
+          <AssociationSet Name="FK_Automoviles_Automoviles" Association="AutoDealerModel.FK_Automoviles_Automoviles">
+            <End Role="Automoviles" EntitySet="Automoviles" />
+            <End Role="Automoviles1" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Automoviles_TiposAutomoviles" Association="AutoDealerModel.FK_Automoviles_TiposAutomoviles">
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+            <End Role="Automoviles" EntitySet="Automoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fabricantes_Status" Association="AutoDealerModel.FK_Fabricantes_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Fabricantes" EntitySet="Fabricantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Fabricantes" Association="AutoDealerModel.FK_TiposAutomoviles_Fabricantes">
+            <End Role="Fabricantes" EntitySet="Fabricantes" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelos_Status" Association="AutoDealerModel.FK_Modelos_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Modelos" EntitySet="Modelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Modelos" Association="AutoDealerModel.FK_TiposAutomoviles_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trim_Status" Association="AutoDealerModel.FK_Trim_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trim" EntitySet="Trim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposAutomoviles_Trim" Association="AutoDealerModel.FK_TiposAutomoviles_Trim">
+            <End Role="Trim" EntitySet="Trim" />
+            <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Fabricantes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_Fabricantes_Status" FromRole="Fabricantes" ToRole="Status" />
+          <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_TiposAutomoviles_Fabricantes" FromRole="Fabricantes" ToRole="TiposAutomoviles" />
+        </EntityType>
+        <EntityType Name="Modelos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_Modelos_Status" FromRole="Modelos" ToRole="Status" />
+          <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_TiposAutomoviles_Modelos" FromRole="Modelos" ToRole="TiposAutomoviles" />
+        </EntityType>
+        <EntityType Name="TiposAutomoviles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fabricante" Type="Int32" Nullable="false" />
+          <Property Name="Modelo" Type="Int32" Nullable="false" />
+          <Property Name="Trim" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Automoviles" Relationship="AutoDealerModel.FK_Automoviles_TiposAutomoviles" FromRole="TiposAutomoviles" ToRole="Automoviles" />
+          <NavigationProperty Name="Fabricantes" Relationship="AutoDealerModel.FK_TiposAutomoviles_Fabricantes" FromRole="TiposAutomoviles" ToRole="Fabricantes" />
+          <NavigationProperty Name="Modelos" Relationship="AutoDealerModel.FK_TiposAutomoviles_Modelos" FromRole="TiposAutomoviles" ToRole="Modelos" />
+          <NavigationProperty Name="Trim1" Relationship="AutoDealerModel.FK_TiposAutomoviles_Trim" FromRole="TiposAutomoviles" ToRole="Trim" />
+        </EntityType>
+        <EntityType Name="Trim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_Trim_Status" FromRole="Trim" ToRole="Status" />
+          <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_TiposAutomoviles_Trim" FromRole="Trim" ToRole="TiposAutomoviles" />
+        </EntityType>
+        <Association Name="FK_Automoviles_Automoviles">
+          <End Type="AutoDealerModel.Automoviles" Role="Automoviles" Multiplicity="1" />
+          <End Type="AutoDealerModel.Automoviles" Role="Automoviles1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Automoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Automoviles_TiposAutomoviles">
+          <End Type="AutoDealerModel.TiposAutomoviles" Role="TiposAutomoviles" Multiplicity="1" />
+          <End Type="AutoDealerModel.Automoviles" Role="Automoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposAutomoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Automoviles">
+              <PropertyRef Name="TipoAutomovil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fabricantes_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.Fabricantes" Role="Fabricantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fabricantes">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposAutomoviles_Fabricantes">
+          <End Type="AutoDealerModel.Fabricantes" Role="Fabricantes" Multiplicity="1" />
+          <End Type="AutoDealerModel.TiposAutomoviles" Role="TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Fabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelos_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.Modelos" Role="Modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modelos">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposAutomoviles_Modelos">
+          <End Type="AutoDealerModel.Modelos" Role="Modelos" Multiplicity="1" />
+          <End Type="AutoDealerModel.TiposAutomoviles" Role="TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Modelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trim_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.Trim" Role="Trim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trim">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposAutomoviles_Trim">
+          <End Type="AutoDealerModel.Trim" Role="Trim" Multiplicity="0..1" />
+          <End Type="AutoDealerModel.TiposAutomoviles" Role="TiposAutomoviles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposAutomoviles">
+              <PropertyRef Name="Trim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -730,6 +1082,7 @@
           <EntitySetMapping Name="Automoviles">
             <EntityTypeMapping TypeName="AutoDealerModel.Automoviles">
               <MappingFragment StoreEntitySet="Automoviles">
+                <ScalarProperty Name="TipoAutomovil" ColumnName="TipoAutomovil" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Suplidor" ColumnName="Suplidor" />
                 <ScalarProperty Name="Liquidaciones" ColumnName="Liquidaciones" />
@@ -891,6 +1244,45 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fabricantes">
+            <EntityTypeMapping TypeName="AutoDealerModel.Fabricantes">
+              <MappingFragment StoreEntitySet="Fabricantes">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelos">
+            <EntityTypeMapping TypeName="AutoDealerModel.Modelos">
+              <MappingFragment StoreEntitySet="Modelos">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposAutomoviles">
+            <EntityTypeMapping TypeName="AutoDealerModel.TiposAutomoviles">
+              <MappingFragment StoreEntitySet="TiposAutomoviles">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Trim" ColumnName="Trim" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trim">
+            <EntityTypeMapping TypeName="AutoDealerModel.Trim">
+              <MappingFragment StoreEntitySet="Trim">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -38,5 +38,9 @@ namespace AutoDealer.Models
         public DbSet<Suplidores> Suplidores { get; set; }
         public DbSet<TiposDeGastos> TiposDeGastos { get; set; }
         public DbSet<Vendedores> Vendedores { get; set; }
+        public DbSet<Fabricantes> Fabricantes { get; set; }
+        public DbSet<Modelos> Modelos { get; set; }
+        public DbSet<TiposAutomoviles> TiposAutomoviles { get; set; }
+        public DbSet<Trim> Trim { get; set; }
     }
 }

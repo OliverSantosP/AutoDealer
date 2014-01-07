@@ -207,6 +207,9 @@
     <Compile Include="Models\Empresas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fabricantes.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Facturas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -237,6 +240,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Modelos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Showrooms.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -246,7 +252,13 @@
     <Compile Include="Models\Suplidores.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TiposAutomoviles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiposDeGastos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trim.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vendedores.cs">
@@ -430,12 +442,12 @@
     <Content Include="Views\TiposGasto\Create.cshtml" />
     <Content Include="Views\TiposGasto\Edit.cshtml" />
     <Content Include="Views\TiposGasto\Delete.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Automovil\Index.cshtml" />
     <Content Include="Views\Automovil\Details.cshtml" />
     <Content Include="Views\Automovil\Create.cshtml" />
     <Content Include="Views\Automovil\Edit.cshtml" />
     <Content Include="Views\Automovil\Delete.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

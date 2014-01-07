@@ -29,6 +29,18 @@
         <AssociationConnector Association="AutoDealerModel.FK_Facturas_Vendedores" ManuallyRouted="false" />
         <AssociationConnector Association="AutoDealerModel.FK_Gastos_TiposGastos" ManuallyRouted="false" />
         <AssociationConnector Association="AutoDealerModel.FK_Liquidaciones_Detalles_Liquidaciones" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AutoDealerModel.Fabricantes" Width="1.5" PointX="3" PointY="37.875" />
+        <EntityTypeShape EntityType="AutoDealerModel.Modelos" Width="1.5" PointX="3" PointY="40.625" />
+        <EntityTypeShape EntityType="AutoDealerModel.TiposAutomoviles" Width="1.5" PointX="5.25" PointY="37.375" />
+        <EntityTypeShape EntityType="AutoDealerModel.Trim" Width="1.5" PointX="3" PointY="35" />
+        <AssociationConnector Association="AutoDealerModel.FK_Automoviles_Automoviles" />
+        <AssociationConnector Association="AutoDealerModel.FK_Automoviles_TiposAutomoviles" />
+        <AssociationConnector Association="AutoDealerModel.FK_Fabricantes_Status" />
+        <AssociationConnector Association="AutoDealerModel.FK_TiposAutomoviles_Fabricantes" />
+        <AssociationConnector Association="AutoDealerModel.FK_Modelos_Status" />
+        <AssociationConnector Association="AutoDealerModel.FK_TiposAutomoviles_Modelos" />
+        <AssociationConnector Association="AutoDealerModel.FK_Trim_Status" />
+        <AssociationConnector Association="AutoDealerModel.FK_TiposAutomoviles_Trim" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
