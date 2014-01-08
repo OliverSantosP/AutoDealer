@@ -1,68 +1,58 @@
 ﻿@model AutoDealer.Models.Automoviles
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear";
 }
-
-<h2>Crear</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-md-2">
-                    <h3 class="panel-title">
-                        Automovil
-                    </h3>
+    <div class="col-md-6">
+        <div class="widget wlightblue">
+            <div class="widget-head">
+                <div class="pull-left">Crear Automoviles</div>
+                <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
                 </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
-        <div class="panel-body">
+            <div class="widget-content">
+                <div class="padd">
+                    Empresa
+                    <div class="btn-group">
+                        <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    </div>
+                    <br />
+                    <br />
+                    Showroom
+                    <div class="btn-group">
+                        <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    </div>
+                    <br />
+                    <br />
+                    Año
+                    @Html.EditorFor(model => model.Year, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Year)
 
-            <div class="editor-label">
-                <b>Empresa</b>
-            </div>
-            <div class="editor-field">
-                <div class="btn-group">
-                    <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    <br />
+                    Tipo Automovil
                 </div>
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Showroom)
-            </div>
-            <div class="editor-field">
-                <div class="btn-group">
-                    <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                <div class="editor-field">
+                    <div class="btn-group">
+                        <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    </div>
+                    <div class="btn-group">
+                        <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <option>Modelo</option>
+                        </select>
+                    </div>
                 </div>
+                <p>
+                    <input type="submit" value="Create" class="btn btn-info" />
+                </p>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Year)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Year)
-                @Html.ValidationMessageFor(model => model.Year)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.TipoAutomovil)
-            </div>
-            <div class="editor-field">
-                <div class="btn-group">
-                    <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
-                </div>
-                <div class="btn-group">
-                    <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <option>Modelo</option>
-                    </select>
-                </div>
-            </div>
-            <p>
-                <input type="submit" value="Create" />
-            </p>
         </div>
     </div>
 }

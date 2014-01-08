@@ -343,7 +343,7 @@ a.btn{
 /* Form */
 
 form{
-	margin: 10px;
+    padding-top:10px;
 }
 
 form input, form button, form textarea, form select{
