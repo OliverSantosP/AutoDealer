@@ -72,13 +72,13 @@
             <div class="col-md-2">
                 <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Showroom)</b></h3>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.FechaEntrada)</b></h3>
             </div>
             <div class="col-md-1">
                 <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Factura)</b></h3>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Precio)</b></h3>
             </div>
             <div class="col-md-1">
@@ -103,14 +103,14 @@
                     <div class="col-md-2">
                         @item.Showrooms.Nombre
                     </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.FechaEntrada)
+                    <div class="col-md-1">
+                        @item.FechaEntrada.Value.ToShortDateString()
                     </div>
                     <div class="col-md-1">
                         @Html.DisplayFor(modelItem => item.Factura)
                     </div>
-                    <div class="col-md-1">
-                        @Html.DisplayFor(modelItem => item.Precio)
+                    <div class="col-md-2">
+                        RD @String.Format("{0:c}", item.Precio)
                     </div>
                     <div class="col-md-1">
                         @Html.ActionLink("Editar", "Edit", new { id = item.Id })
