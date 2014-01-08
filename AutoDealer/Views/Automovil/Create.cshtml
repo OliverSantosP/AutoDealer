@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="widget wlightblue">
             <div class="widget-head">
                 <div class="pull-left">Crear Automoviles</div>
@@ -32,29 +32,25 @@
                     </div>
                     <br />
                     <br />
-                    Año
-                    @Html.EditorFor(model => model.Year, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Year)
-
+                    <div class="col-lg-12">
+                        Tipo Automovil
+                        <div class="btn-group">
+                            <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                        </div>
+                        <div class="btn-group">
+                            <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <option>Modelo</option>
+                            </select>
+                        </div>
+                        <input type="text" placeholder="Año" id="Year">
+                        @Html.ValidationMessageFor(model => model.Year)
+                    </div>
                     <br />
-                    Tipo Automovil
-                </div>
-                <div class="editor-field">
-                    <div class="btn-group">
-                        <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
-                    </div>
-                    <div class="btn-group">
-                        <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <option>Modelo</option>
-                        </select>
-                    </div>
-                </div>
-                <p>
-                    <input type="submit" value="Create" class="btn btn-info" />
-                </p>
-            </div>
-        </div>
-    </div>
+                    <input type="submit" value="Crear" class="btn btn-info" />
+                </div><!--Padd-->
+            </div><!--Widget content-->
+        </div><!--Widget-->
+    </div><!--Col12-->
 }
 
 <div>

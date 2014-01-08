@@ -348,6 +348,7 @@ form{
 
 form input, form button, form textarea, form select{
 	font-size:13px !important;
+    padding:7px;
 }
 
 form label{
