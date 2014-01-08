@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<AutoDealer.Models.Vendedores>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AutoDealer - Vendedores";
 }
-
-<h2>Index</h2>
-
 <p>
-    <a class="btn btn-primary" href="/vendedor/Create">Crear Vendedor</a>
+    <a class="btn btn-info" href="/vendedor/Create">Crear Vendedor</a>
     @using (Html.BeginForm("Index", "vendedor", FormMethod.Get, "Buscar"))
     {<div class="input-group">
         <span class="input-group-addon">
@@ -17,55 +14,70 @@
     </div>
     }
 </p>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-2">
-                <h3 class="panel-title">
-                    <b>@Html.DisplayNameFor(model => model.Nombre)</b>
-                </h3>
+<div class="col-md-12">
+    <div class="widget wlightblue">
+        <div class="widget-head">
+            <div class="pull-left">Vendedores</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
             </div>
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Telefono)</b></h3>
-            </div>
-            <div class="col-md-3">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Direccion)</b></h3>
-            </div>
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Celular)</b></h3>
-            </div>
-            <div class="col-md-1">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Email)</b></h3>
-            </div>
+            <div class="clearfix"></div>
         </div>
-    </div>
 
-    <ul class="list-group">
-        @foreach (var item in Model)
-        {
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-2">
-                        @Html.ActionLink(item.Nombre + " " + item.Apellido, "Details", new { id = item.Id })
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.Telefono)
-                    </div>
-                    <div class="col-md-3">
-                        @Html.DisplayFor(modelItem => item.Direccion)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.Celular)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </div>
-                    <div class="col-md-1">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-                    </div>
-                </div>
-            </li>
-        }
-    </ul><!--Listgroup-->
-</div><!--Panel-->
+        <div class="widget-content">
+            <div class="table-responsive">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Telefono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Direccion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Celular)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Nombre + " " + item.Apellido, "Details", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Telefono)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Direccion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Celular)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div><!--Responsive-->
+        </div><!--Content-->
+    </div><!--Widget-->
+</div><!--Col12-->
