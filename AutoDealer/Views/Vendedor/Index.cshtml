@@ -70,8 +70,10 @@
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
-                                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                                    <div class="btn-group">
+                                        <a href="Vendedores/Edit/@item.Id" class="btn btn-sm btn-default"><i class="icon-pencil"></i></a>
+                                        <a href="Vendedores/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
+                                    </div>
                                 </td>
                             </tr>
                         }
