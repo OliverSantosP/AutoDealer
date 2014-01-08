@@ -1,10 +1,10 @@
 ﻿@model AutoDealer.Models.Compradores
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle";
 }
 
-<h2>Details</h2>
+<h2>Detalle</h2>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
@@ -16,76 +16,80 @@
         </div>
     </div>
     <div class="panel-body">
-            <div class="display-label"><b>
-    @Html.DisplayNameFor(model => model.Nombre)
-</b></div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Nombre)
-            </div>
-
-            <div class="display-label"><b>
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Nombre)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
                 @Html.DisplayNameFor(model => model.Apellido)
-            </b></div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Apellido)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.Telefono)
-                </b>
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Telefono)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.Direccion)
-                </b>
-            </div>
-            <div class="display-field">
-                    @Html.DisplayFor(model => model.Direccion)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.Celular)
-                </b>
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Celular)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.Email)
-                </b>
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Email)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.FechaCreacion)
-                </b>
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.FechaCreacion)
-            </div>
-
-            <div class="display-label">
-                <b>
-                    @Html.DisplayNameFor(model => model.FechaModificacion)
-                </b>
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.FechaModificacion)
-            </div>
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Apellido)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Telefono)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Direccion)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Celular)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Celular)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.Email)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Email)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </div>
+        <br />
+        <div class="display-label">
+            <b>
+                @Html.DisplayNameFor(model => model.FechaModificacion)
+            </b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FechaModificacion)
         </div>
     </div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a lista completa", "Index")
+</p>

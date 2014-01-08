@@ -1,12 +1,12 @@
 ﻿@model AutoDealer.Models.Compradores
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Borrar";
 }
 
-<h2>Delete</h2>
+<h2>Borrar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Esta seguro que desea borrar este Comprador?</h3>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
@@ -26,7 +26,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Nombre)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.Apellido)
@@ -35,7 +35,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Apellido)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.Telefono)
@@ -44,7 +44,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Telefono)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.Direccion)
@@ -53,7 +53,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Direccion)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.Celular)
@@ -62,7 +62,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Celular)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.Email)
@@ -71,7 +71,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Email)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -80,7 +80,7 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.FechaCreacion)
         </div>
-
+        <br />
         <div class="display-label">
             <b>
                 @Html.DisplayNameFor(model => model.FechaModificacion)
@@ -97,5 +97,5 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Volver a lista completa", "Index")
     }
