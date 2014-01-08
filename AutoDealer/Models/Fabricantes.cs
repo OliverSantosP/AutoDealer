@@ -19,7 +19,6 @@ namespace AutoDealer.Models
         {
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
-    
         public static List<Fabricantes> GetFabricantes()
         {
             AutoDealerEntities db = new AutoDealerEntities();

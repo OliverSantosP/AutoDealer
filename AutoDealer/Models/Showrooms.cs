@@ -11,12 +11,26 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
     public partial class Showrooms
     {
         public Showrooms()
         {
             this.Automoviles = new HashSet<Automoviles>();
+        }
+
+        /// <summary>
+        /// Este metodo retorna un modelo, dado un fabricante.
+        /// </summary>
+        /// <param name="Fabricante">El Id del fabricante.</param>
+        /// <returns></returns>
+        public static List<Showrooms> GetShowrooms(int Empresa)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Showrooms> Lista = new List<Showrooms>();
+            Lista = db.Showrooms.Where(Showroom => Showroom.Empresa == Empresa).ToList();
+
+            return Lista;
         }
     
         public int Id { get; set; }

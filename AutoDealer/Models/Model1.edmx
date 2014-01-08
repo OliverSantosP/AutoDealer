@@ -47,6 +47,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="int" />
           <Property Name="Direccion" Type="text" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Fabricantes">
           <Key>
@@ -280,6 +281,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Empresas_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empresas">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Fabricantes_Status">
           <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="Fabricantes" Type="Self.Fabricantes" Multiplicity="*" />
@@ -470,6 +483,10 @@
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
             <End Role="Automoviles" EntitySet="Automoviles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresas_Status" Association="Self.FK_Empresas_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Fabricantes_Status" Association="Self.FK_Fabricantes_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Fabricantes" EntitySet="Fabricantes" />
@@ -575,6 +592,8 @@
           <Property Name="Telefono" Type="Int32" />
           <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Showrooms" Relationship="Self.FK_Showrooms_Empresas" FromRole="Empresas" ToRole="Showrooms" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_Empresas_Status" FromRole="Empresas" ToRole="Status" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -664,6 +683,7 @@
           <NavigationProperty Name="Fabricantes" Relationship="AutoDealerModel.FK_Fabricantes_Status" FromRole="Status" ToRole="Fabricantes" />
           <NavigationProperty Name="Modelos" Relationship="AutoDealerModel.FK_Modelos_Status" FromRole="Status" ToRole="Modelos" />
           <NavigationProperty Name="Trim" Relationship="AutoDealerModel.FK_Trim_Status" FromRole="Status" ToRole="Trim" />
+          <NavigationProperty Name="Empresas" Relationship="AutoDealerModel.FK_Empresas_Status" FromRole="Status" ToRole="Empresas" />
         </EntityType>
         <EntityType Name="Suplidores">
           <Key>
@@ -933,6 +953,10 @@
             <End Role="Trim" EntitySet="Trim" />
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empresas_Status" Association="AutoDealerModel.FK_Empresas_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Fabricantes">
           <Key>
@@ -1075,6 +1099,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Empresas_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.Empresas" Role="Empresas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Empresas">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1119,6 +1155,7 @@
           <EntitySetMapping Name="Empresas">
             <EntityTypeMapping TypeName="AutoDealerModel.Empresas">
               <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

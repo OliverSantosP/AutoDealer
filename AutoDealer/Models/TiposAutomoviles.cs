@@ -11,14 +11,14 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    
     public partial class TiposAutomoviles
     {
         public TiposAutomoviles()
         {
             this.Automoviles = new HashSet<Automoviles>();
         }
-
+    
         public int Id { get; set; }
         public int Fabricante { get; set; }
         public int Modelo { get; set; }

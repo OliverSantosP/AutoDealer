@@ -41,6 +41,7 @@
         <AssociationConnector Association="AutoDealerModel.FK_TiposAutomoviles_Modelos" />
         <AssociationConnector Association="AutoDealerModel.FK_Trim_Status" />
         <AssociationConnector Association="AutoDealerModel.FK_TiposAutomoviles_Trim" />
+        <AssociationConnector Association="AutoDealerModel.FK_Empresas_Status" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

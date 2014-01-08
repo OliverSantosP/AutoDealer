@@ -33,7 +33,7 @@ namespace AutoDealer.Models
             List<Modelos> ListaModelos = new List<Modelos>();
             foreach (var item in ListaTiposAutomoviles)
             {
-                ListaModelos=(db.Modelos.Where(x => x.Id == item.Modelo).ToList());
+                ListaModelos = (db.Modelos.Where(x => x.Id == item.Modelo).ToList());
             }
             return ListaModelos;
         }

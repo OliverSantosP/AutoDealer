@@ -20,12 +20,23 @@ namespace AutoDealer
                 new { controller = "Home", action = "ModelosList", Id = "" }
             );
 
-
             routes.MapRoute(
                 "FabricantesList",
                 "Automovil/Fabricantes/List",
                 new { controller = "Home", action = "FabricantesList" }
             );
+
+            routes.MapRoute(
+                "EmpresasList",
+                "Automovil/Empresas/List",
+                new { controller = "Home", action = "EmpresasList" }
+                );
+
+            routes.MapRoute(
+                "ShowroomsList",
+                "Automovil/Showrooms/List/{Id}",
+                new { controller = "Home", action = "ShowroomsList", Id = "" }
+);
 
 
             routes.MapRoute(

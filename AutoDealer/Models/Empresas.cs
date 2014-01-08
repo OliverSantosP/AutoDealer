@@ -11,20 +11,29 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Empresas
     {
         public Empresas()
         {
             this.Showrooms = new HashSet<Showrooms>();
         }
-    
+        public static List<Empresas> GetEmpresas()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Empresas> Lista = new List<Empresas>();
+            Lista = db.Empresas.ToList();
+            return Lista;
+        }  
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
         public Nullable<int> Telefono { get; set; }
         public string Direccion { get; set; }
+        public int Status { get; set; }
     
         public virtual ICollection<Showrooms> Showrooms { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

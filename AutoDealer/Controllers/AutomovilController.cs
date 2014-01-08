@@ -48,6 +48,51 @@ namespace AutoDealer.Controllers
             return View(ListaTiposAutomoviles.First());
         }
 
+        /// <summary>
+        /// Retorna una lista de Empresas.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EmpresasList()
+        {
+            List<Empresas> empresas = Empresas.GetEmpresas();
+
+            if (HttpContext.Request.IsAjaxRequest())
+            {
+                return Json(new SelectList(
+                            empresas,
+                            "Id",
+                            "Nombre"), JsonRequestBehavior.AllowGet
+                            );
+            }
+
+            return View(empresas);
+        }
+
+        /// <summary>
+        /// Retorna la lista de Showrooms dada una empresa.
+        /// </summary>
+        /// <param name="Id">Id de la Empresa.</param>
+        /// <returns>Lista de Showrooms.</Showrooms></returns>
+        public ActionResult ShowroomsList(int Id)
+        {
+            List<Showrooms> showrooms = Showrooms.GetShowrooms(Id);
+
+            if (HttpContext.Request.IsAjaxRequest())
+            {
+                return Json(new SelectList(
+                            showrooms,
+                            "Id",
+                            "Nombre"), JsonRequestBehavior.AllowGet
+                            );
+            }
+
+            return View(showrooms);
+        }
+
+        /// <summary>
+        /// Retorna la lista de Fabricantes.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult FabricantesList()
         {
             List<Fabricantes> fabricantes = Fabricantes.GetFabricantes();
@@ -64,6 +109,11 @@ namespace AutoDealer.Controllers
             return View(fabricantes);
         }
 
+        /// <summary>
+        /// Retorna la lista de Modelos dado un fabricante.
+        /// </summary>
+        /// <param name="Id">Id del fabricante.</param>
+        /// <returns>Lista de Modelos.</Showrooms></returns>
         public ActionResult ModelosList(int Id)
         {
             List<Modelos> modelos = Modelos.GetModelos(Id);
@@ -168,7 +218,7 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Automoviles automoviles = db.Automoviles.Find(id);
-            db.Automoviles.Remove(automoviles);
+            automoviles.Status = 1;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -30,5 +30,6 @@ namespace AutoDealer.Models
         public virtual ICollection<Fabricantes> Fabricantes { get; set; }
         public virtual ICollection<Modelos> Modelos { get; set; }
         public virtual ICollection<Trim> Trim { get; set; }
+        public virtual Empresas Empresas { get; set; }
     }
 }
