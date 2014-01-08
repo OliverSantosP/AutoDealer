@@ -16,9 +16,15 @@ namespace AutoDealer.Controllers
         //
         // GET: /Vendedor/
 
-        public ActionResult Index()
+        public ActionResult Index(string Buscar)
         {
-            return View(db.Vendedores.Where(Vendedores=> Vendedores.Status==1).OrderBy(Vendedores=> Vendedores.FechaCreacion).Take(100).ToList());
+            var vendedores = db.Vendedores.Where(x => x.Status == 1).OrderBy(x => x.FechaCreacion).Take(100);
+
+            if (!String.IsNullOrEmpty(Buscar))
+            {
+                vendedores = vendedores.Where(Compradores => Compradores.Nombre.Contains(Buscar));
+            }
+            return View(vendedores.ToList());
         }
 
         //
