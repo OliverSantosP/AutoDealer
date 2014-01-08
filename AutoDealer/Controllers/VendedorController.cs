@@ -59,6 +59,7 @@ namespace AutoDealer.Controllers
             if (ModelState.IsValid)
             {
                 vendedores.FechaCreacion = System.DateTime.Now;
+                vendedores.Status = 1;
                 db.Vendedores.Add(vendedores);
                 db.SaveChanges();
                 return RedirectToAction("Index");

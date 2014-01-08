@@ -19,15 +19,19 @@ namespace AutoDealer.Models
         {
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
-
+        /// <summary>
+        /// Este metodo retorna un modelo, dado un fabricante.
+        /// </summary>
+        /// <param name="Fabricante">El Id del fabricante.</param>
+        /// <returns></returns>
         public static List<Modelos> GetModelos(int Fabricante)
         {
             AutoDealerEntities db = new AutoDealerEntities();
-            List<TiposAutomoviles> ListaTiposAutomobiles = new List<TiposAutomoviles>();
-            ListaTiposAutomobiles = db.TiposAutomoviles.Where(x => x.Fabricante == Fabricante).ToList();
+            List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
+            ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Fabricante == Fabricante).ToList();
 
             List<Modelos> ListaModelos = new List<Modelos>();
-            foreach (var item in ListaTiposAutomobiles)
+            foreach (var item in ListaTiposAutomoviles)
             {
                 ListaModelos=(db.Modelos.Where(x => x.Id == item.Modelo).ToList());
             }

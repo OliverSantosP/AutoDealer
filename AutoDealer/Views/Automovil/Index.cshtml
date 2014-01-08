@@ -24,8 +24,17 @@
                     $("#Modelos").html(items);
                 });
             });
+
+            $("#Modelos").change(function () {
+
+                var url = "/Automovil/GetTipoAutomovil";
+                $.get(url, null, function (data) {
+                    $("#getTipoAutomovil").html(data);
+                });
+            })
         }) </script>
 }
+
 
 <h2>Index</h2>
 
@@ -41,9 +50,11 @@
         <div class="btn-group">
             <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
         </div>
-
+        <div class="btn btn-default">Buscar</div>
     }
 </p>
+
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
