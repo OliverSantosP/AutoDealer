@@ -56,68 +56,163 @@
     }
 </p>
 
+<div class="col-md-12">
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.TipoAutomovil)</b></h3>
+    <div class="widget wred">
+
+        <div class="widget-head">
+            <div class="pull-left">Tables</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
             </div>
-            <div class="col-md-1">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Year)</b></h3>
-            </div>
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Suplidor)</b></h3>
-            </div>
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Showroom)</b></h3>
-            </div>
-            <div class="col-md-1">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.FechaEntrada)</b></h3>
-            </div>
-            <div class="col-md-1">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Factura)</b></h3>
-            </div>
-            <div class="col-md-2">
-                <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Precio)</b></h3>
-            </div>
-            <div class="col-md-1">
-            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="widget-content">
+
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Age</th>
+                        <th>Education</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ashok</td>
+                        <td>India</td>
+                        <td>23</td>
+                        <td>B.Tech</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Kumarasamy</td>
+                        <td>USA</td>
+                        <td>22</td>
+                        <td>BE</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Babura</td>
+                        <td>UK</td>
+                        <td>43</td>
+                        <td>PhD</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Ravi Kumar</td>
+                        <td>China</td>
+                        <td>73</td>
+                        <td>PUC</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Santhosh</td>
+                        <td>Japan</td>
+                        <td>43</td>
+                        <td>M.Tech</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="widget-foot">
+
+
+            <ul class="pagination pull-right">
+                <li><a href="#">Prev</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+
+            <div class="clearfix"></div>
+
         </div>
     </div>
+    </div>
 
-    <ul class="list-group">
-        @foreach (var item in Model)
-        {
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-2">
-                        @Html.ActionLink(item.TiposAutomoviles.Fabricantes.Nombre + " " + item.TiposAutomoviles.Modelos.Nombre, "Details", new { id = item.Id })
-                    </div>
-                    <div class="col-md-1">
-                        @item.Year.ToString("yyyy")
-                    </div>
-                    <div class="col-md-2">
-                        @item.Suplidores.Nombre
-                    </div>
-                    <div class="col-md-2">
-                        @item.Showrooms.Nombre
-                    </div>
-                    <div class="col-md-1">
-                        @item.FechaEntrada.Value.ToShortDateString()
-                    </div>
-                    <div class="col-md-1">
-                        @Html.DisplayFor(modelItem => item.Factura)
-                    </div>
-                    <div class="col-md-2">
-                        RD @String.Format("{0:c}", item.Precio)
-                    </div>
-                    <div class="col-md-1">
-                        @Html.ActionLink("Editar", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-                    </div>
-                </div>
-            </li>
-        }
-    </ul><!--Listgroup-->
-</div><!--Panel-->
+<div class="widget wlightblue">
+    <div class="widget-head">
+        <div class="pull-left">Tables</div>
+        <div class="widget-icons pull-right">
+            <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="wclose"><i class="icon-remove"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="widget-content">
+
+        <table class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.TipoAutomovil)</b></h3>
+
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Year)</b></h3>
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Suplidor)</b></h3>
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Showroom)</b></h3>
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.FechaEntrada)</b></h3>
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Factura)</b></h3>
+                    </th>
+                    <th>
+                        <h3 class="panel-title"><b>@Html.DisplayNameFor(model => model.Precio)</b></h3>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.TiposAutomoviles.Fabricantes.Nombre + " " + item.TiposAutomoviles.Modelos.Nombre, "Details", new { id = item.Id })
+                        </td>
+                        <td>
+                            @item.Year.ToString("yyyy")
+                        </td>
+                        <td>
+                            @item.Suplidores.Nombre
+                        </td>
+                        <td>
+                            @item.Showrooms.Nombre
+                        </td>
+                        <td>
+                            @item.FechaEntrada.Value.ToShortDateString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factura)
+                        </td>
+                        <td>
+                            RD @String.Format("{0:c}", item.Precio)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                            @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
