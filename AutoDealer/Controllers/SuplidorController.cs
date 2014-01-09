@@ -16,9 +16,42 @@ namespace AutoDealer.Controllers
         //
         // GET: /Suplidor/
 
-        public ActionResult Index()
+        // <summary>
+        /// Este metodo cuando recibe un parametro String hace una busqueda. Esta busqueda se hace tanto en el Nombre como en el Apellido.
+        /// </summary>
+        /// <param name="Buscar">String para buscar.</param>
+        /// <returns>ActionResult</returns>
+        public ActionResult Index(string Buscar)
         {
-            return View(db.Suplidores.ToList());
+            var suplidores = db.Suplidores.Where(Suplidores => Suplidores.Status == 1);
+            var suplidoresapellidos = db.Suplidores.Where(SuplidorApellidos => SuplidorApellidos.Status == 1);
+            var suplidoresunion = suplidores;
+
+            if (!String.IsNullOrEmpty(Buscar))
+            {
+                suplidores = suplidores.Where(Suplidores => Suplidores.Nombre.Contains(Buscar));
+                suplidoresapellidos = suplidoresapellidos.Where(SuplidorApellidos => SuplidorApellidos.Apellido.Contains(Buscar));
+
+                if (suplidores.Count() > 0 && suplidoresapellidos.Count() > 0)
+                {
+                    suplidoresapellidos = suplidores.Union(suplidoresapellidos);
+                }
+                else
+                {
+                    if (suplidores.Count() > 0)
+                    {
+                        suplidoresunion = suplidores;
+                    }
+                    if (suplidoresapellidos.Count() > 0)
+                    {
+                        suplidoresunion = suplidoresapellidos;
+                    }
+
+                }
+
+
+            }
+            return View(suplidoresunion.ToList());
         }
 
         //
@@ -51,6 +84,7 @@ namespace AutoDealer.Controllers
         {
             if (ModelState.IsValid)
             {
+                suplidores.Status = 1;
                 db.Suplidores.Add(suplidores);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +116,7 @@ namespace AutoDealer.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(suplidores).State = EntityState.Modified;
+                suplidores.FechaModificacion = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -109,7 +144,8 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Suplidores suplidores = db.Suplidores.Find(id);
-            db.Suplidores.Remove(suplidores);
+            suplidores.Status = 0;
+            suplidores.FechaModificacion = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

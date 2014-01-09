@@ -147,6 +147,7 @@ namespace AutoDealer.Controllers
         {
             Compradores compradores = db.Compradores.Find(id);
             compradores.Status = 0;
+            compradores.FechaModificacion = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

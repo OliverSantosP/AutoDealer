@@ -158,6 +158,8 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Vendedores vendedores = db.Vendedores.Find(id);
+            vendedores.Status = 0;
+            vendedores.FechaModificacion = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
