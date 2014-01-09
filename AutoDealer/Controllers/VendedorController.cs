@@ -16,15 +16,41 @@ namespace AutoDealer.Controllers
         //
         // GET: /Vendedor/
 
+        /// <summary>
+        /// Este metodo cuando recibe un parametro String hace una busqueda. Esta busqueda se hace tanto en el Nombre como en el Apellido.
+        /// </summary>
+        /// <param name="Buscar">String para buscar.</param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string Buscar)
         {
-            var vendedores = db.Vendedores.Where(x => x.Status == 1).OrderBy(x => x.FechaCreacion).Take(100);
+            var vendedores = db.Vendedores.Where(Vendedores => Vendedores.Status == 1);
+            var vendedoresappelidos = db.Vendedores.Where(VendedoresApellidos => VendedoresApellidos.Status == 1);
+            var vendedoresunion = vendedores;
 
             if (!String.IsNullOrEmpty(Buscar))
             {
-                vendedores = vendedores.Where(Compradores => Compradores.Nombre.Contains(Buscar));
+                vendedores = vendedores.Where(Vendedores => Vendedores.Nombre.Contains(Buscar));
+                vendedoresappelidos = vendedoresappelidos.Where(VendedoresApellidos => VendedoresApellidos.Apellido.Contains(Buscar));
+
+                if (vendedores.Count() > 0 && vendedoresappelidos.Count() > 0)
+                {
+                    vendedoresunion = vendedores.Union(vendedoresappelidos);
+                }
+                else
+                {
+                    if (vendedores.Count() > 0)
+                    {
+                        vendedoresunion = vendedores;
+                    }
+                    if (vendedoresappelidos.Count() > 0)
+                    {
+                        vendedoresunion = vendedoresappelidos;
+                    }
+                }
+
+
             }
-            return View(vendedores.ToList());
+            return View(vendedoresunion.ToList());
         }
 
         //

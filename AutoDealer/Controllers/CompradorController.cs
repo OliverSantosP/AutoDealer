@@ -13,15 +13,45 @@ namespace AutoDealer.Controllers
     {
         private AutoDealerEntities db = new AutoDealerEntities();
 
+
+        //
+        // GET: /Comprador/
+
+        /// <summary>
+        /// Este metodo cuando recibe un parametro String hace una busqueda. Esta busqueda se hace tanto en el Nombre como en el Apellido.
+        /// </summary>
+        /// <param name="Buscar">String para buscar.</param>
+        /// <returns>ActionResult</returns>
         public ActionResult Index(string Buscar)
         {
-            var compradores = db.Compradores.Where(Compradores => Compradores.Status == 1).OrderBy(Compradores => Compradores.FechaCreacion).Take(100);
-
+            var compradores = db.Compradores.Where(Compradores => Compradores.Status == 1);
+            var compradoresapellidos = db.Compradores.Where(CompradoresApellidos => CompradoresApellidos.Status == 1);
+            var compradoresunion = compradores;
+            
             if (!String.IsNullOrEmpty(Buscar))
             {
                 compradores = compradores.Where(Compradores => Compradores.Nombre.Contains(Buscar));
+                compradoresapellidos = compradoresapellidos.Where(CompradoresApellidos => CompradoresApellidos.Apellido.Contains(Buscar));
+
+                if (compradores.Count() > 0 && compradoresapellidos.Count() > 0)
+                {
+                    compradoresunion = compradores.Union(compradoresapellidos);  
+                }
+                else
+                {
+                    if (compradores.Count() > 0)
+                    {
+                        compradoresunion = compradores;
+                    }
+                    if (compradoresapellidos.Count() > 0)
+                    {
+                        compradoresunion = compradoresapellidos;
+                    }
+                }
+
+
             }
-            return View(compradores.ToList());
+            return View(compradoresunion.ToList());
         }
         //
         // GET: /Comprador/Details/5
