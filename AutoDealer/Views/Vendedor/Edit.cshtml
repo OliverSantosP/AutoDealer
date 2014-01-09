@@ -1,10 +1,8 @@
 ﻿@model AutoDealer.Models.Vendedores
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Editar Vendedores";
 }
-
-<h2>Editar</h2>
 
 @using (Html.BeginForm())
 {
@@ -12,80 +10,81 @@
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.Id)
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-md-2">
-                    <h3 class="panel-title">
-                        Vendedores
-                    </h3>
+    <div class="col-md-12">
+        <div class="widget wlightblue">
+            <div class="widget-head">
+                <div class="pull-left">Crear Compradores</div>
+                <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <div class="padd">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Nombre)
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Apellido)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Apellido)
+                        @Html.ValidationMessageFor(model => model.Apellido)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Telefono)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Telefono)
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Direccion)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Direccion)
+                        @Html.ValidationMessageFor(model => model.Direccion)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Celular)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Celular)
+                        @Html.ValidationMessageFor(model => model.Celular)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FechaCreacion)
+                    </div>
+                    <div class="editor-label">
+                        @Html.EditorFor(model => model.FechaCreacion)
+                        @Html.ValidationMessageFor(model => model.FechaCreacion)
+                    </div>
+                    <br />
+                    <p>
+                        <input type="submit" value="Guardar" class="btn btn-info" />
+                    </p>
+                </div>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
-            <fieldset>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Nombre)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Nombre)
-                    @Html.ValidationMessageFor(model => model.Nombre)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Apellido)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Apellido)
-                    @Html.ValidationMessageFor(model => model.Apellido)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Telefono)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Telefono)
-                    @Html.ValidationMessageFor(model => model.Telefono)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Direccion)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Direccion)
-                    @Html.ValidationMessageFor(model => model.Direccion)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Celular)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Celular)
-                    @Html.ValidationMessageFor(model => model.Celular)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Email)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Email)
-                    @Html.ValidationMessageFor(model => model.Email)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.FechaCreacion)
-                </div>
-                <div class="editor-label">
-                    @Html.EditorFor(model => model.FechaCreacion)
-                    @Html.ValidationMessageFor(model => model.FechaCreacion)
-                </div>
-                <br />
-                <p>
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </p>
-            </fieldset>
-        </div>
-    </div>
 }
 <div>
     @Html.ActionLink("Volver a lista completa", "Index")
