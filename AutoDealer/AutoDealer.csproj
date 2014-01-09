@@ -191,6 +191,7 @@
     <Compile Include="Controllers\GastoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\SuplidorController.cs" />
     <Compile Include="Controllers\TiposGastoController.cs" />
     <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -474,6 +475,11 @@
     <Content Include="Views\Automovil\Create.cshtml" />
     <Content Include="Views\Automovil\Edit.cshtml" />
     <Content Include="Views\Automovil\Delete.cshtml" />
+    <Content Include="Views\Suplidor\Index.cshtml" />
+    <Content Include="Views\Suplidor\Details.cshtml" />
+    <Content Include="Views\Suplidor\Create.cshtml" />
+    <Content Include="Views\Suplidor\Edit.cshtml" />
+    <Content Include="Views\Suplidor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
