@@ -20,9 +20,9 @@ namespace AutoDealer.Models
         public int Factura { get; set; }
         public int Showroom { get; set; }
         public System.DateTime FechaCreacion { get; set; }
-        public System.DateTime FechaModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
         public System.DateTime Year { get; set; }
-        public Nullable<System.DateTime> FechaEntrada { get; set; }
+        public System.DateTime FechaEntrada { get; set; }
         public Nullable<System.DateTime> FechaSalida { get; set; }
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
@@ -32,7 +32,6 @@ namespace AutoDealer.Models
         public virtual Liquidaciones Liquidaciones1 { get; set; }
         public virtual Showrooms Showrooms { get; set; }
         public virtual Status Status1 { get; set; }
-        public virtual Suplidores Suplidores { get; set; }
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }
         public virtual TiposAutomoviles TiposAutomoviles { get; set; }

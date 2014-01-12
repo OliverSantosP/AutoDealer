@@ -1,17 +1,18 @@
-﻿@model AutoDealer.Models.Vendedores
+﻿@model AutoDealer.Models.Personas
 
 @{
-    ViewBag.Title = "Crear Vendedores";
+    ViewBag.Title = "AutoDealer - Editar Persona";
 }
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
 
     <div class="col-md-12">
         <div class="widget wlightblue">
             <div class="widget-head">
-                <div class="pull-left">Crear Vendedores</div>
+                <div class="pull-left">Crear Persona</div>
                 <div class="widget-icons pull-right">
                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
                     <a href="#" class="wclose"><i class="icon-remove"></i></a>
@@ -68,17 +69,27 @@
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
 
-                    <br>
-                    <input type="submit" value="Crear" class="btn btn-info" />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FechaCreacion)
+                    </div>
+                    <div class="editor-label">
+                        @Html.EditorFor(model => model.FechaCreacion)
+                        @Html.ValidationMessageFor(model => model.FechaCreacion)
+                    </div>
+                    <br />
+                    <p>
+                        <input type="submit" value="Guardar" class="btn btn-info" />
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Volver a lista completa", "Index")
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }

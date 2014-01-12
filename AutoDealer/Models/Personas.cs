@@ -12,11 +12,12 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Suplidores
+    public partial class Personas
     {
-        public Suplidores()
+        public Personas()
         {
-            this.Automoviles = new HashSet<Automoviles>();
+            this.Facturas = new HashSet<Facturas>();
+            this.Facturas1 = new HashSet<Facturas>();
         }
     
         public int Id { get; set; }
@@ -28,8 +29,9 @@ namespace AutoDealer.Models
         public string Email { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int Status { get; set; }
     
-        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<Facturas> Facturas1 { get; set; }
     }
 }

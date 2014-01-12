@@ -15,28 +15,13 @@
           <Property Name="Factura" Type="int" Nullable="false" />
           <Property Name="Showroom" Type="int" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Year" Type="date" Nullable="false" />
-          <Property Name="FechaEntrada" Type="datetime" />
+          <Property Name="FechaEntrada" Type="datetime" Nullable="false" />
           <Property Name="FechaSalida" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="TipoAutomovil" Type="int" Nullable="false" />
           <Property Name="Precio" Type="int" />
-        </EntityType>
-        <EntityType Name="Compradores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telefono" Type="varchar" MaxLength="12" />
-          <Property Name="Direccion" Type="text" />
-          <Property Name="Celular" Type="varchar" MaxLength="12" />
-          <Property Name="Email" Type="text" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
-          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
@@ -121,6 +106,21 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
+          <Property Name="Direccion" Type="varchar(max)" />
+          <Property Name="Celular" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Showrooms">
           <Key>
             <PropertyRef Name="Id" />
@@ -138,21 +138,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="text" />
-        </EntityType>
-        <EntityType Name="Suplidores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telefono" Type="varchar" MaxLength="12" />
-          <Property Name="Direccion" Type="text" />
-          <Property Name="Celular" Type="varchar" MaxLength="12" />
-          <Property Name="Email" Type="text" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
-          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="TiposAutomoviles">
           <Key>
@@ -180,21 +165,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendedores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telefono" Type="varchar" MaxLength="12" />
-          <Property Name="Direccion" Type="text" />
-          <Property Name="Celular" Type="varchar" MaxLength="12" />
-          <Property Name="Email" Type="text" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Automoviles_Automoviles">
@@ -257,18 +227,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Automoviles_Suplidores">
-          <End Role="Suplidores" Type="Self.Suplidores" Multiplicity="1" />
-          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suplidores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Automoviles">
-              <PropertyRef Name="Suplidor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Automoviles_TiposAutomoviles">
           <End Role="TiposAutomoviles" Type="Self.TiposAutomoviles" Multiplicity="1" />
           <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
@@ -305,18 +263,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Facturas_Compradores">
-          <End Role="Compradores" Type="Self.Compradores" Multiplicity="1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compradores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="Comprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Facturas_Detalles">
           <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
@@ -329,11 +275,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Facturas_Vendedores">
-          <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
+        <Association Name="FK_Facturas_PersonaComprador">
+          <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Vendedores">
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Comprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_PersonaVendedor">
+          <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Facturas">
@@ -439,7 +397,6 @@
         </Association>
         <EntityContainer Name="AutoDealerModelStoreContainer">
           <EntitySet Name="Automoviles" EntityType="Self.Automoviles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Compradores" EntityType="Self.Compradores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fabricantes" EntityType="Self.Fabricantes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
@@ -448,13 +405,12 @@
           <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Showrooms" EntityType="Self.Showrooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Suplidores" EntityType="Self.Suplidores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposAutomoviles" EntityType="Self.TiposAutomoviles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trim" EntityType="Self.Trim" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Automoviles_Automoviles" Association="Self.FK_Automoviles_Automoviles">
             <End Role="Automoviles" EntitySet="Automoviles" />
             <End Role="Automoviles1" EntitySet="Automoviles" />
@@ -475,10 +431,6 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Automoviles" EntitySet="Automoviles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Automoviles_Suplidores" Association="Self.FK_Automoviles_Suplidores">
-            <End Role="Suplidores" EntitySet="Suplidores" />
-            <End Role="Automoviles" EntitySet="Automoviles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Automoviles_TiposAutomoviles" Association="Self.FK_Automoviles_TiposAutomoviles">
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
             <End Role="Automoviles" EntitySet="Automoviles" />
@@ -491,16 +443,16 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Fabricantes" EntitySet="Fabricantes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Compradores" Association="Self.FK_Facturas_Compradores">
-            <End Role="Compradores" EntitySet="Compradores" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
             <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Vendedores" Association="Self.FK_Facturas_Vendedores">
-            <End Role="Vendedores" EntitySet="Vendedores" />
+          <AssociationSet Name="FK_Facturas_PersonaComprador" Association="Self.FK_Facturas_PersonaComprador">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_PersonaVendedor" Association="Self.FK_Facturas_PersonaVendedor">
+            <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
           <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
@@ -550,37 +502,20 @@
           <Property Name="Factura" Type="Int32" Nullable="false" />
           <Property Name="Showroom" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaEntrada" Type="DateTime" Precision="3" />
+          <Property Name="FechaEntrada" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="FechaSalida" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Automoviles_Facturas" FromRole="Automoviles" ToRole="Facturas" />
           <NavigationProperty Name="Liquidaciones1" Relationship="Self.FK_Automoviles_Liquidaciones" FromRole="Automoviles" ToRole="Liquidaciones" />
           <NavigationProperty Name="Showrooms" Relationship="Self.FK_Automoviles_Showrooms" FromRole="Automoviles" ToRole="Showrooms" />
           <NavigationProperty Name="Status1" Relationship="Self.FK_Automoviles_Status" FromRole="Automoviles" ToRole="Status" />
-          <NavigationProperty Name="Suplidores" Relationship="Self.FK_Automoviles_Suplidores" FromRole="Automoviles" ToRole="Suplidores" />
           <Property Name="TipoAutomovil" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Automoviles1" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles" ToRole="Automoviles1" />
           <NavigationProperty Name="Automoviles2" Relationship="AutoDealerModel.FK_Automoviles_Automoviles" FromRole="Automoviles1" ToRole="Automoviles" />
           <NavigationProperty Name="TiposAutomoviles" Relationship="AutoDealerModel.FK_Automoviles_TiposAutomoviles" FromRole="Automoviles" ToRole="TiposAutomoviles" />
           <Property Name="Precio" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Compradores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Compradores" FromRole="Compradores" ToRole="Facturas" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
@@ -607,9 +542,9 @@
           <Property Name="Comprador" Type="Int32" Nullable="false" />
           <Property Name="NCF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Facturas" FromRole="Facturas" ToRole="Automoviles" />
-          <NavigationProperty Name="Compradores" Relationship="Self.FK_Facturas_Compradores" FromRole="Facturas" ToRole="Compradores" />
           <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_Facturas_Detalles" FromRole="Facturas" ToRole="FacturasDetalles" />
-          <NavigationProperty Name="Vendedores" Relationship="Self.FK_Facturas_Vendedores" FromRole="Facturas" ToRole="Vendedores" />
+          <NavigationProperty Name="Personas" Relationship="AutoDealerModel.FK_Facturas_PersonaComprador" FromRole="Facturas" ToRole="Personas" />
+          <NavigationProperty Name="Personas1" Relationship="AutoDealerModel.FK_Facturas_PersonaVendedor" FromRole="Facturas" ToRole="Personas" />
         </EntityType>
         <EntityType Name="FacturasDetalles">
           <Key>
@@ -685,22 +620,6 @@
           <NavigationProperty Name="Trim" Relationship="AutoDealerModel.FK_Trim_Status" FromRole="Status" ToRole="Trim" />
           <NavigationProperty Name="Empresas" Relationship="AutoDealerModel.FK_Empresas_Status" FromRole="Status" ToRole="Empresas" />
         </EntityType>
-        <EntityType Name="Suplidores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Suplidores" FromRole="Suplidores" ToRole="Automoviles" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
         <EntityType Name="TiposDeGastos">
           <Key>
             <PropertyRef Name="Id" />
@@ -710,22 +629,6 @@
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gastos" Relationship="Self.FK_Gastos_TiposGastos" FromRole="TiposDeGastos" ToRole="Gastos" />
-        </EntityType>
-        <EntityType Name="Vendedores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Vendedores" FromRole="Vendedores" ToRole="Facturas" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Automoviles_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
@@ -775,30 +678,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Automoviles_Suplidores">
-          <End Role="Suplidores" Type="Self.Suplidores" Multiplicity="1" />
-          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suplidores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Automoviles">
-              <PropertyRef Name="Suplidor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Facturas_Compradores">
-          <End Role="Compradores" Type="Self.Compradores" Multiplicity="1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compradores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="Comprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Showrooms_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
           <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
@@ -820,18 +699,6 @@
             </Principal>
             <Dependent Role="Facturas">
               <PropertyRef Name="Detalle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Facturas_Vendedores">
-          <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendedores">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="Vendedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -861,7 +728,6 @@
         </Association>
         <EntityContainer Name="AutoDealerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Automoviles" EntityType="Self.Automoviles" />
-          <EntitySet Name="Compradores" EntityType="Self.Compradores" />
           <EntitySet Name="Empresas" EntityType="Self.Empresas" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" />
@@ -870,9 +736,7 @@
           <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" />
           <EntitySet Name="Showrooms" EntityType="Self.Showrooms" />
           <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="Suplidores" EntityType="Self.Suplidores" />
           <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" />
-          <EntitySet Name="Vendedores" EntityType="Self.Vendedores" />
           <AssociationSet Name="FK_Automoviles_Facturas" Association="Self.FK_Automoviles_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Automoviles" EntitySet="Automoviles" />
@@ -889,24 +753,12 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Automoviles" EntitySet="Automoviles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Automoviles_Suplidores" Association="Self.FK_Automoviles_Suplidores">
-            <End Role="Suplidores" EntitySet="Suplidores" />
-            <End Role="Automoviles" EntitySet="Automoviles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Compradores" Association="Self.FK_Facturas_Compradores">
-            <End Role="Compradores" EntitySet="Compradores" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Showrooms" EntitySet="Showrooms" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
             <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Vendedores" Association="Self.FK_Facturas_Vendedores">
-            <End Role="Vendedores" EntitySet="Vendedores" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
           <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
@@ -956,6 +808,15 @@
           <AssociationSet Name="FK_Empresas_Status" Association="AutoDealerModel.FK_Empresas_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
+          <EntitySet Name="Personas" EntityType="AutoDealerModel.Personas" />
+          <AssociationSet Name="FK_Facturas_PersonaComprador" Association="AutoDealerModel.FK_Facturas_PersonaComprador">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_PersonaVendedor" Association="AutoDealerModel.FK_Facturas_PersonaVendedor">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Fabricantes">
@@ -1111,6 +972,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="AutoDealerModel.FK_Facturas_PersonaComprador" FromRole="Personas" ToRole="Facturas" />
+          <NavigationProperty Name="Facturas1" Relationship="AutoDealerModel.FK_Facturas_PersonaVendedor" FromRole="Personas" ToRole="Facturas" />
+        </EntityType>
+        <Association Name="FK_Facturas_PersonaComprador">
+          <End Type="AutoDealerModel.Personas" Role="Personas" Multiplicity="1" />
+          <End Type="AutoDealerModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Comprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_PersonaVendedor">
+          <End Type="AutoDealerModel.Personas" Role="Personas" Multiplicity="1" />
+          <End Type="AutoDealerModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1133,22 +1035,6 @@
                 <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
                 <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Compradores">
-            <EntityTypeMapping TypeName="AutoDealerModel.Compradores">
-              <MappingFragment StoreEntitySet="Compradores">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1245,22 +1131,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Suplidores">
-            <EntityTypeMapping TypeName="AutoDealerModel.Suplidores">
-              <MappingFragment StoreEntitySet="Suplidores">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TiposDeGastos">
             <EntityTypeMapping TypeName="AutoDealerModel.TiposDeGastos">
               <MappingFragment StoreEntitySet="TiposDeGastos">
@@ -1268,22 +1138,6 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendedores">
-            <EntityTypeMapping TypeName="AutoDealerModel.Vendedores">
-              <MappingFragment StoreEntitySet="Vendedores">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1321,6 +1175,22 @@
               <MappingFragment StoreEntitySet="Trim">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="AutoDealerModel.Personas">
+              <MappingFragment StoreEntitySet="Personas">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -185,24 +185,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AutomovilController.cs" />
-    <Compile Include="Controllers\CompradorController.cs" />
-    <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\FacturaDetalleController.cs" />
     <Compile Include="Controllers\GastoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
-    <Compile Include="Controllers\SuplidorController.cs" />
     <Compile Include="Controllers\TiposGastoController.cs" />
-    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Automoviles.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Compradores.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Empresas.cs">
@@ -244,13 +238,13 @@
     <Compile Include="Models\Modelos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Personas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Showrooms.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Suplidores.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposAutomoviles.cs">
@@ -260,9 +254,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Trim.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Vendedores.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -439,16 +430,6 @@
     <Content Include="Views\Status\Create.cshtml" />
     <Content Include="Views\Status\Edit.cshtml" />
     <Content Include="Views\Status\Delete.cshtml" />
-    <Content Include="Views\Comprador\Index.cshtml" />
-    <Content Include="Views\Comprador\Details.cshtml" />
-    <Content Include="Views\Comprador\Create.cshtml" />
-    <Content Include="Views\Comprador\Edit.cshtml" />
-    <Content Include="Views\Comprador\Delete.cshtml" />
-    <Content Include="Views\Vendedor\Index.cshtml" />
-    <Content Include="Views\Vendedor\Details.cshtml" />
-    <Content Include="Views\Vendedor\Create.cshtml" />
-    <Content Include="Views\Vendedor\Edit.cshtml" />
-    <Content Include="Views\Vendedor\Delete.cshtml" />
     <Content Include="Views\FacturaDetalle\Index.cshtml" />
     <Content Include="Views\FacturaDetalle\Details.cshtml" />
     <Content Include="Views\FacturaDetalle\Create.cshtml" />
@@ -475,11 +456,11 @@
     <Content Include="Views\Automovil\Create.cshtml" />
     <Content Include="Views\Automovil\Edit.cshtml" />
     <Content Include="Views\Automovil\Delete.cshtml" />
-    <Content Include="Views\Suplidor\Index.cshtml" />
-    <Content Include="Views\Suplidor\Details.cshtml" />
-    <Content Include="Views\Suplidor\Create.cshtml" />
-    <Content Include="Views\Suplidor\Edit.cshtml" />
-    <Content Include="Views\Suplidor\Delete.cshtml" />
+    <Content Include="Views\Persona\Index.cshtml" />
+    <Content Include="Views\Persona\Details.cshtml" />
+    <Content Include="Views\Persona\Create.cshtml" />
+    <Content Include="Views\Persona\Edit.cshtml" />
+    <Content Include="Views\Persona\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

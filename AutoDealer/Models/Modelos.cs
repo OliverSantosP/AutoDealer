@@ -19,6 +19,7 @@ namespace AutoDealer.Models
         {
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
+
         /// <summary>
         /// Este metodo retorna un modelo, dado un fabricante.
         /// </summary>
@@ -37,6 +38,7 @@ namespace AutoDealer.Models
             }
             return ListaModelos;
         }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Status { get; set; }

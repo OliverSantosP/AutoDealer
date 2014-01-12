@@ -104,14 +104,13 @@
                                 <td>
                                     @item.Year.ToString("yyyy")
                                 </td>
-                                <td>
-                                    @item.Suplidores.Nombre
-                                </td>
+                                <td></td>
                                 <td>
                                     @item.Showrooms.Nombre
                                 </td>
+                                
                                 <td>
-                                    @item.FechaEntrada.Value.ToShortDateString()
+                                    @item.FechaEntrada.ToShortDateString()
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Factura)

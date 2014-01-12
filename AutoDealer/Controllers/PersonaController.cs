@@ -9,66 +9,64 @@ using AutoDealer.Models;
 
 namespace AutoDealer.Controllers
 {
-    public class SuplidorController : Controller
+    public class PersonaController : Controller
     {
         private AutoDealerEntities db = new AutoDealerEntities();
 
         //
-        // GET: /Suplidor/
+        // GET: /Comprador/
 
-        // <summary>
+        /// <summary>
         /// Este metodo cuando recibe un parametro String hace una busqueda. Esta busqueda se hace tanto en el Nombre como en el Apellido.
         /// </summary>
         /// <param name="Buscar">String para buscar.</param>
         /// <returns>ActionResult</returns>
         public ActionResult Index(string Buscar)
         {
-            var suplidores = db.Suplidores.Where(Suplidores => Suplidores.Status == 1);
-            var suplidoresapellidos = db.Suplidores.Where(SuplidorApellidos => SuplidorApellidos.Status == 1);
-            var suplidoresunion = suplidores;
+            var personas = db.Personas.Where(Personas => Personas.Status == 1);
+            var personasapellidos = db.Personas.Where(PersonasApellidos => PersonasApellidos.Status == 1);
+            var personasunion = personas;
 
             if (!String.IsNullOrEmpty(Buscar))
             {
-                suplidores = suplidores.Where(Suplidores => Suplidores.Nombre.Contains(Buscar));
-                suplidoresapellidos = suplidoresapellidos.Where(SuplidorApellidos => SuplidorApellidos.Apellido.Contains(Buscar));
+                personas = personas.Where(Personas => Personas.Nombre.Contains(Buscar));
+                personasapellidos = personasapellidos.Where(PersonasApellidos => PersonasApellidos.Apellido.Contains(Buscar));
 
-                if (suplidores.Count() > 0 && suplidoresapellidos.Count() > 0)
+                if (personas.Count() > 0 && personasapellidos.Count() > 0)
                 {
-                    suplidoresapellidos = suplidores.Union(suplidoresapellidos);
+                    personasunion = personas.Union(personasapellidos);
                 }
                 else
                 {
-                    if (suplidores.Count() > 0)
+                    if (personas.Count() > 0)
                     {
-                        suplidoresunion = suplidores;
+                        personasunion = personas;
                     }
-                    if (suplidoresapellidos.Count() > 0)
+                    if (personasapellidos.Count() > 0)
                     {
-                        suplidoresunion = suplidoresapellidos;
+                        personasunion = personasapellidos;
                     }
-
                 }
 
 
             }
-            return View(suplidoresunion.ToList());
+            return View(personasunion.ToList());
         }
-
         //
-        // GET: /Suplidor/Details/5
+        // GET: /Persona/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Suplidores suplidores = db.Suplidores.Find(id);
-            if (suplidores == null)
+            Personas personas = db.Personas.Find(id);
+            if (personas == null)
             {
                 return HttpNotFound();
             }
-            return View(suplidores);
+            return View(personas);
         }
 
         //
-        // GET: /Suplidor/Create
+        // GET: /Persona/Create
 
         public ActionResult Create()
         {
@@ -76,76 +74,77 @@ namespace AutoDealer.Controllers
         }
 
         //
-        // POST: /Suplidor/Create
+        // POST: /Persona/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Suplidores suplidores)
+        public ActionResult Create(Personas personas)
         {
             if (ModelState.IsValid)
             {
-                suplidores.Status = 1;
-                db.Suplidores.Add(suplidores);
+                personas.FechaCreacion = DateTime.Now;
+                personas.Status = 1;
+                db.Personas.Add(personas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(suplidores);
+            return View(personas);
         }
 
         //
-        // GET: /Suplidor/Edit/5
+        // GET: /Persona/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Suplidores suplidores = db.Suplidores.Find(id);
-            if (suplidores == null)
+            Personas personas = db.Personas.Find(id);
+            if (personas == null)
             {
                 return HttpNotFound();
             }
-            return View(suplidores);
+            return View(personas);
         }
 
         //
-        // POST: /Suplidor/Edit/5
+        // POST: /Persona/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Suplidores suplidores)
+        public ActionResult Edit(Personas personas)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(suplidores).State = EntityState.Modified;
-                suplidores.FechaModificacion = DateTime.Now;
+                personas.FechaModificacion = DateTime.Now;
+                personas.Status = 1;
+                db.Entry(personas).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(suplidores);
+            return View(personas);
         }
 
         //
-        // GET: /Suplidor/Delete/5
+        // GET: /Persona/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Suplidores suplidores = db.Suplidores.Find(id);
-            if (suplidores == null)
+            Personas personas = db.Personas.Find(id);
+            if (personas == null)
             {
                 return HttpNotFound();
             }
-            return View(suplidores);
+            return View(personas);
         }
 
         //
-        // POST: /Suplidor/Delete/5
+        // POST: /Persona/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Suplidores suplidores = db.Suplidores.Find(id);
-            suplidores.Status = 0;
-            suplidores.FechaModificacion = DateTime.Now;
+            Personas personas = db.Personas.Find(id);
+            personas.Status = 0;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

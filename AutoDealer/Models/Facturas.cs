@@ -28,8 +28,8 @@ namespace AutoDealer.Models
         public string NCF { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Compradores Compradores { get; set; }
         public virtual FacturasDetalles FacturasDetalles { get; set; }
-        public virtual Vendedores Vendedores { get; set; }
+        public virtual Personas Personas { get; set; }
+        public virtual Personas Personas1 { get; set; }
     }
 }
