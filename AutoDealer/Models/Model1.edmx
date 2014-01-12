@@ -121,6 +121,16 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PersonasRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Persona" Type="int" Nullable="false" />
+          <Property Name="Rol" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Showrooms">
           <Key>
             <PropertyRef Name="Id" />
@@ -156,6 +166,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="text" />
           <Property Name="Descripcion" Type="text" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Trim">
@@ -335,6 +354,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PersonasRoles_Personas">
+          <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
+          <End Role="PersonasRoles" Type="Self.PersonasRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonasRoles">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonasRoles_Roles">
+          <End Role="TiposRoles" Type="Self.TiposRoles" Multiplicity="1" />
+          <End Role="PersonasRoles" Type="Self.PersonasRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonasRoles">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Showrooms_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
           <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
@@ -383,6 +426,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TiposRoles_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="TiposRoles" Type="Self.TiposRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposRoles">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Trim_Status">
           <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="Trim" Type="Self.Trim" Multiplicity="*" />
@@ -406,10 +461,12 @@
           <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonasRoles" EntityType="Self.PersonasRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Showrooms" EntityType="Self.Showrooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposAutomoviles" EntityType="Self.TiposAutomoviles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDeGastos" EntityType="Self.TiposDeGastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposRoles" EntityType="Self.TiposRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trim" EntityType="Self.Trim" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Automoviles_Automoviles" Association="Self.FK_Automoviles_Automoviles">
             <End Role="Automoviles" EntitySet="Automoviles" />
@@ -467,6 +524,14 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Modelos" EntitySet="Modelos" />
           </AssociationSet>
+          <AssociationSet Name="FK_PersonasRoles_Personas" Association="Self.FK_PersonasRoles_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonasRoles" EntitySet="PersonasRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonasRoles_Roles" Association="Self.FK_PersonasRoles_Roles">
+            <End Role="TiposRoles" EntitySet="TiposRoles" />
+            <End Role="PersonasRoles" EntitySet="PersonasRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Showrooms" EntitySet="Showrooms" />
@@ -482,6 +547,10 @@
           <AssociationSet Name="FK_TiposAutomoviles_Trim" Association="Self.FK_TiposAutomoviles_Trim">
             <End Role="Trim" EntitySet="Trim" />
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposRoles_Status" Association="Self.FK_TiposRoles_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="TiposRoles" EntitySet="TiposRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Trim_Status" Association="Self.FK_Trim_Status">
             <End Role="Status" EntitySet="Status" />
@@ -619,6 +688,7 @@
           <NavigationProperty Name="Modelos" Relationship="AutoDealerModel.FK_Modelos_Status" FromRole="Status" ToRole="Modelos" />
           <NavigationProperty Name="Trim" Relationship="AutoDealerModel.FK_Trim_Status" FromRole="Status" ToRole="Trim" />
           <NavigationProperty Name="Empresas" Relationship="AutoDealerModel.FK_Empresas_Status" FromRole="Status" ToRole="Empresas" />
+          <NavigationProperty Name="TiposRoles" Relationship="AutoDealerModel.FK_TiposRoles_Status" FromRole="Status" ToRole="TiposRoles" />
         </EntityType>
         <EntityType Name="TiposDeGastos">
           <Key>
@@ -818,6 +888,20 @@
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
+          <EntitySet Name="PersonasRoles" EntityType="AutoDealerModel.PersonasRoles" />
+          <EntitySet Name="TiposRoles" EntityType="AutoDealerModel.TiposRoles" />
+          <AssociationSet Name="FK_PersonasRoles_Personas" Association="AutoDealerModel.FK_PersonasRoles_Personas">
+            <End Role="Personas" EntitySet="Personas" />
+            <End Role="PersonasRoles" EntitySet="PersonasRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonasRoles_Roles" Association="AutoDealerModel.FK_PersonasRoles_Roles">
+            <End Role="TiposRoles" EntitySet="TiposRoles" />
+            <End Role="PersonasRoles" EntitySet="PersonasRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposRoles_Status" Association="AutoDealerModel.FK_TiposRoles_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="TiposRoles" EntitySet="TiposRoles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Fabricantes">
           <Key>
@@ -988,6 +1072,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="AutoDealerModel.FK_Facturas_PersonaComprador" FromRole="Personas" ToRole="Facturas" />
           <NavigationProperty Name="Facturas1" Relationship="AutoDealerModel.FK_Facturas_PersonaVendedor" FromRole="Personas" ToRole="Facturas" />
+          <NavigationProperty Name="PersonasRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Personas" FromRole="Personas" ToRole="PersonasRoles" />
         </EntityType>
         <Association Name="FK_Facturas_PersonaComprador">
           <End Type="AutoDealerModel.Personas" Role="Personas" Multiplicity="1" />
@@ -1010,6 +1095,65 @@
             </Principal>
             <Dependent Role="Facturas">
               <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonasRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Persona" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Personas" Relationship="AutoDealerModel.FK_PersonasRoles_Personas" FromRole="PersonasRoles" ToRole="Personas" />
+          <NavigationProperty Name="TiposRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="PersonasRoles" ToRole="TiposRoles" />
+        </EntityType>
+        <EntityType Name="TiposRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PersonasRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="TiposRoles" ToRole="PersonasRoles" />
+          <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_TiposRoles_Status" FromRole="TiposRoles" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK_PersonasRoles_Personas">
+          <End Type="AutoDealerModel.Personas" Role="Personas" Multiplicity="1" />
+          <End Type="AutoDealerModel.PersonasRoles" Role="PersonasRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonasRoles">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonasRoles_Roles">
+          <End Type="AutoDealerModel.TiposRoles" Role="TiposRoles" Multiplicity="1" />
+          <End Type="AutoDealerModel.PersonasRoles" Role="PersonasRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonasRoles">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposRoles_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.TiposRoles" Role="TiposRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposRoles">
+              <PropertyRef Name="Status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1191,6 +1335,27 @@
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonasRoles">
+            <EntityTypeMapping TypeName="AutoDealerModel.PersonasRoles">
+              <MappingFragment StoreEntitySet="PersonasRoles">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Persona" ColumnName="Persona" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposRoles">
+            <EntityTypeMapping TypeName="AutoDealerModel.TiposRoles">
+              <MappingFragment StoreEntitySet="TiposRoles">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -20,6 +20,7 @@ namespace AutoDealer.Models
             this.Fabricantes = new HashSet<Fabricantes>();
             this.Modelos = new HashSet<Modelos>();
             this.Trim = new HashSet<Trim>();
+            this.TiposRoles = new HashSet<TiposRoles>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,6 @@ namespace AutoDealer.Models
         public virtual ICollection<Modelos> Modelos { get; set; }
         public virtual ICollection<Trim> Trim { get; set; }
         public virtual Empresas Empresas { get; set; }
+        public virtual ICollection<TiposRoles> TiposRoles { get; set; }
     }
 }

@@ -12,28 +12,19 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Personas
+    public partial class TiposRoles
     {
-        public Personas()
+        public TiposRoles()
         {
-            this.Facturas = new HashSet<Facturas>();
-            this.Facturas1 = new HashSet<Facturas>();
             this.PersonasRoles = new HashSet<PersonasRoles>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Telefono { get; set; }
-        public string Direccion { get; set; }
-        public string Celular { get; set; }
-        public string Email { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string Descripcion { get; set; }
         public int Status { get; set; }
     
-        public virtual ICollection<Facturas> Facturas { get; set; }
-        public virtual ICollection<Facturas> Facturas1 { get; set; }
         public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }
