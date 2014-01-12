@@ -68,8 +68,18 @@
                         @Html.EditorFor(model => model.Email)
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
-
                     <br>
+                    <div class="btn-group">
+                        <select id="Roles" name="Roles" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            @foreach (var item in AutoDealer.Models.TiposRoles.GetTiposRoles())
+                            {
+                                <option value="@item.Id">@item.Nombre</option>
+                            }
+
+                        </select>
+                    </div>
+                    <br />
+                    <br />
                     <input type="submit" value="Crear" class="btn btn-info" />
                 </div>
             </div>

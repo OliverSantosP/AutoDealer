@@ -11,12 +11,21 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class TiposRoles
     {
         public TiposRoles()
         {
             this.PersonasRoles = new HashSet<PersonasRoles>();
+        }
+
+        public static List<TiposRoles> GetTiposRoles()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<TiposRoles> TodosLosRoles  = new List<TiposRoles>();
+            TodosLosRoles = db.TiposRoles.ToList();
+            return TodosLosRoles;
         }
     
         public int Id { get; set; }
