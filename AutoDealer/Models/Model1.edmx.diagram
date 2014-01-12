@@ -39,11 +39,11 @@
         <EntityTypeShape EntityType="AutoDealerModel.Personas" Width="1.5" PointX="5.375" PointY="4.75" />
         <AssociationConnector Association="AutoDealerModel.FK_Facturas_PersonaComprador" />
         <AssociationConnector Association="AutoDealerModel.FK_Facturas_PersonaVendedor" />
-        <EntityTypeShape EntityType="AutoDealerModel.PersonasRoles" Width="1.5" PointX="7.625" PointY="16.25" />
         <EntityTypeShape EntityType="AutoDealerModel.TiposRoles" Width="1.5" PointX="3" PointY="27.875" />
+        <AssociationConnector Association="AutoDealerModel.FK_TiposRoles_Status" />
+        <EntityTypeShape EntityType="AutoDealerModel.PersonasRoles" Width="1.5" PointX="7.625" PointY="16.25" />
         <AssociationConnector Association="AutoDealerModel.FK_PersonasRoles_Personas" />
         <AssociationConnector Association="AutoDealerModel.FK_PersonasRoles_Roles" />
-        <AssociationConnector Association="AutoDealerModel.FK_TiposRoles_Status" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

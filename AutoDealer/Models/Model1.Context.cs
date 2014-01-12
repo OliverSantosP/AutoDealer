@@ -40,7 +40,7 @@ namespace AutoDealer.Models
         public DbSet<TiposAutomoviles> TiposAutomoviles { get; set; }
         public DbSet<Trim> Trim { get; set; }
         public DbSet<Personas> Personas { get; set; }
-        public DbSet<PersonasRoles> PersonasRoles { get; set; }
         public DbSet<TiposRoles> TiposRoles { get; set; }
+        public DbSet<PersonasRoles> PersonasRoles { get; set; }
     }
 }

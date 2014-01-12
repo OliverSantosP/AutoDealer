@@ -52,6 +52,7 @@ namespace AutoDealer.Controllers
             }
             return View(personasunion.ToList());
         }
+
         //
         // GET: /Persona/Details/5
 
@@ -78,14 +79,23 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Personas personas)
+        public ActionResult Create(Personas personas,FormCollection formdata)
         {
             if (ModelState.IsValid)
             {
+                
                 personas.FechaCreacion = DateTime.Now;
                 personas.Status = 1;
                 db.Personas.Add(personas);
                 db.SaveChanges();
+                
+                PersonasRoles Rol= new PersonasRoles();
+                Rol.Persona = personas.Id;
+                Rol.FechaCreacion = personas.FechaCreacion;
+                Rol.Rol = Int32.Parse(formdata["Roles"].ToString());
+                db.PersonasRoles.Add(Rol);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -110,7 +120,7 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Personas personas)
+        public ActionResult Edit(Personas personas,FormCollection formdata)
         {
             if (ModelState.IsValid)
             {
@@ -118,6 +128,14 @@ namespace AutoDealer.Controllers
                 personas.Status = 1;
                 db.Entry(personas).State = EntityState.Modified;
                 db.SaveChanges();
+
+                PersonasRoles Rol = new PersonasRoles();
+                Rol.Persona = personas.Id;
+                Rol.FechaCreacion = personas.FechaCreacion;
+                Rol.Rol = Int32.Parse(formdata["Roles"].ToString());
+                db.PersonasRoles.Add(Rol);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(personas);

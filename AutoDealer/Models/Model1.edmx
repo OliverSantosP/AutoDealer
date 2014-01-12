@@ -125,7 +125,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Persona" Type="int" Nullable="false" />
           <Property Name="Rol" Type="int" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
@@ -888,8 +888,12 @@
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <EntitySet Name="PersonasRoles" EntityType="AutoDealerModel.PersonasRoles" />
           <EntitySet Name="TiposRoles" EntityType="AutoDealerModel.TiposRoles" />
+          <AssociationSet Name="FK_TiposRoles_Status" Association="AutoDealerModel.FK_TiposRoles_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="TiposRoles" EntitySet="TiposRoles" />
+          </AssociationSet>
+          <EntitySet Name="PersonasRoles" EntityType="AutoDealerModel.PersonasRoles" />
           <AssociationSet Name="FK_PersonasRoles_Personas" Association="AutoDealerModel.FK_PersonasRoles_Personas">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="PersonasRoles" EntitySet="PersonasRoles" />
@@ -897,10 +901,6 @@
           <AssociationSet Name="FK_PersonasRoles_Roles" Association="AutoDealerModel.FK_PersonasRoles_Roles">
             <End Role="TiposRoles" EntitySet="TiposRoles" />
             <End Role="PersonasRoles" EntitySet="PersonasRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TiposRoles_Status" Association="AutoDealerModel.FK_TiposRoles_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="TiposRoles" EntitySet="TiposRoles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Fabricantes">
@@ -1098,18 +1098,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PersonasRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Persona" Type="Int32" Nullable="false" />
-          <Property Name="Rol" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Personas" Relationship="AutoDealerModel.FK_PersonasRoles_Personas" FromRole="PersonasRoles" ToRole="Personas" />
-          <NavigationProperty Name="TiposRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="PersonasRoles" ToRole="TiposRoles" />
-        </EntityType>
         <EntityType Name="TiposRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -1118,8 +1106,32 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PersonasRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="TiposRoles" ToRole="PersonasRoles" />
           <NavigationProperty Name="Status1" Relationship="AutoDealerModel.FK_TiposRoles_Status" FromRole="TiposRoles" ToRole="Status" />
+          <NavigationProperty Name="PersonasRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="TiposRoles" ToRole="PersonasRoles" />
+        </EntityType>
+        <Association Name="FK_TiposRoles_Status">
+          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="AutoDealerModel.TiposRoles" Role="TiposRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TiposRoles">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonasRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Persona" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Personas" Relationship="AutoDealerModel.FK_PersonasRoles_Personas" FromRole="PersonasRoles" ToRole="Personas" />
+          <NavigationProperty Name="TiposRoles" Relationship="AutoDealerModel.FK_PersonasRoles_Roles" FromRole="PersonasRoles" ToRole="TiposRoles" />
         </EntityType>
         <Association Name="FK_PersonasRoles_Personas">
           <End Type="AutoDealerModel.Personas" Role="Personas" Multiplicity="1" />
@@ -1142,18 +1154,6 @@
             </Principal>
             <Dependent Role="PersonasRoles">
               <PropertyRef Name="Rol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TiposRoles_Status">
-          <End Type="AutoDealerModel.Status" Role="Status" Multiplicity="1" />
-          <End Type="AutoDealerModel.TiposRoles" Role="TiposRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TiposRoles">
-              <PropertyRef Name="Status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1340,6 +1340,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TiposRoles">
+            <EntityTypeMapping TypeName="AutoDealerModel.TiposRoles">
+              <MappingFragment StoreEntitySet="TiposRoles">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PersonasRoles">
             <EntityTypeMapping TypeName="AutoDealerModel.PersonasRoles">
               <MappingFragment StoreEntitySet="PersonasRoles">
@@ -1347,16 +1357,6 @@
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
                 <ScalarProperty Name="Persona" ColumnName="Persona" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TiposRoles">
-            <EntityTypeMapping TypeName="AutoDealerModel.TiposRoles">
-              <MappingFragment StoreEntitySet="TiposRoles">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -19,13 +19,31 @@ namespace AutoDealer.Models
         {
             this.PersonasRoles = new HashSet<PersonasRoles>();
         }
-
         public static List<TiposRoles> GetTiposRoles()
         {
             AutoDealerEntities db = new AutoDealerEntities();
-            List<TiposRoles> TodosLosRoles  = new List<TiposRoles>();
-            TodosLosRoles = db.TiposRoles.ToList();
-            return TodosLosRoles;
+            List<TiposRoles> ListaTiposRoles = new List<TiposRoles>();
+            ListaTiposRoles = db.TiposRoles.ToList();
+            return ListaTiposRoles;
+        }
+
+
+        public static List<TiposRoles> ConseguirRolesDePersona(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+
+            List<PersonasRoles> ListaPersonaRoles = new List<PersonasRoles>();
+            ListaPersonaRoles = db.PersonasRoles.Where(x => x.Persona == Id).ToList();
+
+            List<TiposRoles> ListaTiposRoles = new List<TiposRoles>();
+
+            foreach (var item in ListaPersonaRoles)
+            {
+                ListaTiposRoles = db.TiposRoles.Where(y => y.Status == 1).ToList();
+                ListaTiposRoles = ListaTiposRoles.Where(z => z.Id == item.Rol).ToList();
+            }
+
+            return ListaTiposRoles;
         }
     
         public int Id { get; set; }
@@ -33,7 +51,7 @@ namespace AutoDealer.Models
         public string Descripcion { get; set; }
         public int Status { get; set; }
     
-        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
         public virtual Status Status1 { get; set; }
+        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
     }
 }
