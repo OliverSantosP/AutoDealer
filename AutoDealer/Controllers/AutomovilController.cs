@@ -156,16 +156,26 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Automoviles automoviles)
+        public ActionResult Create(Automoviles automoviles, FormCollection FormData)
         {
-            if (ModelState.IsValid)
-            {
+            automoviles.Showroom = Int32.Parse(FormData["Showrooms"]);
+            automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
+            automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
+            automoviles.FechaCreacion = DateTime.Now;
+            automoviles.Status = 1;
+            string Year = FormData["Year"];
+            string FormatedYear = "1/1/YYYY";
+            FormatedYear = FormatedYear.Replace("YYYY", Year);
+            automoviles.Year = DateTime.Parse(FormatedYear);
+            //if (ModelState.IsValid)
+            //{
+                
                 db.Automoviles.Add(automoviles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            //}
 
-            return View(automoviles);
+            //return View(automoviles);
         }
 
         //

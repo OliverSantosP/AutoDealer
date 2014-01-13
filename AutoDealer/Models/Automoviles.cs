@@ -16,8 +16,8 @@ namespace AutoDealer.Models
     {
         public int Id { get; set; }
         public int Suplidor { get; set; }
-        public int Liquidaciones { get; set; }
-        public int Factura { get; set; }
+        public int ?Liquidaciones { get; set; }
+        public int ?Factura { get; set; }
         public int Showroom { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }

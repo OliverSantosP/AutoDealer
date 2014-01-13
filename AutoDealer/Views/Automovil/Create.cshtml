@@ -20,20 +20,20 @@
             </div>
             <div class="widget-content">
                 <div class="padd">
-                    Empresa
+                    Empresa<br />
                     <div class="btn-group">
                         <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
                     </div>
                     <br />
                     <br />
-                    Showroom
+                    Showroom<br />
                     <div class="btn-group">
                         <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
                     </div>
                     <br />
                     <br />
                     <div class="col-lg-12">
-                        Tipo Automovil
+                        Tipo Automovil<br />
                         <div class="btn-group">
                             <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
                         </div>
@@ -42,9 +42,26 @@
                                 <option>Modelo</option>
                             </select>
                         </div>
-                        <input type="text" placeholder="Año" id="Year">
+                        <input type="text" placeholder="Año" id="Year" name="Year">
                         @Html.ValidationMessageFor(model => model.Year)
                     </div>
+                    <br />
+                    Precio
+                    <br />
+                    @Html.TextBoxFor(model => model.Precio)
+                    @Html.ValidationMessageFor(model => model.Precio)
+                    <br />
+                    <br />
+                Suplidor<br />
+                    <div class="btn-group">
+                        <select id="Suplidores" name="Suplidores" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            @foreach (var item in AutoDealer.Models.Personas.GetSuplidores())
+                            {
+                                <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                            }
+                        </select>
+                    </div>
+                    <br />
                     <br />
                     <input type="submit" value="Crear" class="btn btn-info" />
                 </div><!--Padd-->

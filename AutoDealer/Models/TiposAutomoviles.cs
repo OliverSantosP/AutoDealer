@@ -11,12 +11,25 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class TiposAutomoviles
     {
         public TiposAutomoviles()
         {
             this.Automoviles = new HashSet<Automoviles>();
+        }
+
+        public static int GetTipoAutomovil(string Fabricante, string Modelo)
+        {
+            int TipoAutomovil;
+            int FabricanteInt = Int32.Parse(Fabricante);
+            int ModeloInt = Int32.Parse(Modelo);
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
+            ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Fabricante == FabricanteInt).ToList();
+            ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == ModeloInt).ToList();
+            return TipoAutomovil = ListaTiposAutomoviles.First().Id;
         }
     
         public int Id { get; set; }

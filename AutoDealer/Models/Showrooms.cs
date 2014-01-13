@@ -20,6 +20,14 @@ namespace AutoDealer.Models
             this.Automoviles = new HashSet<Automoviles>();
         }
 
+        public static Showrooms GetShowroom(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Showrooms Lista = new Showrooms();
+            Lista = db.Showrooms.Where(Showroom => Showroom.Id == Id).First();
+            return Lista;
+        }
+
         /// <summary>
         /// Este metodo retorna un modelo, dado un fabricante.
         /// </summary>

@@ -87,6 +87,14 @@
                 <div class="display-field">
                     @Html.DisplayFor(model => model.FechaModificacion)
                 </div>
+                <br />
+                <div class="display-label">
+                    <b>Rol:</b>
+                </div>
+                @foreach (var Rol in AutoDealer.Models.TiposRoles.ConseguirRolesDePersona(Model.Id))
+                {
+                    @Rol.Nombre
+                }
             </div>
         </div>
         <br />
