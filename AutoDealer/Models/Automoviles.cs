@@ -22,7 +22,7 @@ namespace AutoDealer.Models
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public System.DateTime Year { get; set; }
-        public System.DateTime ?FechaEntrada { get; set; }
+        public System.DateTime FechaEntrada { get; set; }
         public Nullable<System.DateTime> FechaSalida { get; set; }
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
