@@ -162,9 +162,10 @@ namespace AutoDealer.Controllers
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
             automoviles.FechaCreacion = DateTime.Now;
+            automoviles.FechaEntrada = DateTime.Now;
             automoviles.Status = 1;
             string Year = FormData["Year"];
-            string FormatedYear = "1/1/YYYY";
+            string FormatedYear = "01/01/YYYY";
             FormatedYear = FormatedYear.Replace("YYYY", Year);
             automoviles.Year = DateTime.Parse(FormatedYear);
             //if (ModelState.IsValid)
