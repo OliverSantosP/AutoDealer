@@ -1,54 +1,45 @@
 ﻿@model AutoDealer.Models.Showrooms
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "AutoDealer - Crear Showroom";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Showrooms</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
+    <div class="col-md-12">
+        <div class="widget wlightblue">
+            <div class="widget-head">
+                <div class="pull-left">Crear Showroom</div>
+                <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <div class="padd">
+                    <div class="editor-label">
+                        Nombre:
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Nombre)
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                    <div class="col-lg-12">
+                        Empresa:<br />
+                        <div class="btn-group">
+                            <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                        </div>
+                    </div>
+                    <br />
+                    <input type="submit" value="Crear" class="btn btn-info" />
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Empresa, "Empresas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Empresa", String.Empty)
-            @Html.ValidationMessageFor(model => model.Empresa)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaModificacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaModificacion)
-            @Html.ValidationMessageFor(model => model.FechaModificacion)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </div>
 }
 
 <div>
@@ -57,4 +48,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/Automovil/EmpresasList", function (data) {
+                var items = "<option></option>";
+                $.each(data, function (i, empresa) {
+                    items += "<option value='" + empresa.Value + "'>" + empresa.Text + "</option>";
+                });
+                $("#Empresas").html(items);
+            })
+        });
+</script>
 }

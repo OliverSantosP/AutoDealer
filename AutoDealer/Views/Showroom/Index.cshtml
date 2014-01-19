@@ -48,7 +48,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(item.Nombre, "Details", new { id = item.Id })
+                                   @Html.DisplayFor(modelItem => item.Nombre)
                                 </td>
                                 <td>
                                     @AutoDealer.Models.Empresas.GetEmpresa(item.Empresa).First().Nombre
