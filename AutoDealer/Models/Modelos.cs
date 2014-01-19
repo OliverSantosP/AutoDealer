@@ -38,6 +38,20 @@ namespace AutoDealer.Models
             }
             return ListaModelos;
         }
+
+        /// <summary>
+        /// Este metodo retorna un modelo, dado su Id.
+        /// </summary>
+        /// <param name="Fabricante">El Id del Modelo.</param>
+        /// <returns></returns>
+        public static List<Modelos> GetModelo(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Modelos> ListaModelos = new List<Modelos>();
+
+            ListaModelos = db.Modelos.Where(x => x.Id == Id).ToList();
+            return ListaModelos;
+        }
     
         public int Id { get; set; }
         public string Nombre { get; set; }

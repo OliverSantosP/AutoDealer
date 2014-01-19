@@ -26,7 +26,15 @@ namespace AutoDealer.Models
             List<Empresas> Lista = new List<Empresas>();
             Lista = db.Empresas.ToList();
             return Lista;
-        }  
+        }
+
+        public static List<Empresas> GetEmpresa(int id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Empresas> Lista = new List<Empresas>();
+            Lista = db.Empresas.Where(x=>x.Id==id).ToList();
+            return Lista;
+        } 
     
         public int Id { get; set; }
         public string Nombre { get; set; }

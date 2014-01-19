@@ -27,6 +27,14 @@ namespace AutoDealer.Models
             Lista = db.Fabricantes.ToList();
             return Lista;
         }
+
+        public static List<Fabricantes> GetFabricante(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Fabricantes> Lista = new List<Fabricantes>();
+            Lista = db.Fabricantes.Where(x=>x.Id==Id).ToList();
+            return Lista;
+        }
     
         public int Id { get; set; }
         public string Nombre { get; set; }

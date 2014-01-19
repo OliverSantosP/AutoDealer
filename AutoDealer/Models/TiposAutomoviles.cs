@@ -31,6 +31,23 @@ namespace AutoDealer.Models
             ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == ModeloInt).ToList();
             return TipoAutomovil = ListaTiposAutomoviles.First().Id;
         }
+
+        /// <summary>
+        /// Retorna el Fabricante y Modelo dado un Automovil.
+        /// </summary>
+        /// <param name="Fabricante">El Id del Automovil.</param>
+        /// <returns></returns>
+        public static String NombreTipoAutomovil(int Automovil)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
+            ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Id == Automovil).ToList();
+            List<Fabricantes> Fabricante = Fabricantes.GetFabricante(ListaTiposAutomoviles[0].Fabricante);
+            List<Modelos> Modelo = Modelos.GetModelo(ListaTiposAutomoviles[0].Modelo);
+
+            string Nombres = Fabricante[0].Nombre + " " + Modelo[0].Nombre;
+            return Nombres;
+        }
     
         public int Id { get; set; }
         public int Fabricante { get; set; }

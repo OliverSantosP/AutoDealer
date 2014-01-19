@@ -48,6 +48,8 @@ namespace AutoDealer.Controllers
             return View(ListaTiposAutomoviles.First());
         }
 
+
+
         /// <summary>
         /// Retorna una lista de Empresas.
         /// </summary>
@@ -88,6 +90,8 @@ namespace AutoDealer.Controllers
 
             return View(showrooms);
         }
+
+
 
         /// <summary>
         /// Retorna la lista de Fabricantes.
@@ -197,14 +201,24 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Automoviles automoviles)
+        public ActionResult Edit(Automoviles automoviles, FormCollection FormData)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(automoviles).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            automoviles.Showroom = Int32.Parse(FormData["Showrooms"]);
+            automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
+            automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
+            automoviles.FechaCreacion = DateTime.Now;
+            automoviles.FechaEntrada = DateTime.Now;
+            automoviles.Status = 1;
+            string Year = FormData["Year"];
+            string FormatedYear = "01/01/YYYY";
+            FormatedYear = FormatedYear.Replace("YYYY", Year);
+            automoviles.Year = DateTime.Parse(FormatedYear);
+            //if (ModelState.IsValid)
+            //{
+
+            db.Automoviles.Add(automoviles);
+            db.SaveChanges();
+            return RedirectToAction("Index");
             return View(automoviles);
         }
 

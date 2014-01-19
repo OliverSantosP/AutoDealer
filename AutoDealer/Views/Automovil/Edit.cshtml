@@ -1,118 +1,134 @@
 ﻿@model AutoDealer.Models.Automoviles
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Auto Dealer - Editar Automovil";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Automoviles</legend>
 
-        @Html.HiddenFor(model => model.Id)
+    <div class="col-md-12">
+        <div class="widget wlightblue">
+            <div class="widget-head">
+                <div class="pull-left">Editar Automoviles</div>
+                <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <div class="padd">
+                    Empresa<br />
+                    <div class="btn-group">
+                        <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    </div>
+                    <br />
+                    <br />
+                    Showroom<br />
+                    <div class="btn-group">
+                        <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="col-lg-12">
+                        Tipo Automovil<br />
+                        <i>Actual: @AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Model.TipoAutomovil)</i>
+                        <br />
+                        <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Suplidor)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Suplidor)
-            @Html.ValidationMessageFor(model => model.Suplidor)
-        </div>
+                        <div class="btn-group">
+                            <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <option>Modelo</option>
+                            </select>
+                        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Liquidaciones)
+                        <input type="text" placeholder="Año" id="Year" name="Year">
+                        @Html.ValidationMessageFor(model => model.Year)
+                    </div>
+                    <br />
+                    Precio
+                    <br />
+                    @Html.TextBoxFor(model => model.Precio)
+                    @Html.ValidationMessageFor(model => model.Precio)
+                    <br />
+                    <br />
+                    Fecha de entrada
+                    @Html.EditorFor(model => model.FechaEntrada)
+                    <br />
+                    Fecha de salida
+                    @Html.EditorFor(model => model.FechaSalida)
+                    <br />
+                    Suplidor<br />
+                    <div class="btn-group">
+                        <select id="Suplidores" name="Suplidores" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            @foreach (var item in AutoDealer.Models.Personas.GetSuplidores())
+                            {
+                                <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    <br />
+                    <input type="submit" value="Guardar" class="btn btn-info" />
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Liquidaciones)
-            @Html.ValidationMessageFor(model => model.Liquidaciones)
-        </div>
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Factura)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Factura)
-            @Html.ValidationMessageFor(model => model.Factura)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Showroom)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Showroom)
-            @Html.ValidationMessageFor(model => model.Showroom)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaModificacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaModificacion)
-            @Html.ValidationMessageFor(model => model.FechaModificacion)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Year)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Year)
-            @Html.ValidationMessageFor(model => model.Year)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaEntrada)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaEntrada)
-            @Html.ValidationMessageFor(model => model.FechaEntrada)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaSalida)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaSalida)
-            @Html.ValidationMessageFor(model => model.FechaSalida)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Status)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Status)
-            @Html.ValidationMessageFor(model => model.Status)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TipoAutomovil)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TipoAutomovil)
-            @Html.ValidationMessageFor(model => model.TipoAutomovil)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a lista completa", "Index")
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/Automovil/EmpresasList", function (data) {
+                var items = "<option></option>";
+                $.each(data, function (i, empresa) {
+                    items += "<option value='" + empresa.Value + "'>" + empresa.Text + "</option>";
+                });
+                $("#Empresas").html(items);
+            });
+
+            $("#Empresas").change(function () {
+                $.getJSON("/Automovil/ShowroomsList/" + $("#Empresas > option:selected").attr("value"), function (data) {
+                    var items = "<option></option>";
+                    $.each(data, function (i, modelo) {
+                        items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
+                    });
+                    $("#Showrooms").html(items);
+                });
+            });
+
+            $(function () {
+                $.getJSON("/Automovil/FabricantesList", function (data) {
+                    var items = "<option>Fabricante</option>";
+                    $.each(data, function (i, fabricante) {
+                        items += "<option value='" + fabricante.Value + "'>" + fabricante.Text + "</option>";
+                    });
+
+                    $("#Fabricantes").html(items);
+                });
+
+                $("#Fabricantes").change(function () {
+                    $.getJSON("/Automovil/ModelosList/" + $("#Fabricantes > option:selected").attr("value"), function (data) {
+                        var items = "<option>Modelo</option>";
+                        $.each(data, function (i, modelo) {
+                            items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
+                        });
+                        $("#Modelos").html(items);
+                    });
+                });
+            })
+        })
+        $("#Fabricantes option[value='1']").attr("selected", "selected");
+    </script>
 }
