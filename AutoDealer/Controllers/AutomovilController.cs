@@ -22,31 +22,21 @@ namespace AutoDealer.Controllers
         //}
         //
         // GET: /Automovil/1
-        public ActionResult Index(string Id)
+        public ActionResult Index(string Id, FormCollection FormData)
         {
 
-            if (!String.IsNullOrEmpty(Id))
+            if (FormData.Keys.Count>0)
             {
-                int ParsedID = Int32.Parse(Id);
-                return View(db.Automoviles.Where(x => x.TipoAutomovil == ParsedID).ToList());
+                string Fabricante = FormData["Fabricantes"];
+                string Modelo = FormData["Modelos"];
+                int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
+                return View(db.Automoviles.Where(x => x.TipoAutomovil == TipoAutomovil).ToList());
             }
             return View(db.Automoviles.ToList());
         }
 
-        /// <summary>
-        /// Retorna un Tipo de Automovil usando el Id de un Fabricante y el Id de un modelo.
-        /// </summary>
-        /// <param name="Fabricante">El Id del fabricante.</param>
-        /// <param name="Modelo">El Id del modelo.</param>
-        /// <returns></returns>
-        public ActionResult Buscar(int Fabricante, int Modelo)
-        {
-            AutoDealerEntities db = new AutoDealerEntities();
-            List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
-            ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Fabricante == Fabricante).ToList();
-            ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == Modelo).ToList();
-            return View(ListaTiposAutomoviles.First());
-        }
+
+
 
 
 

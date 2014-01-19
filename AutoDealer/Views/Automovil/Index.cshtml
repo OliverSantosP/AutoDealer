@@ -3,37 +3,7 @@
 @{
     ViewBag.Title = "Inicio";
 }
-<!--Codigo para los filtros por Fabricante y modelo-->
-@section scripts {
-    <script type="text/javascript">
-        $(function () {
-            $.getJSON("/Automovil/FabricantesList", function (data) {
-                var items = "<option>Fabricante</option>";
-                $.each(data, function (i, fabricante) {
-                    items += "<option value='" + fabricante.Value + "'>" + fabricante.Text + "</option>";
-                });
-                $("#Fabricantes").html(items);
-            });
 
-            $("#Fabricantes").change(function () {
-                $.getJSON("/Automovil/ModelosList/" + $("#Fabricantes > option:selected").attr("value"), function (data) {
-                    var items = "<option>Modelo</option>";
-                    $.each(data, function (i, modelo) {
-                        items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
-                    });
-                    $("#Modelos").html(items);
-                });
-            });
-
-            $("#Modelos").change(function () {
-
-                var url = "/Automovil/GetTipoAutomovil";
-                $.get(url, null, function (data) {
-                    $("#getTipoAutomovil").html(data);
-                });
-            })
-        })</script>
-}
 <p>
     <a class="btn btn-info" href="/Automovil/Create">Crear Automovil</a>
 
@@ -49,7 +19,7 @@
                 <option>Modelo</option>
             </select>
         </div>
-        <div class="btn btn-default">Buscar</div>
+        <input type="submit" value="Buscar" id="Buscar" name="Buscar" class="btn btn-default">
     }
 </p>
 
@@ -132,3 +102,43 @@
         </div>
     </div>
 </div>
+
+<!--Codigo para los filtros por Fabricante y modelo-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/Automovil/FabricantesList", function (data) {
+                var items = "<option>Fabricante</option>";
+                $.each(data, function (i, fabricante) {
+                    items += "<option value='" + fabricante.Value + "'>" + fabricante.Text + "</option>";
+                });
+                $("#Fabricantes").html(items);
+            });
+
+            $("#Fabricantes").change(function () {
+                $.getJSON("/Automovil/ModelosList/" + $("#Fabricantes > option:selected").attr("value"), function (data) {
+                    var items = "<option>Modelo</option>";
+                    $.each(data, function (i, modelo) {
+                        items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
+                    });
+                    $("#Modelos").html(items);
+                });
+            });
+
+            $("#Modelos").change(function () {
+
+                var url = "/Automovil/GetTipoAutomovil";
+                $.get(url, null, function (data) {
+                    $("#getTipoAutomovil").html(data);
+                });
+            })
+        })
+    
+
+    </script>
+    <script type="text/javascript">
+        $("#Buscar").click(function () {
+            window.location.href = "http://stackoverflow.com";
+        });
+    </script>
+}
