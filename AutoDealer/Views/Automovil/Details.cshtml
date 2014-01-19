@@ -1,92 +1,98 @@
 ﻿@model AutoDealer.Models.Automoviles
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "AutoDealer - Detalles Automovil";
 }
 
-<h2>Details</h2>
 
-<fieldset>
-    <legend>Automoviles</legend>
+<div class="col-md-12">
+    <div class="widget wlightblue">
+        <div class="widget-head">
+            <div class="pull-left">Detalles Automovil</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TipoAutomovil)
+                </div>
+                <div class="display-field">
+                    @AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Model.TipoAutomovil)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Suplidor)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Suplidor)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Liquidaciones)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Liquidaciones)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Factura)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Factura)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Showroom)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Showroom)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaCreacion)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaCreacion)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaModificacion)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaModificacion)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayText("Año")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Year)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaEntrada)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaEntrada)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaSalida)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaSalida)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Suplidor)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Suplidor)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Liquidaciones)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Liquidaciones)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Factura)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Factura)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Showroom)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Showroom)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaCreacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaCreacion)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaModificacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaModificacion)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Year)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Year)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaEntrada)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaEntrada)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaSalida)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaSalida)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Status)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TipoAutomovil)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TipoAutomovil)
-    </div>
-</fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a lista completa", "Index")
 </p>

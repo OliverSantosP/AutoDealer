@@ -219,7 +219,7 @@ namespace AutoDealer.Controllers
             db.Automoviles.Add(automoviles);
             db.SaveChanges();
             return RedirectToAction("Index");
-            return View(automoviles);
+            //return View(automoviles);
         }
 
         //

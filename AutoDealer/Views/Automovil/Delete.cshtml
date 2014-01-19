@@ -1,96 +1,101 @@
 ﻿@model AutoDealer.Models.Automoviles
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "AutoDealer - Borrar Automovil";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Automoviles</legend>
+<h3>Esta seguro que desea borrar este automovil?</h3>
+<div class="col-md-12">
+    <div class="widget wlightblue">
+        <div class="widget-head">
+            <div class="pull-left">Detalles Automovil</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TipoAutomovil)
+                </div>
+                <div class="display-field">
+                    @AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Model.TipoAutomovil)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Suplidor)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Suplidor)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Liquidaciones)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Liquidaciones)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Factura)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Factura)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Showroom)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Showroom)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaCreacion)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaCreacion)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaModificacion)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaModificacion)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayText("Año")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Year)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaEntrada)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaEntrada)
+                </div>
+                <br />
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FechaSalida)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FechaSalida)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Suplidor)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Suplidor)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Liquidaciones)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Liquidaciones)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Factura)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Factura)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Showroom)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Showroom)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaCreacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaCreacion)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaModificacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaModificacion)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Year)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Year)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaEntrada)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaEntrada)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaSalida)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaSalida)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Status)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TipoAutomovil)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TipoAutomovil)
-    </div>
-</fieldset>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
+        @Html.ActionLink("Volver a la lista completa", "Index")
     </p>
 }
