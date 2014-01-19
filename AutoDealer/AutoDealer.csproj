@@ -202,6 +202,7 @@
     <Compile Include="Controllers\GastoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\ShowroomController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TiposGastoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -509,6 +510,11 @@
     <Content Include="Views\Persona\Create.cshtml" />
     <Content Include="Views\Persona\Edit.cshtml" />
     <Content Include="Views\Persona\Delete.cshtml" />
+    <Content Include="Views\Showroom\Index.cshtml" />
+    <Content Include="Views\Showroom\Details.cshtml" />
+    <Content Include="Views\Showroom\Create.cshtml" />
+    <Content Include="Views\Showroom\Edit.cshtml" />
+    <Content Include="Views\Showroom\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

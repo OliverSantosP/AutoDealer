@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AutoDealer.Models.Showrooms>
+
+@{
+    ViewBag.Title = "AutoDealer - Showrooms";
+}
+
+<p>
+    <a class="btn btn-info" href="/Showroom/Create">Crear Showroom</a>
+</p>
+
+<div class="col-md-12">
+    <div class="widget wlightblue">
+        <div class="widget-head">
+            <div class="pull-left">Showrooms</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="widget-content">
+            <div class="table-responsive">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Empresa)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaModificacion)
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Nombre, "Details", new { id = item.Id })
+                                </td>
+                                <td>
+                                    @AutoDealer.Models.Empresas.GetEmpresa(item.Empresa).First().Nombre
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaModificacion)
+                                </td>
+                                
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="Showroom/Edit/@item.Id" class="btn btn-sm btn-default"><i class="icon-pencil"></i></a>
+                                        <a href="Showroom/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div><!--Responsive-->
+        </div><!--Content-->
+    </div><!--Widget-->
+</div><!--Col12-->
+
