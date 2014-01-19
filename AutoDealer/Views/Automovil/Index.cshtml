@@ -11,8 +11,7 @@
     @using (Html.BeginForm())
     {
         <div class="btn-group">
-            <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            </select>
+            <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
         </div>
         <div class="btn-group">
             <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -76,13 +75,13 @@
                                     @item.Year.ToString("yyyy")
                                 </td>
                                 <td>
-                                    
+
                                     <!---->
                                 </td>
                                 <td>
                                     @item.Showrooms.Nombre
                                 </td>
-                                
+
                                 <td>
                                     @item.FechaEntrada.ToShortDateString()
                                 </td>
@@ -141,13 +140,27 @@
 </div>
 <!--Codigo para los filtros por Fabricante y modelo-->
 @section scripts {
-    @Scripts.Render("~/Content/js/charts.js")
+<script src="~/Content/js/jquery-ui-1.10.2.custom.min.js"></script> <!-- jQuery UI -->
+
+<script src="~/Content/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+<script src="~/Content/js/jquery.rateit.min.js"></script> <!-- RateIt - Star rating -->
+<script src="~/Content/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
+
+
 <!-- jQuery Flot -->
-@Scripts.Render("~/Content/js/excanvas.min.js")
-@Scripts.Render("~/Content/js/jquery.flot.js")
-@Scripts.Render("~/Content/js/jquery.flot.resize.js")
-@Scripts.Render("~/Content/js/jquery.flot.pie.js")
-@Scripts.Render("~/Content/js/jquery.flot.stack.js")
+<script src="~/Content/js/excanvas.min.js"></script>
+<script src="~/Content/js/jquery.flot.js"></script>
+<script src="~/Content/js/jquery.flot.resize.js"></script>
+<script src="~/Content/js/jquery.flot.pie.js"></script>
+<script src="~/Content/js/jquery.flot.stack.js"></script>
+
+<script src="~/Content/js/sparklines.js"></script> <!-- Sparklines -->
+<script src="~/Content/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
+<script src="~/Content/js/bootstrap-datetimepicker.min.js"></script> <!-- Date picker -->
+<script src="~/Content/js/bootstrap-switch.min.js"></script> <!-- Bootstrap Toggle -->
+<script src="~/Content/js/filter.js"></script> <!-- Filter for support page -->
+<script src="~/Content/js/custom.js"></script> <!-- Custom codes -->
+<script src="~/Content/js/charts.js"></script> <!-- Custom chart codes -->
 
 
     <script type="text/javascript">
@@ -178,9 +191,10 @@
                 });
             })
         })
-    
+
 
     </script>
+
     <script type="text/javascript">
         $(function () {
 
@@ -234,6 +248,7 @@
 
             /* Bar chart ends */
 
-        });
+        });
+
     </script>
 }
