@@ -32,7 +32,7 @@ namespace AutoDealer.Models
         {
             AutoDealerEntities db = new AutoDealerEntities();
             List<Fabricantes> Lista = new List<Fabricantes>();
-            Lista = db.Fabricantes.Where(x=>x.Id==Id).ToList();
+            Lista = db.Fabricantes.Where(x => x.Id == Id).ToList();
             return Lista;
         }
     

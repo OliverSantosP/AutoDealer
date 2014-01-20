@@ -25,8 +25,7 @@ namespace AutoDealer.Models
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Precio { get; set; }
-        public int Comprador { get; set; }
-        public int Vendedor { get; set; }
+        public Nullable<int> Descuento { get; set; }
     
         public virtual ICollection<Facturas> Facturas { get; set; }
     }

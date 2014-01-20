@@ -38,7 +38,6 @@ namespace AutoDealer.Models
             AutoDealerEntities db = new AutoDealerEntities();
             List<Showrooms> Lista = new List<Showrooms>();
             Lista = db.Showrooms.Where(Showroom => Showroom.Empresa == Empresa).ToList();
-
             return Lista;
         }
     
@@ -47,8 +46,10 @@ namespace AutoDealer.Models
         public int Empresa { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
         public virtual Empresas Empresas { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

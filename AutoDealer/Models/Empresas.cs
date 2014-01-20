@@ -17,6 +17,7 @@ namespace AutoDealer.Models
     {
         public Empresas()
         {
+            this.Facturas = new HashSet<Facturas>();
             this.Showrooms = new HashSet<Showrooms>();
         }
 
@@ -32,7 +33,7 @@ namespace AutoDealer.Models
         {
             AutoDealerEntities db = new AutoDealerEntities();
             List<Empresas> Lista = new List<Empresas>();
-            Lista = db.Empresas.Where(x=>x.Id==id).ToList();
+            Lista = db.Empresas.Where(x => x.Id == id).ToList();
             return Lista;
         } 
     
@@ -43,7 +44,8 @@ namespace AutoDealer.Models
         public string Direccion { get; set; }
         public int Status { get; set; }
     
-        public virtual ICollection<Showrooms> Showrooms { get; set; }
+        public virtual ICollection<Facturas> Facturas { get; set; }
         public virtual Status Status1 { get; set; }
+        public virtual ICollection<Showrooms> Showrooms { get; set; }
     }
 }

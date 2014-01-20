@@ -16,8 +16,8 @@ namespace AutoDealer.Models
     {
         public int Id { get; set; }
         public int Suplidor { get; set; }
-        public int ?Liquidaciones { get; set; }
-        public int ?Factura { get; set; }
+        public Nullable<int> Liquidaciones { get; set; }
+        public Nullable<int> Factura { get; set; }
         public int Showroom { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
@@ -28,12 +28,12 @@ namespace AutoDealer.Models
         public int TipoAutomovil { get; set; }
         public Nullable<int> Precio { get; set; }
     
+        public virtual Automoviles Automoviles1 { get; set; }
+        public virtual Automoviles Automoviles2 { get; set; }
         public virtual Facturas Facturas { get; set; }
         public virtual Liquidaciones Liquidaciones1 { get; set; }
         public virtual Showrooms Showrooms { get; set; }
         public virtual Status Status1 { get; set; }
-        public virtual Automoviles Automoviles1 { get; set; }
-        public virtual Automoviles Automoviles2 { get; set; }
         public virtual TiposAutomoviles TiposAutomoviles { get; set; }
     }
 }

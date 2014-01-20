@@ -27,20 +27,20 @@ namespace AutoDealer.Models
     
         public DbSet<Automoviles> Automoviles { get; set; }
         public DbSet<Empresas> Empresas { get; set; }
+        public DbSet<Fabricantes> Fabricantes { get; set; }
         public DbSet<Facturas> Facturas { get; set; }
         public DbSet<FacturasDetalles> FacturasDetalles { get; set; }
         public DbSet<Gastos> Gastos { get; set; }
         public DbSet<Liquidaciones> Liquidaciones { get; set; }
         public DbSet<Liquidaciones_Detalles> Liquidaciones_Detalles { get; set; }
+        public DbSet<Modelos> Modelos { get; set; }
+        public DbSet<Personas> Personas { get; set; }
+        public DbSet<PersonasRoles> PersonasRoles { get; set; }
         public DbSet<Showrooms> Showrooms { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<TiposDeGastos> TiposDeGastos { get; set; }
-        public DbSet<Fabricantes> Fabricantes { get; set; }
-        public DbSet<Modelos> Modelos { get; set; }
         public DbSet<TiposAutomoviles> TiposAutomoviles { get; set; }
-        public DbSet<Trim> Trim { get; set; }
-        public DbSet<Personas> Personas { get; set; }
+        public DbSet<TiposDeGastos> TiposDeGastos { get; set; }
         public DbSet<TiposRoles> TiposRoles { get; set; }
-        public DbSet<PersonasRoles> PersonasRoles { get; set; }
+        public DbSet<Trim> Trim { get; set; }
     }
 }
