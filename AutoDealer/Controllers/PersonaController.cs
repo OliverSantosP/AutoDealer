@@ -162,7 +162,7 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Personas personas = db.Personas.Find(id);
-            personas.Status = 0;
+            personas.Status = 2;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

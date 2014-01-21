@@ -233,7 +233,7 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Automoviles automoviles = db.Automoviles.Find(id);
-            automoviles.Status = 0;
+            automoviles.Status = 2;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
