@@ -1,0 +1,81 @@
+﻿@model IEnumerable<AutoDealer.Models.Gastos>
+
+@{
+    ViewBag.Title = "AutoDealer - Gastos";
+}
+
+<div class="col-md-12">
+    <div class="widget worange">
+        <div class="widget-head">
+            <div class="pull-left">Gastos</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="widget-content">
+            <div class="table-responsive">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TiposDeGastos.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Precio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaModificacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Automovil)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PagadoA)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TiposDeGastos.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Precio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaModificacion)
+                                </td>
+                                <td>
+                                    <a href="/Automovil/Details/@item.Automovil">@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(item.Automovil)</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PagadoA)
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="Gasto/Edit/@item.Id" class="btn btn-sm btn-default"><i class="icon-pencil"></i></a>
+                                        <a href="Gasto/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

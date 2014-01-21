@@ -40,8 +40,14 @@ namespace AutoDealer.Models
         public static String NombreTipoAutomovil(int Automovil)
         {
             AutoDealerEntities db = new AutoDealerEntities();
+            
+            List<Automoviles> ListaAutomoviles = new List<Automoviles>();
+            ListaAutomoviles = db.Automoviles.Where(x => x.Id == Automovil).ToList();
+            
+            int TipoAutomovil = ListaAutomoviles[0].TipoAutomovil;
             List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
-            ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Id == Automovil).ToList();
+            ListaTiposAutomoviles = db.TiposAutomoviles.Where(y => y.Id == TipoAutomovil ).ToList();
+            
             List<Fabricantes> Fabricante = Fabricantes.GetFabricante(ListaTiposAutomoviles[0].Fabricante);
             List<Modelos> Modelo = Modelos.GetModelo(ListaTiposAutomoviles[0].Modelo);
 

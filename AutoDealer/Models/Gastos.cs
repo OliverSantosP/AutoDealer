@@ -11,6 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Gastos
     {
@@ -20,11 +21,19 @@ namespace AutoDealer.Models
         }
     
         public int Id { get; set; }
+        
+        [Display(Name = "Tipo de Gasto")]
         public int Tipo { get; set; }
         public int Precio { get; set; }
+
+        [Display(Name = "Fecha de Creacion")]
         public System.DateTime FechaCreacion { get; set; }
+
+        [Display(Name = "Fecha de Modificacion")]
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public int Automovil { get; set; }
+
+        [Display(Name = "Pagado a")]
         public string PagadoA { get; set; }
     
         public virtual TiposDeGastos TiposDeGastos { get; set; }

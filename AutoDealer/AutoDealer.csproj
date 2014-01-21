@@ -202,7 +202,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\ShowroomController.cs" />
-    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TiposGastoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -462,11 +461,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Status\Index.cshtml" />
-    <Content Include="Views\Status\Details.cshtml" />
-    <Content Include="Views\Status\Create.cshtml" />
-    <Content Include="Views\Status\Edit.cshtml" />
-    <Content Include="Views\Status\Delete.cshtml" />
     <Content Include="Views\FacturaDetalle\Index.cshtml" />
     <Content Include="Views\FacturaDetalle\Details.cshtml" />
     <Content Include="Views\FacturaDetalle\Create.cshtml" />
@@ -477,16 +471,6 @@
     <Content Include="Views\Factura\Create.cshtml" />
     <Content Include="Views\Factura\Edit.cshtml" />
     <Content Include="Views\Factura\Delete.cshtml" />
-    <Content Include="Views\Gasto\Index.cshtml" />
-    <Content Include="Views\Gasto\Details.cshtml" />
-    <Content Include="Views\Gasto\Create.cshtml" />
-    <Content Include="Views\Gasto\Edit.cshtml" />
-    <Content Include="Views\Gasto\Delete.cshtml" />
-    <Content Include="Views\TiposGasto\Index.cshtml" />
-    <Content Include="Views\TiposGasto\Details.cshtml" />
-    <Content Include="Views\TiposGasto\Create.cshtml" />
-    <Content Include="Views\TiposGasto\Edit.cshtml" />
-    <Content Include="Views\TiposGasto\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Automovil\Index.cshtml" />
     <Content Include="Views\Automovil\Details.cshtml" />
@@ -503,6 +487,9 @@
     <Content Include="Views\Showroom\Create.cshtml" />
     <Content Include="Views\Showroom\Edit.cshtml" />
     <Content Include="Views\Showroom\Delete.cshtml" />
+    <Content Include="Views\Gasto\Index.cshtml" />
+    <Content Include="Views\Gasto\Edit.cshtml" />
+    <Content Include="Views\Gasto\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
