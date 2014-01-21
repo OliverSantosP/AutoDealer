@@ -490,6 +490,7 @@
     <Content Include="Views\Gasto\Index.cshtml" />
     <Content Include="Views\Gasto\Edit.cshtml" />
     <Content Include="Views\Gasto\Delete.cshtml" />
+    <Content Include="Views\Gasto\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

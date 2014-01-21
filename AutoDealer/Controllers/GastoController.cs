@@ -16,9 +16,17 @@ namespace AutoDealer.Controllers
         //
         // GET: /Gasto/
 
-        public ActionResult Index()
+        public ActionResult Index(String AutomovilId)
         {
             var gastos = db.Gastos.Include(g => g.TiposDeGastos);
+            
+            if (!String.IsNullOrEmpty(AutomovilId))
+            {
+                int AutomovilIdInt =Int32.Parse(AutomovilId);
+                gastos = db.Gastos.Include(g => g.TiposDeGastos).Where(x=>x.Automovil==AutomovilIdInt);
+                return View(gastos.ToList());
+            }
+
             return View(gastos.ToList());
         }
 
@@ -53,6 +61,10 @@ namespace AutoDealer.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+                { gastos.Automovil = Int32.Parse(Request.QueryString["AutomovilId"]);}
+                
+                gastos.FechaCreacion = DateTime.Now;
                 db.Gastos.Add(gastos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,6 +97,7 @@ namespace AutoDealer.Controllers
         {
             if (ModelState.IsValid)
             {
+                gastos.FechaModificacion = DateTime.Now;
                 db.Entry(gastos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

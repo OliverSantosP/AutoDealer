@@ -93,7 +93,15 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="Factura/Create" class="btn btn-sm btn-default">F</a>
-                                        <a href="Gastos/Create" class="btn btn-sm btn-default">G</a>
+                                        @if (AutoDealer.Models.Gastos.TieneGastos(item.Id) == true)
+                                        {
+                                            <a href="/Gasto?AutomovilId=@item.Id" class="btn btn-sm btn-info">G</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="Gasto/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">G</a>
+                                        }
+
                                         <a href="Automovil/Edit/@item.Id" class="btn btn-sm btn-default"><i class="icon-pencil"></i></a>
                                         <a href="Automovil/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
 

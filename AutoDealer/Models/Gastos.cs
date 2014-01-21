@@ -12,12 +12,29 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.Linq;
     public partial class Gastos
     {
         public Gastos()
         {
             this.Liquidaciones = new HashSet<Liquidaciones>();
+        }
+
+        public static bool TieneGastos(int AutomovilId)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+
+            bool Existe;
+            Existe = false;
+
+            List<Gastos> ListaGastos = new List<Gastos>();
+            ListaGastos= db.Gastos.Where(x=>x.Automovil==AutomovilId).ToList();
+            if (ListaGastos.Count>0)
+            {
+                return Existe = true;
+            }
+
+            return Existe = false;
         }
     
         public int Id { get; set; }

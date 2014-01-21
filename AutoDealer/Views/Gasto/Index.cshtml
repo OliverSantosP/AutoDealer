@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "AutoDealer - Gastos";
 }
-
+@if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+{
+    string AutomovilId = Request.QueryString["AutomovilId"];
+    <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Gasto</a>
+}
 <div class="col-md-12">
     <div class="widget worange">
         <div class="widget-head">
