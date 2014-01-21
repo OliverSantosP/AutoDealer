@@ -49,18 +49,21 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Showrooms showrooms,FormCollection FormData)
+        public ActionResult Create(Showrooms showrooms, FormCollection FormData)
         {
-            showrooms.Empresa = Int32.Parse(FormData["Empresas"]);
-            showrooms.FechaCreacion = DateTime.Now;
-
-            //if (ModelState.IsValid)
+            if (FormData["Empresas"] != "0")
             {
+                showrooms.Empresa = Int32.Parse(FormData["Empresas"]);
+                showrooms.FechaCreacion = DateTime.Now;
+
+                //if (ModelState.IsValid)
+
                 db.Showrooms.Add(showrooms);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
 
+            }
+            return RedirectToAction("Index");
             //ViewBag.Empresa = new SelectList(db.Empresas, "Id", "Nombre", showrooms.Empresa);
             //return View(showrooms);
         }
@@ -86,10 +89,13 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Showrooms showrooms, FormCollection FormData)
         {
-            showrooms.Empresa = Int32.Parse(FormData["Empresas"]);
-            showrooms.FechaModificacion = DateTime.Now;
             if (ModelState.IsValid)
             {
+                showrooms.FechaModificacion = DateTime.Now;
+                if (!String.IsNullOrEmpty(FormData["Empresa"]))
+                {
+                    showrooms.Empresa = Int32.Parse(FormData["Empresa"]);
+                }
                 db.Entry(showrooms).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
