@@ -12,7 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class TiposAutomoviles
     {
         public TiposAutomoviles()
@@ -40,14 +40,14 @@ namespace AutoDealer.Models
         public static String NombreTipoAutomovil(int Automovil)
         {
             AutoDealerEntities db = new AutoDealerEntities();
-            
+
             List<Automoviles> ListaAutomoviles = new List<Automoviles>();
             ListaAutomoviles = db.Automoviles.Where(x => x.Id == Automovil).ToList();
-            
+
             int TipoAutomovil = ListaAutomoviles[0].TipoAutomovil;
             List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
-            ListaTiposAutomoviles = db.TiposAutomoviles.Where(y => y.Id == TipoAutomovil ).ToList();
-            
+            ListaTiposAutomoviles = db.TiposAutomoviles.Where(y => y.Id == TipoAutomovil).ToList();
+
             List<Fabricantes> Fabricante = Fabricantes.GetFabricante(ListaTiposAutomoviles[0].Fabricante);
             List<Modelos> Modelo = Modelos.GetModelo(ListaTiposAutomoviles[0].Modelo);
 
@@ -60,7 +60,7 @@ namespace AutoDealer.Models
         public int Modelo { get; set; }
         public Nullable<int> Trim { get; set; }
         public int Status { get; set; }
-    
+
         public virtual ICollection<Automoviles> Automoviles { get; set; }
         public virtual Fabricantes Fabricantes { get; set; }
         public virtual Modelos Modelos { get; set; }

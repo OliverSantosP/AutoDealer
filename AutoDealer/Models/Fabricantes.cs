@@ -12,7 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Fabricantes
     {
         public Fabricantes()
@@ -35,11 +35,11 @@ namespace AutoDealer.Models
             Lista = db.Fabricantes.Where(x => x.Id == Id).ToList();
             return Lista;
         }
-    
+
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Status { get; set; }
-    
+
         public virtual Status Status1 { get; set; }
         public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
     }

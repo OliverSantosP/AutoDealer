@@ -47,9 +47,9 @@ namespace AutoDealer.Models
             AutoDealerEntities db = new AutoDealerEntities();
             Personas Persona = new Personas();
             Persona = db.Personas.Where(x => x.Id == Id).First();
-            return Persona.Nombre+" "+Persona.Apellido;
+            return Persona.Nombre + " " + Persona.Apellido;
         }
-    
+
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -60,7 +60,7 @@ namespace AutoDealer.Models
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public int Status { get; set; }
-    
+
         public virtual ICollection<Facturas> Facturas { get; set; }
         public virtual ICollection<Facturas> Facturas1 { get; set; }
         public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }

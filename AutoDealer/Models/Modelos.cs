@@ -55,7 +55,7 @@ namespace AutoDealer.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Status { get; set; }
-    
+
         public virtual Status Status1 { get; set; }
         public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
     }

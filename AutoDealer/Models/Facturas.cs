@@ -17,12 +17,12 @@ namespace AutoDealer.Models
         public Facturas()
         {
             this.Automoviles = new HashSet<Automoviles>();
+            this.FacturasDetalles = new HashSet<FacturasDetalles>();
             this.Liquidaciones = new HashSet<Liquidaciones>();
         }
     
         public int Id { get; set; }
         public System.DateTime FechaCreacion { get; set; }
-        public Nullable<int> Detalle { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public int Vendedor { get; set; }
         public int Comprador { get; set; }
@@ -32,9 +32,9 @@ namespace AutoDealer.Models
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
         public virtual Empresas Empresas { get; set; }
-        public virtual FacturasDetalles FacturasDetalles { get; set; }
         public virtual Personas Personas { get; set; }
         public virtual Personas Personas1 { get; set; }
+        public virtual ICollection<FacturasDetalles> FacturasDetalles { get; set; }
         public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
     }
 }

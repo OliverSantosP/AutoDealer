@@ -28,17 +28,17 @@ namespace AutoDealer.Models
             Existe = false;
 
             List<Gastos> ListaGastos = new List<Gastos>();
-            ListaGastos= db.Gastos.Where(x=>x.Automovil==AutomovilId).ToList();
-            if (ListaGastos.Count>0)
+            ListaGastos = db.Gastos.Where(x => x.Automovil == AutomovilId).ToList();
+            if (ListaGastos.Count > 0)
             {
                 return Existe = true;
             }
 
             return Existe = false;
         }
-    
+
         public int Id { get; set; }
-        
+
         [Display(Name = "Tipo de Gasto")]
         public int Tipo { get; set; }
         public int Precio { get; set; }
@@ -52,7 +52,7 @@ namespace AutoDealer.Models
 
         [Display(Name = "Pagado a")]
         public string PagadoA { get; set; }
-    
+
         public virtual TiposDeGastos TiposDeGastos { get; set; }
         public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
     }

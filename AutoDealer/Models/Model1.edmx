@@ -21,7 +21,6 @@
           <Property Name="FechaSalida" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="TipoAutomovil" Type="int" Nullable="false" />
-          <Property Name="Precio" Type="int" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
@@ -48,7 +47,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="Detalle" Type="int" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Vendedor" Type="int" Nullable="false" />
           <Property Name="Comprador" Type="int" Nullable="false" />
@@ -303,18 +301,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Facturas_Detalles">
-          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="0..1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FacturasDetalles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="Detalle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Facturas_PersonaComprador">
           <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
@@ -336,6 +322,18 @@
             </Principal>
             <Dependent Role="Facturas">
               <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasDetalles_Factura">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacturasDetalles">
+              <PropertyRef Name="Factura" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -585,10 +583,6 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Fabricantes" EntitySet="Fabricantes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
-            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Facturas_PersonaComprador" Association="Self.FK_Facturas_PersonaComprador">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
@@ -596,6 +590,10 @@
           <AssociationSet Name="FK_Facturas_PersonaVendedor" Association="Self.FK_Facturas_PersonaVendedor">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasDetalles_Factura" Association="Self.FK_FacturasDetalles_Factura">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
           </AssociationSet>
           <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
             <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
@@ -683,7 +681,6 @@
           <Property Name="FechaSalida" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="TipoAutomovil" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Int32" />
           <NavigationProperty Name="Automoviles1" Relationship="Self.FK_Automoviles_Automoviles" FromRole="Automoviles" ToRole="Automoviles1" />
           <NavigationProperty Name="Automoviles2" Relationship="Self.FK_Automoviles_Automoviles" FromRole="Automoviles1" ToRole="Automoviles" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Automoviles_Facturas" FromRole="Automoviles" ToRole="Facturas" />
@@ -722,7 +719,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Detalle" Type="Int32" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="Vendedor" Type="Int32" Nullable="false" />
           <Property Name="Comprador" Type="Int32" Nullable="false" />
@@ -731,9 +727,9 @@
           <Property Name="Empresa" Type="Int32" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Facturas" FromRole="Facturas" ToRole="Automoviles" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Empresas" FromRole="Facturas" ToRole="Empresas" />
-          <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_Facturas_Detalles" FromRole="Facturas" ToRole="FacturasDetalles" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Facturas_PersonaComprador" FromRole="Facturas" ToRole="Personas" />
           <NavigationProperty Name="Personas1" Relationship="Self.FK_Facturas_PersonaVendedor" FromRole="Facturas" ToRole="Personas" />
+          <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_FacturasDetalles_Factura" FromRole="Facturas" ToRole="FacturasDetalles" />
           <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Factura" FromRole="Facturas" ToRole="Liquidaciones" />
         </EntityType>
         <EntityType Name="FacturasDetalles">
@@ -747,7 +743,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Precio" Type="Int32" />
           <Property Name="Descuento" Type="Int32" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Detalles" FromRole="FacturasDetalles" ToRole="Facturas" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasDetalles_Factura" FromRole="FacturasDetalles" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="Gastos">
           <Key>
@@ -1045,18 +1041,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Facturas_Detalles">
-          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="0..1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FacturasDetalles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Facturas">
-              <PropertyRef Name="Detalle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Facturas_PersonaComprador">
           <End Role="Personas" Type="Self.Personas" Multiplicity="1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
@@ -1078,6 +1062,18 @@
             </Principal>
             <Dependent Role="Facturas">
               <PropertyRef Name="Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasDetalles_Factura">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacturasDetalles">
+              <PropertyRef Name="Factura" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1311,10 +1307,6 @@
             <End Role="Fabricantes" EntitySet="Fabricantes" />
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Detalles" Association="Self.FK_Facturas_Detalles">
-            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Facturas_PersonaComprador" Association="Self.FK_Facturas_PersonaComprador">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
@@ -1322,6 +1314,10 @@
           <AssociationSet Name="FK_Facturas_PersonaVendedor" Association="Self.FK_Facturas_PersonaVendedor">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasDetalles_Factura" Association="Self.FK_FacturasDetalles_Factura">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
           </AssociationSet>
           <AssociationSet Name="FK_Liquidaciones_Factura" Association="Self.FK_Liquidaciones_Factura">
             <End Role="Facturas" EntitySet="Facturas" />
@@ -1401,7 +1397,6 @@
                 <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TipoAutomovil" ColumnName="TipoAutomovil" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1431,7 +1426,6 @@
               <MappingFragment StoreEntitySet="Facturas">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
                 <ScalarProperty Name="Comprador" ColumnName="Comprador" />
@@ -1610,7 +1604,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

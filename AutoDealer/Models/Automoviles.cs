@@ -26,7 +26,6 @@ namespace AutoDealer.Models
         public Nullable<System.DateTime> FechaSalida { get; set; }
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
-        public Nullable<int> Precio { get; set; }
     
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }

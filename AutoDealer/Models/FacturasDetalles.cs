@@ -14,11 +14,6 @@ namespace AutoDealer.Models
     
     public partial class FacturasDetalles
     {
-        public FacturasDetalles()
-        {
-            this.Facturas = new HashSet<Facturas>();
-        }
-    
         public int Id { get; set; }
         public int Factura { get; set; }
         public System.DateTime FechaCreacion { get; set; }
@@ -27,6 +22,6 @@ namespace AutoDealer.Models
         public Nullable<int> Precio { get; set; }
         public Nullable<int> Descuento { get; set; }
     
-        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual Facturas Facturas { get; set; }
     }
 }
