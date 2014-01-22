@@ -52,7 +52,7 @@
                                 <h3 class="panel-title">@Html.DisplayNameFor(model => model.Suplidor)</h3>
                             </th>
                             <th>
-                                <h3 class="panel-title">Entrada</h3>
+                                <h3 class="panel-title">Precio de Venta</h3>
                             </th>
                             <th>
                                 <h3 class="panel-title">@Html.DisplayNameFor(model => model.Status)</h3>
@@ -79,7 +79,7 @@
                                 </td>
 
                                 <td>
-                                    @item.FechaEntrada.ToShortDateString()
+                                    @item.PrecioVenta
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status1.Nombre)
@@ -96,9 +96,9 @@
                                             <a href="Gasto/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">G</a>
                                         }*@
 
-                                        <a href="Automovil/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
+                                        <a href="/Automovil/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
                                         <a href="Factura/Create" class="btn btn-sm btn-default">Facturar</a>
-                                        <a href="Automovil/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
+                                        <a href="/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
 
                                     </div>
                             </tr>

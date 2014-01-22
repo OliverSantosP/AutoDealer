@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7341c74bf0a44ba48478cbe8d339424b" Name="Diagram1">
-        <EntityTypeShape EntityType="AutoDealerModel.Automoviles" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Empresas" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Fabricantes" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Facturas" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.FacturasDetalles" Width="1.5" PointX="10.5" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Gastos" Width="1.5" PointX="11.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Liquidaciones" Width="1.5" PointX="13.5" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Liquidaciones_Detalles" Width="1.5" PointX="15.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Modelos" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Personas" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.PersonasRoles" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Showrooms" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+      <Diagram DiagramId="73ea0f1f417d4aa6a62acbb60a4b6445" Name="Diagram1">
+        <EntityTypeShape EntityType="AutoDealerModel.Automoviles" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Empresas" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Fabricantes" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Facturas" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.FacturasDetalles" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Gastos" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Liquidaciones" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Liquidaciones_Detalles" Width="1.5" PointX="12.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Modelos" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Personas" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.PersonasRoles" Width="1.5" PointX="5.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Showrooms" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoDealerModel.Status" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.TiposAutomoviles" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.TiposDeGastos" Width="1.5" PointX="9" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.TiposRoles" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDealerModel.Trim" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.TiposAutomoviles" Width="1.5" PointX="5.25" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.TiposDeGastos" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.TiposRoles" Width="1.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoDealerModel.Trim" Width="1.5" PointX="3" PointY="27.125" IsExpanded="true" />
         <AssociationConnector Association="AutoDealerModel.FK_Automoviles_Automoviles" ManuallyRouted="false" />
         <AssociationConnector Association="AutoDealerModel.FK_Automoviles_Facturas" ManuallyRouted="false" />
         <AssociationConnector Association="AutoDealerModel.FK_Automoviles_Liquidaciones" ManuallyRouted="false" />

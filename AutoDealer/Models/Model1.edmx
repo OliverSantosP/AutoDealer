@@ -21,6 +21,7 @@
           <Property Name="FechaSalida" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="TipoAutomovil" Type="int" Nullable="false" />
+          <Property Name="PrecioVenta" Type="int" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
@@ -681,6 +682,7 @@
           <Property Name="FechaSalida" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="TipoAutomovil" Type="Int32" Nullable="false" />
+          <Property Name="PrecioVenta" Type="Int32" />
           <NavigationProperty Name="Automoviles1" Relationship="Self.FK_Automoviles_Automoviles" FromRole="Automoviles" ToRole="Automoviles1" />
           <NavigationProperty Name="Automoviles2" Relationship="Self.FK_Automoviles_Automoviles" FromRole="Automoviles1" ToRole="Automoviles" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Automoviles_Facturas" FromRole="Automoviles" ToRole="Facturas" />
@@ -1397,6 +1399,7 @@
                 <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TipoAutomovil" ColumnName="TipoAutomovil" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1604,7 +1607,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

@@ -11,6 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Automoviles
     {
@@ -26,6 +27,7 @@ namespace AutoDealer.Models
         public Nullable<System.DateTime> FechaSalida { get; set; }
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
+        public Nullable<int> PrecioVenta { get; set; }
     
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }
