@@ -197,7 +197,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AutomovilController.cs" />
-    <Compile Include="Controllers\FacturaDetalleController.cs" />
     <Compile Include="Controllers\GastoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
@@ -461,16 +460,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\FacturaDetalle\Index.cshtml" />
-    <Content Include="Views\FacturaDetalle\Details.cshtml" />
-    <Content Include="Views\FacturaDetalle\Create.cshtml" />
-    <Content Include="Views\FacturaDetalle\Edit.cshtml" />
-    <Content Include="Views\FacturaDetalle\Delete.cshtml" />
-    <Content Include="Views\Factura\Index.cshtml" />
-    <Content Include="Views\Factura\Details.cshtml" />
-    <Content Include="Views\Factura\Create.cshtml" />
-    <Content Include="Views\Factura\Edit.cshtml" />
-    <Content Include="Views\Factura\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Automovil\Index.cshtml" />
     <Content Include="Views\Automovil\Details.cshtml" />
