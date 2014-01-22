@@ -1,0 +1,64 @@
+﻿@model AutoDealer.Models.Facturas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Facturas</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaCreacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Personas1.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Personas1.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Personas.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Personas.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NCF)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NCF)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CostoTraspaso)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CostoTraspaso)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Empresas.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Empresas.Nombre)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

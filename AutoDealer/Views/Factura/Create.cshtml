@@ -1,0 +1,84 @@
+﻿@model AutoDealer.Models.Facturas
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Facturas</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaCreacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaCreacion)
+            @Html.ValidationMessageFor(model => model.FechaCreacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaModificacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaModificacion)
+            @Html.ValidationMessageFor(model => model.FechaModificacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Vendedor, "Personas1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Vendedor", String.Empty)
+            @Html.ValidationMessageFor(model => model.Vendedor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comprador, "Personas")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Comprador", String.Empty)
+            @Html.ValidationMessageFor(model => model.Comprador)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NCF)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NCF)
+            @Html.ValidationMessageFor(model => model.NCF)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CostoTraspaso)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CostoTraspaso)
+            @Html.ValidationMessageFor(model => model.CostoTraspaso)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Empresa, "Empresas")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Empresa", String.Empty)
+            @Html.ValidationMessageFor(model => model.Empresa)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
