@@ -46,16 +46,16 @@
                                 <h3 class="panel-title">Año</h3>
                             </th>
                             <th>
-                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Suplidor)</h3>
+                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Showroom)</h3>
                             </th>
                             <th>
-                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Showroom)</h3>
+                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Suplidor)</h3>
                             </th>
                             <th>
                                 <h3 class="panel-title">Entrada</h3>
                             </th>
                             <th>
-                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Factura)</h3>
+                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Status)</h3>
                             </th>
                             <th>
                             </th>
@@ -72,31 +72,32 @@
                                     @item.Year.ToString("yyyy")
                                 </td>
                                 <td>
-                                    @AutoDealer.Models.Personas.GetPersonaNombre(item.Suplidor)
+                                    @item.Showrooms.Nombre
                                 </td>
                                 <td>
-                                    @item.Showrooms.Nombre
+                                    @AutoDealer.Models.Personas.GetPersonaNombre(item.Suplidor)
                                 </td>
 
                                 <td>
                                     @item.FechaEntrada.ToShortDateString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Factura)
+                                    @Html.DisplayFor(modelItem => item.Status1.Nombre)
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="Factura/Create" class="btn btn-sm btn-default">F</a>
-                                        @if (AutoDealer.Models.Gastos.TieneGastos(item.Id) == true)
+                                        
+                                        @*@if (AutoDealer.Models.Gastos.TieneGastos(item.Id) == true)
                                         {
                                             <a href="/Gasto?AutomovilId=@item.Id" class="btn btn-sm btn-info">G</a>
                                         }
                                         else
                                         {
                                             <a href="Gasto/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">G</a>
-                                        }
+                                        }*@
 
-                                        <a href="Automovil/Edit/@item.Id" class="btn btn-sm btn-default"><i class="icon-pencil"></i></a>
+                                        <a href="Automovil/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
+                                        <a href="Factura/Create" class="btn btn-sm btn-default">Facturar</a>
                                         <a href="Automovil/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i> </a>
 
                                     </div>

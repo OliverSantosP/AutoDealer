@@ -32,7 +32,7 @@ namespace AutoDealer.Controllers
                 int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
                 return View(db.Automoviles.Where(x => x.TipoAutomovil == TipoAutomovil).ToList());
             }
-            return View(db.Automoviles.ToList());
+            return View(db.Automoviles.Where(x=>x.Status==3).ToList());
         }
 
 
