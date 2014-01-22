@@ -66,7 +66,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(item.TiposAutomoviles.Fabricantes.Nombre + " " + item.TiposAutomoviles.Modelos.Nombre, "Details", new { id = item.Id })
+                                    <a href="/Gasto?AutomovilId=@item.Id" >@item.TiposAutomoviles.Fabricantes.Nombre @item.TiposAutomoviles.Modelos.Nombre</a>
                                 </td>
                                 <td>
                                     @item.Year.ToString("yyyy")

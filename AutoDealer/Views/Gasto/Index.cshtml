@@ -34,12 +34,6 @@
                                 @Html.DisplayNameFor(model => model.FechaCreacion)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FechaModificacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Automovil)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.PagadoA)
                             </th>
                             <th></th>
@@ -51,19 +45,13 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TiposDeGastos.Nombre)
+                                    Concepto
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Precio)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FechaCreacion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FechaModificacion)
-                                </td>
-                                <td>
-                                    <a href="/Automovil/Details/@item.Automovil">@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(item.Automovil)</a>
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PagadoA)

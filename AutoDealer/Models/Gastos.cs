@@ -41,6 +41,8 @@ namespace AutoDealer.Models
 
         [Display(Name = "Tipo de Gasto")]
         public int Tipo { get; set; }
+
+        [Display(Name = "Monto")]
         public int Precio { get; set; }
 
         [Display(Name = "Fecha de Creacion")]
