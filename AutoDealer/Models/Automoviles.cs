@@ -29,6 +29,13 @@ namespace AutoDealer.Models
         public int TipoAutomovil { get; set; }
         public Nullable<int> PrecioVenta { get; set; }
     
+
+        public static Automoviles GetAutomovil(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Automoviles Automovil = db.Automoviles.Find(Id);
+            return Automovil;
+        }
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }
         public virtual Facturas Facturas { get; set; }

@@ -6,8 +6,19 @@
 @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
 {
     string AutomovilId = Request.QueryString["AutomovilId"];
-    <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Gasto</a>
-    <b>Total gastos:</b> @AutoDealer.Models.Gastos.TotalGastos(AutomovilId);
+    var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(Int32.Parse(AutomovilId));
+    <b>Datos del Automovil: </b>@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Automovil.Id)
+    <br />
+    <b>Showroom: </b>@Automovil.Showrooms.Nombre
+    <br />
+    <b>Status: </b>@Automovil.Status1.Nombre
+    <br />
+    <b>Fecha de entrada: </b>@Automovil.FechaEntrada
+    <br />
+    <b>Precio de Venta: </b>@Automovil.PrecioVenta
+    <br />
+    <br />
+    <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Nuevo Gasto</a>
 }
 <div class="col-md-12">
     <div class="widget worange">
@@ -49,7 +60,7 @@
                                     Concepto
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Precio)
+                                    RD @String.Format("{0:C}", item.Precio)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FechaCreacion)
@@ -65,10 +76,17 @@
                                 </td>
                             </tr>
                         }
+
                     </tbody>
                 </table>
             </div>
         </div>
+        @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+        {
+            string AutomovilId = Request.QueryString["AutomovilId"];
+            <br />
+            <b>Total gastos: RD</b>
+            @String.Format("{0:C}", @AutoDealer.Models.Gastos.TotalGastos(AutomovilId))
+        }
     </div>
 </div>
-
