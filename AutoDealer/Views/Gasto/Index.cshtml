@@ -7,6 +7,7 @@
 {
     string AutomovilId = Request.QueryString["AutomovilId"];
     <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Gasto</a>
+    <b>Total gastos:</b> @AutoDealer.Models.Gastos.TotalGastos(AutomovilId);
 }
 <div class="col-md-12">
     <div class="widget worange">

@@ -37,6 +37,14 @@ namespace AutoDealer.Models
             return Existe = false;
         }
 
+        public static int TotalGastos(string AutomovilId)
+        {
+            int AutomovilIdInt = Int32.Parse(AutomovilId);
+            AutoDealerEntities db = new AutoDealerEntities();
+            int Total = (from a in db.Gastos where a.Automovil==AutomovilIdInt select a.Precio).Sum();
+            return Total;
+        }
+
         public int Id { get; set; }
 
         [Display(Name = "Tipo de Gasto")]
