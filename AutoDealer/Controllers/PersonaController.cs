@@ -21,20 +21,35 @@ namespace AutoDealer.Controllers
         /// </summary>
         /// <param name="Buscar">String para buscar.</param>
         /// <returns>ActionResult</returns>
-        public ActionResult Index(string Buscar)
+        public ActionResult Index(string Buscar,string TipoRol)
         {
-            var personas = db.Personas.Where(Personas => Personas.Status == 1);
-            var personasapellidos = db.Personas.Where(PersonasApellidos => PersonasApellidos.Status == 1);
-            var personasunion = personas;
+            List<Personas> personas = new List<Personas>();
+            List<Personas> personasapellidos = new List<Personas>();
+            List<Personas> personasunion = new List<Personas>();
 
+            if (!String.IsNullOrEmpty(TipoRol))
+            {
+                int TipoRolInt = Int32.Parse(TipoRol);
+                List<PersonasRoles> Roles = new List<PersonasRoles>();
+                Personas Personita = new Personas();
+                Roles = db.PersonasRoles.Where(x => x.Rol == TipoRolInt).ToList();
+
+                foreach (var item in Roles)
+                {
+                    Personita=db.Personas.Where(x=>x.Id==item.Persona).First();
+                    personasapellidos.Add(Personita);
+                    personas.Add(Personita);
+                }
+
+            }
             if (!String.IsNullOrEmpty(Buscar))
             {
-                personas = personas.Where(Personas => Personas.Nombre.Contains(Buscar));
-                personasapellidos = personasapellidos.Where(PersonasApellidos => PersonasApellidos.Apellido.Contains(Buscar));
+                personas = personas.Where(Personas => Personas.Nombre.Contains(Buscar)).ToList();
+                personasapellidos = personasapellidos.Where(PersonasApellidos => PersonasApellidos.Apellido.Contains(Buscar)).ToList();
 
                 if (personas.Count() > 0 && personasapellidos.Count() > 0)
                 {
-                    personasunion = personas.Union(personasapellidos);
+                    personasunion = personas.Union(personasapellidos).ToList();
                 }
                 else
                 {
@@ -47,7 +62,6 @@ namespace AutoDealer.Controllers
                         personasunion = personasapellidos;
                     }
                 }
-
 
             }
             return View(personasunion.ToList());
