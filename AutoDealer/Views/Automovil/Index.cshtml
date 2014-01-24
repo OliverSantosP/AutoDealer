@@ -18,19 +18,21 @@
                 <option>Modelo</option>
             </select>
         </div>
-        <input type="submit" value="Buscar" id="Buscar" name="Buscar" class="btn btn-default">
-    }
-</p>
-
-<div class="btn-group">
-    <select>
+        <div class="btn-group">
+    <select id="Year" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <option value="0">Año</option>
         @foreach (var item in AutoDealer.Models.Automoviles.GetAllYears())
         {
-            <option value="value">@item</option>
+            <option value="value">@item.Year</option>
         }
 
     </select>
 </div>
+        <input type="submit" value="Buscar" id="Buscar" name="Buscar" class="btn btn-default">
+    }
+</p>
+
+
 <div class="col-md-12">
     <div class="widget wlightblue">
         <div class="widget-head">

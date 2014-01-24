@@ -43,11 +43,11 @@ namespace AutoDealer.Models
         /// </summary>
         /// <param name="Id">El Id del Automovil.</param>
         /// <returns></returns>
-        public static List<string> GetAllYears()
+        public static List<DateTime> GetAllYears()
         {
             AutoDealerEntities db = new AutoDealerEntities();
-            List<string> AutomovilesYears = new List<string>();
-            AutomovilesYears = (from a in db.Automoviles select a.Year.ToString()).Distinct().ToList();
+            List<DateTime> AutomovilesYears = new List<DateTime>();
+            AutomovilesYears = (from a in db.Automoviles select a.Year).Distinct().OrderByDescending(x=>x.Year).ToList();
             return AutomovilesYears;
         }
         public virtual Automoviles Automoviles1 { get; set; }
