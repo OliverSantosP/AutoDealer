@@ -19,15 +19,23 @@
             </select>
         </div>
         <div class="btn-group">
-    <select id="Year" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <option value="0">Año</option>
-        @foreach (var item in AutoDealer.Models.Automoviles.GetAllYears())
-        {
-            <option value="value">@item.Year</option>
-        }
-
-    </select>
-</div>
+            <select id="Year" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <option value="0">Año</option>
+                @foreach (var item in AutoDealer.Models.Automoviles.GetAllYears())
+                {
+                    <option value="value">@item.Year</option>
+                }
+            </select>
+        </div>
+                <div class="btn-group">
+            <select id="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <option value="0">Showroom</option>
+                @foreach (var item in AutoDealer.Models.Showrooms.GetAllShowrooms())
+                {
+                    <option value="value">@item.Nombre</option>
+                }
+            </select>
+        </div>
         <input type="submit" value="Buscar" id="Buscar" name="Buscar" class="btn btn-default">
     }
 </p>
@@ -77,7 +85,7 @@
                         {
                             <tr>
                                 <td>
-                                    <a href="/Gasto?AutomovilId=@item.Id" >@item.TiposAutomoviles.Fabricantes.Nombre @item.TiposAutomoviles.Modelos.Nombre</a>
+                                    <a href="/Gasto?AutomovilId=@item.Id">@item.TiposAutomoviles.Fabricantes.Nombre @item.TiposAutomoviles.Modelos.Nombre</a>
                                 </td>
                                 <td>
                                     @item.Year.ToString("yyyy")
@@ -97,15 +105,15 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        
+
                                         @*@if (AutoDealer.Models.Gastos.TieneGastos(item.Id) == true)
-                                        {
-                                            <a href="/Gasto?AutomovilId=@item.Id" class="btn btn-sm btn-info">G</a>
-                                        }
-                                        else
-                                        {
-                                            <a href="Gasto/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">G</a>
-                                        }*@
+                                            {
+                                                <a href="/Gasto?AutomovilId=@item.Id" class="btn btn-sm btn-info">G</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="Gasto/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">G</a>
+                                            }*@
 
                                         <a href="/Automovil/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
                                         <a href="Factura/Create" class="btn btn-sm btn-default">Facturar</a>

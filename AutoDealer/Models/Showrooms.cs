@@ -33,6 +33,19 @@ namespace AutoDealer.Models
         /// </summary>
         /// <param name="Fabricante">El Id del fabricante.</param>
         /// <returns></returns>
+        public static List<Showrooms> GetAllShowrooms()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Showrooms> Lista = new List<Showrooms>();
+            Lista = db.Showrooms.Distinct().ToList();
+            return Lista;
+        }
+
+        /// <summary>
+        /// Este metodo retorna un modelo, dado un fabricante.
+        /// </summary>
+        /// <param name="Fabricante">El Id del fabricante.</param>
+        /// <returns></returns>
         public static List<Showrooms> GetShowrooms(int Empresa)
         {
             AutoDealerEntities db = new AutoDealerEntities();

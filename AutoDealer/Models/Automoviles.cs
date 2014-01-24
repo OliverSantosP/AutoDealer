@@ -50,6 +50,22 @@ namespace AutoDealer.Models
             AutomovilesYears = (from a in db.Automoviles select a.Year).Distinct().OrderByDescending(x=>x.Year).ToList();
             return AutomovilesYears;
         }
+
+        /// <summary>
+        /// Retorna todos los Automoviles de un año en especifico.
+        /// </summary>
+        /// <param name="Id">El Año del Automovil.</param>
+        /// <returns></returns>
+        public static List<Automoviles> GetAutomovilOfYear(string Year)
+        {
+            DateTime Year2;
+            Year2=DateTime.Parse(Year);
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Automoviles> Automoviles = new List<Automoviles>();
+            Automoviles = db.Automoviles.Where(x => x.Year == Year2).ToList();
+            return Automoviles;
+        }
+
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }
         public virtual Facturas Facturas { get; set; }
