@@ -22,6 +22,15 @@
     }
 </p>
 
+<div class="btn-group">
+    <select>
+        @foreach (var item in AutoDealer.Models.Automoviles.GetAllYears())
+        {
+            <option value="value">@item</option>
+        }
+
+    </select>
+</div>
 <div class="col-md-12">
     <div class="widget wlightblue">
         <div class="widget-head">

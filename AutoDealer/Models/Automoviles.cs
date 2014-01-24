@@ -12,7 +12,8 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.Linq;
+
     public partial class Automoviles
     {
         public int Id { get; set; }
@@ -35,6 +36,19 @@ namespace AutoDealer.Models
             AutoDealerEntities db = new AutoDealerEntities();
             Automoviles Automovil = db.Automoviles.Find(Id);
             return Automovil;
+        }
+
+        /// <summary>
+        /// Retorna todos los años existentes y distintos (campo Year) para todos los Automoviles.
+        /// </summary>
+        /// <param name="Id">El Id del Automovil.</param>
+        /// <returns></returns>
+        public static List<string> GetAllYears()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<string> AutomovilesYears = new List<string>();
+            AutomovilesYears = (from a in db.Automoviles select a.Year.ToString()).Distinct().ToList();
+            return AutomovilesYears;
         }
         public virtual Automoviles Automoviles1 { get; set; }
         public virtual Automoviles Automoviles2 { get; set; }
