@@ -17,6 +17,7 @@ namespace AutoDealer.Models
         public Status()
         {
             this.Automoviles = new HashSet<Automoviles>();
+            this.Colores = new HashSet<Colores>();
             this.Fabricantes = new HashSet<Fabricantes>();
             this.Modelos = new HashSet<Modelos>();
             this.Showrooms = new HashSet<Showrooms>();
@@ -29,6 +30,7 @@ namespace AutoDealer.Models
         public string Descripcion { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual ICollection<Colores> Colores { get; set; }
         public virtual Empresas Empresas { get; set; }
         public virtual ICollection<Fabricantes> Fabricantes { get; set; }
         public virtual ICollection<Modelos> Modelos { get; set; }

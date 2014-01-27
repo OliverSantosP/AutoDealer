@@ -19,6 +19,15 @@ namespace AutoDealer.Models
         {
             this.PersonasRoles = new HashSet<PersonasRoles>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int Status { get; set; }
+    
+        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
+        public virtual Status Status1 { get; set; }
+
         public static List<TiposRoles> GetTiposRoles()
         {
             AutoDealerEntities db = new AutoDealerEntities();
@@ -46,12 +55,5 @@ namespace AutoDealer.Models
             return ListaTiposRoles;
         }
 
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public int Status { get; set; }
-
-        public virtual Status Status1 { get; set; }
-        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
     }
 }

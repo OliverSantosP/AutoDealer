@@ -26,6 +26,7 @@ namespace AutoDealer.Models
         }
     
         public DbSet<Automoviles> Automoviles { get; set; }
+        public DbSet<Colores> Colores { get; set; }
         public DbSet<Empresas> Empresas { get; set; }
         public DbSet<Fabricantes> Fabricantes { get; set; }
         public DbSet<Facturas> Facturas { get; set; }

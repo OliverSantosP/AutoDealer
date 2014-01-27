@@ -12,16 +12,18 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PersonasRoles
+    public partial class Colores
     {
-        public int Id { get; set; }
-        public int Persona { get; set; }
-        public int Rol { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public Nullable<double> Comision { get; set; }
+        public Colores()
+        {
+            this.Automoviles = new HashSet<Automoviles>();
+        }
     
-        public virtual Personas Personas { get; set; }
-        public virtual TiposRoles TiposRoles { get; set; }
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<int> Status { get; set; }
+    
+        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

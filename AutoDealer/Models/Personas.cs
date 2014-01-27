@@ -12,7 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class Personas
     {
         public Personas()
@@ -23,6 +23,23 @@ namespace AutoDealer.Models
             this.Liquidaciones1 = new HashSet<Liquidaciones>();
             this.PersonasRoles = new HashSet<PersonasRoles>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string Celular { get; set; }
+        public string Email { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public int Status { get; set; }
+    
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<Facturas> Facturas1 { get; set; }
+        public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
+        public virtual ICollection<Liquidaciones> Liquidaciones1 { get; set; }
+        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
 
         public static List<Personas> GetSuplidores()
         {
@@ -49,22 +66,5 @@ namespace AutoDealer.Models
             Persona = db.Personas.Where(x => x.Id == Id).First();
             return Persona.Nombre + " " + Persona.Apellido;
         }
-
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Telefono { get; set; }
-        public string Direccion { get; set; }
-        public string Celular { get; set; }
-        public string Email { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public int Status { get; set; }
-
-        public virtual ICollection<Facturas> Facturas { get; set; }
-        public virtual ICollection<Facturas> Facturas1 { get; set; }
-        public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
-        public virtual ICollection<Liquidaciones> Liquidaciones1 { get; set; }
-        public virtual ICollection<PersonasRoles> PersonasRoles { get; set; }
     }
 }

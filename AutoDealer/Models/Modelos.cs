@@ -12,13 +12,20 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class Modelos
     {
         public Modelos()
         {
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int Status { get; set; }
+    
+        public virtual Status Status1 { get; set; }
+        public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
 
         /// <summary>
         /// Este metodo retorna un modelo, dado un fabricante.
@@ -52,11 +59,5 @@ namespace AutoDealer.Models
             ListaModelos = db.Modelos.Where(x => x.Id == Id).ToList();
             return ListaModelos;
         }
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public int Status { get; set; }
-
-        public virtual Status Status1 { get; set; }
-        public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
     }
 }

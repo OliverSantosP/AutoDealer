@@ -12,13 +12,24 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class TiposAutomoviles
     {
         public TiposAutomoviles()
         {
             this.Automoviles = new HashSet<Automoviles>();
         }
+    
+        public int Id { get; set; }
+        public int Fabricante { get; set; }
+        public int Modelo { get; set; }
+        public Nullable<int> Trim { get; set; }
+        public int Status { get; set; }
+    
+        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Fabricantes Fabricantes { get; set; }
+        public virtual Modelos Modelos { get; set; }
+        public virtual Trim Trim1 { get; set; }
 
         public static int GetTipoAutomovil(string Fabricante, string Modelo)
         {
@@ -54,16 +65,5 @@ namespace AutoDealer.Models
             string Nombres = Fabricante[0].Nombre + " " + Modelo[0].Nombre;
             return Nombres;
         }
-
-        public int Id { get; set; }
-        public int Fabricante { get; set; }
-        public int Modelo { get; set; }
-        public Nullable<int> Trim { get; set; }
-        public int Status { get; set; }
-
-        public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Fabricantes Fabricantes { get; set; }
-        public virtual Modelos Modelos { get; set; }
-        public virtual Trim Trim1 { get; set; }
     }
 }

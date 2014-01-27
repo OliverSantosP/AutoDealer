@@ -11,9 +11,8 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
-
+    
     public partial class Automoviles
     {
         public int Id { get; set; }
@@ -29,7 +28,21 @@ namespace AutoDealer.Models
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
         public Nullable<int> PrecioVenta { get; set; }
+        public string Placa { get; set; }
+        public string Vin { get; set; }
+        public Nullable<int> PrecioMinimo { get; set; }
+        public Nullable<int> Costo { get; set; }
+        public string Referencia { get; set; }
+        public Nullable<int> Color { get; set; }
     
+        public virtual Automoviles Automoviles1 { get; set; }
+        public virtual Automoviles Automoviles2 { get; set; }
+        public virtual Colores Colores { get; set; }
+        public virtual Facturas Facturas { get; set; }
+        public virtual Liquidaciones Liquidaciones1 { get; set; }
+        public virtual Showrooms Showrooms { get; set; }
+        public virtual Status Status1 { get; set; }
+        public virtual TiposAutomoviles TiposAutomoviles { get; set; }
 
         public static Automoviles GetAutomovil(int Id)
         {
@@ -47,7 +60,7 @@ namespace AutoDealer.Models
         {
             AutoDealerEntities db = new AutoDealerEntities();
             List<DateTime> AutomovilesYears = new List<DateTime>();
-            AutomovilesYears = (from a in db.Automoviles select a.Year).Distinct().OrderByDescending(x=>x.Year).ToList();
+            AutomovilesYears = (from a in db.Automoviles select a.Year).Distinct().OrderByDescending(x => x.Year).ToList();
             return AutomovilesYears;
         }
 
@@ -59,19 +72,11 @@ namespace AutoDealer.Models
         public static List<Automoviles> GetAutomovilOfYear(string Year)
         {
             DateTime Year2;
-            Year2=DateTime.Parse(Year);
+            Year2 = DateTime.Parse(Year);
             AutoDealerEntities db = new AutoDealerEntities();
             List<Automoviles> Automoviles = new List<Automoviles>();
             Automoviles = db.Automoviles.Where(x => x.Year == Year2).ToList();
             return Automoviles;
         }
-
-        public virtual Automoviles Automoviles1 { get; set; }
-        public virtual Automoviles Automoviles2 { get; set; }
-        public virtual Facturas Facturas { get; set; }
-        public virtual Liquidaciones Liquidaciones1 { get; set; }
-        public virtual Showrooms Showrooms { get; set; }
-        public virtual Status Status1 { get; set; }
-        public virtual TiposAutomoviles TiposAutomoviles { get; set; }
     }
 }

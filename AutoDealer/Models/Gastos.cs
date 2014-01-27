@@ -11,58 +11,22 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
+    
     public partial class Gastos
     {
         public Gastos()
         {
             this.Liquidaciones = new HashSet<Liquidaciones>();
         }
-
-        public static bool TieneGastos(int AutomovilId)
-        {
-            AutoDealerEntities db = new AutoDealerEntities();
-
-            bool Existe;
-            Existe = false;
-
-            List<Gastos> ListaGastos = new List<Gastos>();
-            ListaGastos = db.Gastos.Where(x => x.Automovil == AutomovilId).ToList();
-            if (ListaGastos.Count > 0)
-            {
-                return Existe = true;
-            }
-
-            return Existe = false;
-        }
-
-        public static int TotalGastos(string AutomovilId)
-        {
-            int AutomovilIdInt = Int32.Parse(AutomovilId);
-            AutoDealerEntities db = new AutoDealerEntities();
-            int Total = (from a in db.Gastos where a.Automovil==AutomovilIdInt select a.Precio).Sum();
-            return Total;
-        }
-
+    
         public int Id { get; set; }
-
-        [Display(Name = "Tipo de Gasto")]
         public int Tipo { get; set; }
-
-        [Display(Name = "Monto")]
         public int Precio { get; set; }
-
-        [Display(Name = "Fecha de Creacion")]
         public System.DateTime FechaCreacion { get; set; }
-
-        [Display(Name = "Fecha de Modificacion")]
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public int Automovil { get; set; }
-
-        [Display(Name = "Pagado a")]
         public string PagadoA { get; set; }
-
+    
         public virtual TiposDeGastos TiposDeGastos { get; set; }
         public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
     }

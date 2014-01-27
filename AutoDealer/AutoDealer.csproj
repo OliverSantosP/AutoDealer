@@ -209,6 +209,9 @@
     <Compile Include="Models\Automoviles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Colores.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empresas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

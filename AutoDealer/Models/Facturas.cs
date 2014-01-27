@@ -11,7 +11,6 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Facturas
     {
@@ -23,17 +22,11 @@ namespace AutoDealer.Models
         }
     
         public int Id { get; set; }
-        
-        [Display(Name = "Fecha de Creacion")]
         public System.DateTime FechaCreacion { get; set; }
-
-        [Display(Name = "Fecha de Modificacion")]
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public int Vendedor { get; set; }
         public int Comprador { get; set; }
         public string NCF { get; set; }
-
-        [Display(Name = "Costo de Traspaso")]
         public Nullable<int> CostoTraspaso { get; set; }
         public Nullable<int> Empresa { get; set; }
     
