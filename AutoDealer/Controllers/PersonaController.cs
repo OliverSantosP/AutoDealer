@@ -27,44 +27,66 @@ namespace AutoDealer.Controllers
             List<Personas> personasapellidos = new List<Personas>();
             List<Personas> personasunion = new List<Personas>();
 
-            if (!String.IsNullOrEmpty(TipoRol))
+            if (String.IsNullOrEmpty(Buscar) && String.IsNullOrEmpty(TipoRol))
             {
-                int TipoRolInt = Int32.Parse(TipoRol);
-                List<PersonasRoles> Roles = new List<PersonasRoles>();
-                Personas Personita = new Personas();
-                Roles = db.PersonasRoles.Where(x => x.Rol == TipoRolInt).ToList();
-
-                foreach (var item in Roles)
-                {
-                    Personita=db.Personas.Where(x=>x.Id==item.Persona).First();
-                    personasapellidos.Add(Personita);
-                    personas.Add(Personita);
-                }
-
+                personas = db.Personas.ToList();
             }
-            if (!String.IsNullOrEmpty(Buscar))
+            else
             {
-                personas = personas.Where(Personas => Personas.Nombre.Contains(Buscar)).ToList();
-                personasapellidos = personasapellidos.Where(PersonasApellidos => PersonasApellidos.Apellido.Contains(Buscar)).ToList();
+                if (!String.IsNullOrEmpty(TipoRol))
+                {
+                   
+                    int TipoRolInt = Int32.Parse(TipoRol);
+                    List<PersonasRoles> Roles = new List<PersonasRoles>();
+                    Personas Personita = new Personas();
+                    Roles = db.PersonasRoles.Where(x => x.Rol == TipoRolInt).ToList();
 
-                if (personas.Count() > 0 && personasapellidos.Count() > 0)
-                {
-                    personasunion = personas.Union(personasapellidos).ToList();
-                }
-                else
-                {
-                    if (personas.Count() > 0)
+                    if (TipoRol != "0")
                     {
+                        foreach (var item in Roles)
+                        {
+                            Personita = db.Personas.Where(x => x.Id == item.Persona).First();
+                            personas.Add(Personita);
+                            personasapellidos.Add(Personita);
+                            personasunion.Add(Personita);
+                        }
+                    }
+                    else
+                    {
+                        personas = db.Personas.ToList();
+                        personasapellidos = personas;
                         personasunion = personas;
                     }
-                    if (personasapellidos.Count() > 0)
+                    
+
+                }
+                if (!String.IsNullOrEmpty(Buscar))
+                {
+                    personas = personas.Where(Personas => Personas.Nombre.Contains(Buscar)).ToList();
+                    personasapellidos = personasapellidos.Where(PersonasApellidos => PersonasApellidos.Apellido.Contains(Buscar)).ToList();
+
+                    if (personas.Count() > 0 && personasapellidos.Count() > 0)
                     {
-                        personasunion = personasapellidos;
+                        personasunion = personas.Union(personasapellidos).ToList();
+                    }
+                    else
+                    {
+                        if (personas.Count() > 0)
+                        {
+                            personasunion = personas;
+                        }
+                        if (personasapellidos.Count() > 0)
+                        {
+                            personasunion = personasapellidos;
+                        }
                     }
                 }
 
+                return View(personasunion.ToList());
+
             }
-            return View(personasunion.ToList());
+            return View(personas.ToList());
+            
         }
 
         //

@@ -11,6 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class PersonasRoles
     {
@@ -23,5 +24,23 @@ namespace AutoDealer.Models
     
         public virtual Personas Personas { get; set; }
         public virtual TiposRoles TiposRoles { get; set; }
+
+        public static string GetComision(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            PersonasRoles PersonaRole = new PersonasRoles();
+            PersonaRole = db.PersonasRoles.Where(x => x.Id == Id).First();
+            return PersonaRole.Comision.ToString();
+        }
+
+        public static string GetComsision(string Id)
+        {
+            int IdInt = Int32.Parse(Id);
+            AutoDealerEntities db = new AutoDealerEntities();
+            PersonasRoles PersonaRole = new PersonasRoles();
+
+            PersonaRole = db.PersonasRoles.Where(x => x.Id == IdInt).First();
+            return PersonaRole.Comision.ToString();
+        }
     }
 }
