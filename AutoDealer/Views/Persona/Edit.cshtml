@@ -68,24 +68,45 @@
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
 
-                    <div class="editor-label">
-                        @Html.DisplayText("Tasa de comision")
-                    </div>
-                    <div class="editor-label">
-                    </div>
+
                     <div class="editor-label">
                         <label for="Rol">Rol</label>
                     </div>
                     <div class="btn-group">
                         <select id="Roles" name="Roles" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            @{
+                              var Rol = @AutoDealer.Models.PersonasRoles.ConseguirRolDePersona(Model.Id);
+                            }
                             @foreach (var item in AutoDealer.Models.TiposRoles.GetTiposRoles())
                             {
-                                <option value="@item.Id">@item.Nombre</option>
+                                if (item.Id==Rol.Rol)
+                                {
+                                    <option value="@item.Id" selected="selected">@item.Nombre</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
                             }
 
                         </select>
                     </div>
-                    <br />
+                    <div class="editor-label">
+                        @Html.Label("Tasa de comision")
+                    </div>
+                    <div class="editor-label">
+
+
+                        @if (Rol != null)
+                        {
+                            string Comision = AutoDealer.Models.PersonasRoles.GetComision(Rol.Id);
+                            <input type="text" name="TasaComision" value="@Comision" />
+                        }
+                        else
+                        {
+                            <input type="text" name="TasaComision" value="" />
+                        }
+                    </div>
                     <br />
                     <p>
                         <input type="submit" value="Guardar" class="btn btn-info" />

@@ -113,11 +113,12 @@
 
                                 <td>
                                     @{
-                                        var Rol = @AutoDealer.Models.TiposRoles.ConseguirRolesDePersona(@item.Id).First();
+                                       var Rol = AutoDealer.Models.PersonasRoles.ConseguirRolDePersona(@item.Id);
                                       }
                                     @if (Rol!=null)
                                     {
-                                        @Rol.Nombre
+                                        string NombreRol = AutoDealer.Models.TiposRoles.ConseguirNombreRol(Rol.Rol).ToString();
+                                        @NombreRol
                                     }
                                 </td>
                                 <td>

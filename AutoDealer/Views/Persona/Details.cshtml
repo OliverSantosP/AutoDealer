@@ -91,12 +91,28 @@
                 <div class="display-label">
                     <b>Rol:</b>
                 </div>
-                @foreach (var Rol in AutoDealer.Models.TiposRoles.ConseguirRolesDePersona(Model.Id))
+                @{
+                    var Rol = AutoDealer.Models.PersonasRoles.ConseguirRolDePersona(Model.Id);
+                }
+                @if (Rol != null)
                 {
-                    @Rol.Nombre
+                    string NombreRol = AutoDealer.Models.TiposRoles.ConseguirNombreRol(Rol.Rol).ToString();
+                    @NombreRol
+                    <br />
+                }
+                <br />
+                <div class="display-label">
+
+                    <b>Comision:</b>
+                </div>
+                @if (Rol != null)
+                {
+                    string Comision = AutoDealer.Models.PersonasRoles.GetComision(Rol.Id);
+                    @Comision
                 }
             </div>
         </div>
+
         <br />
         <p>
             @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |

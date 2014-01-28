@@ -36,24 +36,17 @@ namespace AutoDealer.Models
             return ListaTiposRoles;
         }
 
-
-        public static List<TiposRoles> ConseguirRolesDePersona(int Id)
+        public static string ConseguirNombreRol(int Id)
         {
             AutoDealerEntities db = new AutoDealerEntities();
-
-            List<PersonasRoles> ListaPersonaRoles = new List<PersonasRoles>();
-            ListaPersonaRoles = db.PersonasRoles.Where(x => x.Persona == Id).ToList();
-
-            List<TiposRoles> ListaTiposRoles = new List<TiposRoles>();
-
-            foreach (var item in ListaPersonaRoles)
-            {
-                ListaTiposRoles = db.TiposRoles.Where(y => y.Status == 1).ToList();
-                ListaTiposRoles = ListaTiposRoles.Where(z => z.Id == item.Rol).ToList();
-            }
-
-            return ListaTiposRoles;
+            TiposRoles TipoRol = new TiposRoles();
+            string Nombre;
+            TipoRol = db.TiposRoles.Where(x => x.Id == Id).FirstOrDefault();
+            Nombre = TipoRol.Nombre;
+            return Nombre;
         }
+
+
 
     }
 }

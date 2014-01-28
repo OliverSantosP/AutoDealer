@@ -33,7 +33,7 @@ namespace AutoDealer.Controllers
             }
             else
             {
-                if (!String.IsNullOrEmpty(TipoRol))
+                if (!String.IsNullOrEmpty(TipoRol) && TipoRol!="0")
                 {
                    
                     int TipoRolInt = Int32.Parse(TipoRol);
@@ -117,17 +117,18 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Personas personas,FormCollection formdata)
         {
+            personas.FechaCreacion = DateTime.Now;
+            personas.Status = 1;
+            db.Personas.Add(personas);
+
             if (ModelState.IsValid)
             {
-                
-                personas.FechaCreacion = DateTime.Now;
-                personas.Status = 1;
-                db.Personas.Add(personas);
                 db.SaveChanges();
                 
                 PersonasRoles Rol= new PersonasRoles();
                 Rol.Persona = personas.Id;
                 Rol.FechaCreacion = personas.FechaCreacion;
+                Rol.Comision = double.Parse(formdata["TasaComision"].ToString());
                 Rol.Rol = Int32.Parse(formdata["Roles"].ToString());
                 db.PersonasRoles.Add(Rol);
                 db.SaveChanges();
@@ -158,18 +159,23 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Personas personas,FormCollection formdata)
         {
+            personas.FechaModificacion = DateTime.Now;
+            personas.Status = 1;
+            //Pending: Arreglar esta hora para que cargue automaticamente.
+            personas.FechaCreacion = DateTime.Now;
             if (ModelState.IsValid)
             {
-                personas.FechaModificacion = DateTime.Now;
-                personas.Status = 1;
+
                 db.Entry(personas).State = EntityState.Modified;
                 db.SaveChanges();
 
-                PersonasRoles Rol = new PersonasRoles();
-                Rol.Persona = personas.Id;
-                Rol.FechaCreacion = personas.FechaCreacion;
-                Rol.Rol = Int32.Parse(formdata["Roles"].ToString());
-                db.PersonasRoles.Add(Rol);
+                PersonasRoles PersonaRol = new PersonasRoles();
+                PersonaRol = db.PersonasRoles.Where(x=>x.Persona==personas.Id).FirstOrDefault();
+                PersonaRol.FechaCreacion = System.DateTime.Now;
+                PersonaRol.Rol = Int32.Parse(formdata["Roles"].ToString());
+                PersonaRol.Comision = double.Parse(formdata["TasaComision"].ToString());
+
+                db.Entry(PersonaRol).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

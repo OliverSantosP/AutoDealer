@@ -25,12 +25,27 @@ namespace AutoDealer.Models
         public virtual Personas Personas { get; set; }
         public virtual TiposRoles TiposRoles { get; set; }
 
-        public static string GetComision(int Id)
+        public static string GetComision(int PersonaId)
         {
             AutoDealerEntities db = new AutoDealerEntities();
             PersonasRoles PersonaRole = new PersonasRoles();
-            PersonaRole = db.PersonasRoles.Where(x => x.Id == Id).First();
+            PersonaRole = db.PersonasRoles.Where(x => x.Id == PersonaId).First();
             return PersonaRole.Comision.ToString();
+        }
+
+        /// <summary>
+        /// Retorna todos los roles que tiene una persona.
+        /// </summary>
+        /// <param name="Id">Id de Persona.</param>
+        /// <returns>Personas Roles.</returns>
+        public static PersonasRoles ConseguirRolDePersona(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+
+            PersonasRoles PersonaRol = new PersonasRoles();
+            PersonaRol = db.PersonasRoles.Where(x => x.Persona == Id).First();
+
+            return PersonaRol;
         }
 
         public static string GetComsision(string Id)

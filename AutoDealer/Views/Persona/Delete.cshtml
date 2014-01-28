@@ -91,6 +91,31 @@
                     @Html.DisplayFor(model => model.FechaModificacion)
                 </div>
                 <br>
+                <div class="display-label">
+                    <b>Rol:</b>
+                </div>
+                @{
+    var Rol = AutoDealer.Models.PersonasRoles.ConseguirRolDePersona(Model.Id);
+                }
+                @if (Rol != null)
+                {
+                    string NombreRol = AutoDealer.Models.TiposRoles.ConseguirNombreRol(Rol.Rol).ToString();
+                    @NombreRol
+                    <br />
+                }
+                <br />
+                <div class="display-label">
+
+                    <b>Comision:</b>
+                </div>
+                @if (Rol != null)
+                {
+                    string Comision = AutoDealer.Models.PersonasRoles.GetComision(Rol.Id);
+                    @Comision
+                    <br />
+                    <br />
+                }
+
                 <input type="submit" value="Borrar" class="btn btn-danger" />
 
             </div>
