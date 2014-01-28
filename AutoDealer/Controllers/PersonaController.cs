@@ -33,7 +33,7 @@ namespace AutoDealer.Controllers
             }
             else
             {
-                if (!String.IsNullOrEmpty(TipoRol) && TipoRol!="0")
+                if (!String.IsNullOrEmpty(TipoRol))
                 {
                    
                     int TipoRolInt = Int32.Parse(TipoRol);
