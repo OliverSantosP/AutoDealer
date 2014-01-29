@@ -35,10 +35,6 @@ namespace AutoDealer.Controllers
         }
 
 
-
-
-
-
         /// <summary>
         /// Retorna una lista de Empresas.
         /// </summary>
@@ -151,25 +147,36 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Automoviles automoviles, FormCollection FormData)
         {
+            //Todavia se esta implementando este metodo.
+            //Pendiente: Hacer que pase la validacion de modelo.
+
             automoviles.Showroom = Int32.Parse(FormData["Showrooms"]);
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
             automoviles.FechaCreacion = DateTime.Now;
             automoviles.FechaEntrada = DateTime.Now;
-            automoviles.Status = 1;
+            automoviles.Color = Int32.Parse(FormData["Colores"]);
+
+            //Por default status es "En Venta" para nuevos Automoviles.
+            automoviles.Status = 13;
             string Year = FormData["Year"];
             string FormatedYear = "01/01/YYYY";
             FormatedYear = FormatedYear.Replace("YYYY", Year);
-            automoviles.Year = DateTime.Parse(FormatedYear);
-            //if (ModelState.IsValid)
-            //{
-                
+            automoviles.Year = DateTime.Now;
+
+            foreach (var modelErrors in ModelState)
+            {
+                string propertyName = modelErrors.Key;
+            }
+
+            if (ModelState.IsValid)
+            {
                 db.Automoviles.Add(automoviles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            //}
+            }
 
-            //return View(automoviles);
+            return View(automoviles);
         }
 
         //
@@ -207,7 +214,7 @@ namespace AutoDealer.Controllers
             FormatedYear = FormatedYear.Replace("YYYY", Year);
             DateTime FormatedYear2 = DateTime.Parse(FormatedYear);
             var Test = automoviles.Year.GetDateTimeFormats();
-            automoviles.Year = FormatedYear2;
+            automoviles.Year = System.DateTime.Now;
             foreach (ModelState modelState in ViewData.ModelState.Values)
             {
                 foreach (ModelError error in modelState.Errors)

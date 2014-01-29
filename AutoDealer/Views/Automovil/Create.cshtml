@@ -43,12 +43,11 @@
                             </select>
                         </div>
                         <input type="text" placeholder="Año" id="Year" name="Year">
-                        @Html.ValidationMessageFor(model => model.Year)
                     </div>
+                    <br />
                     <div class="editor-label">
                         @Html.LabelFor(model => model.Suplidor)
                     </div>
-                <br />
                     <div class="editor-field">
                         <div class="btn-group">
                             <select id="Suplidores" name="Suplidores" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -67,7 +66,7 @@
                         @Html.EditorFor(model => model.Costo)
                         @Html.ValidationMessageFor(model => model.Costo)
                     </div>
-                <br />
+                    <br />
                     <div class="editor-label">
                         @Html.LabelFor(model => model.PrecioMinimo)
                     </div>
@@ -88,7 +87,7 @@
                         @Html.LabelFor(model => model.Color)
                     </div>
                     <div class="editor-field">
-                        <select>
+                        <select id="Colores" name="Colores">
                             @foreach (var item in AutoDealer.Models.Colores.GetColors())
                             {
                                 <option value="@item.ID">@item.Nombre</option>

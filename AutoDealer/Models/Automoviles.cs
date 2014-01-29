@@ -12,6 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Automoviles
     {
@@ -28,10 +29,13 @@ namespace AutoDealer.Models
         public int Status { get; set; }
         public int TipoAutomovil { get; set; }
         public Nullable<int> PrecioVenta { get; set; }
+        [StringLength(20)]
         public string Placa { get; set; }
+        [StringLength(20)]
         public string Vin { get; set; }
         public Nullable<int> PrecioMinimo { get; set; }
         public Nullable<int> Costo { get; set; }
+        [StringLength(20)]
         public string Referencia { get; set; }
         public Nullable<int> Color { get; set; }
     
