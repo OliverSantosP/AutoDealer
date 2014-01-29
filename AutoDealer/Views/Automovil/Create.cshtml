@@ -45,18 +45,80 @@
                         <input type="text" placeholder="Año" id="Year" name="Year">
                         @Html.ValidationMessageFor(model => model.Year)
                     </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Suplidor)
+                    </div>
+                <br />
+                    <div class="editor-field">
+                        <div class="btn-group">
+                            <select id="Suplidores" name="Suplidores" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                @foreach (var item in AutoDealer.Models.Personas.GetSuplidores())
+                                {
+                                    <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
                     <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Costo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Costo)
+                        @Html.ValidationMessageFor(model => model.Costo)
+                    </div>
+                <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PrecioMinimo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PrecioMinimo)
+                        @Html.ValidationMessageFor(model => model.PrecioMinimo)
+                    </div>
                     <br />
-                    Suplidor<br />
-                    <div class="btn-group">
-                        <select id="Suplidores" name="Suplidores" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            @foreach (var item in AutoDealer.Models.Personas.GetSuplidores())
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PrecioVenta)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PrecioVenta)
+                        @Html.ValidationMessageFor(model => model.PrecioVenta)
+                    </div>
+                    <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Color)
+                    </div>
+                    <div class="editor-field">
+                        <select>
+                            @foreach (var item in AutoDealer.Models.Colores.GetColors())
                             {
-                                <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                <option value="@item.ID">@item.Nombre</option>
                             }
                         </select>
                     </div>
                     <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Placa)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Placa)
+                        @Html.ValidationMessageFor(model => model.Placa)
+                    </div>
+                    <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Vin)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Vin)
+                        @Html.ValidationMessageFor(model => model.Vin)
+                    </div>
+                    <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Referencia)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Referencia)
+                        @Html.ValidationMessageFor(model => model.Referencia)
+                    </div>
                     <br />
                     <input type="submit" value="Crear" class="btn btn-info" />
                 </div><!--Padd-->

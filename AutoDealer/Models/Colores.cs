@@ -11,12 +11,26 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Colores
     {
         public Colores()
         {
             this.Automoviles = new HashSet<Automoviles>();
+        }
+        
+
+        /// <summary>
+        /// Retorna una lista de colores activos.
+        /// </summary>
+        /// <returns>Lista de Colores.</returns>
+        public static List<Colores> GetColors()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Colores> ListaColores = new List<Colores>();
+            ListaColores = db.Colores.Where(x=>x.Status==1).ToList();
+            return ListaColores;
         }
     
         public int ID { get; set; }
