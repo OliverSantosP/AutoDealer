@@ -11,12 +11,38 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Gastos
     {
         public Gastos()
         {
             this.Liquidaciones = new HashSet<Liquidaciones>();
+        }
+
+        public static bool TieneGastos(string AutomovilId)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+
+            bool Existe;
+            Existe = false;
+            int AutomovilIdInt = Int32.Parse(AutomovilId);
+            List<Gastos> ListaGastos = new List<Gastos>();
+            ListaGastos = db.Gastos.Where(x => x.Automovil == AutomovilIdInt).ToList();
+            if (ListaGastos.Count > 0)
+            {
+                return Existe = true;
+            }
+
+            return Existe = false;
+        }
+
+        public static int TotalGastos(string AutomovilId)
+        {
+            int AutomovilIdInt = Int32.Parse(AutomovilId);
+            AutoDealerEntities db = new AutoDealerEntities();
+            int Total = (from a in db.Gastos where a.Automovil == AutomovilIdInt select a.Precio).Sum();
+            return Total;
         }
     
         public int Id { get; set; }

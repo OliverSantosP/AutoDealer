@@ -7,16 +7,41 @@
 {
     string AutomovilId = Request.QueryString["AutomovilId"];
     var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(Int32.Parse(AutomovilId));
-    <b>Datos del Automovil: </b>@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Automovil.Id)
-    <br />
-    <b>Showroom: </b>@Automovil.Showrooms.Nombre
-    <br />
-    <b>Status: </b>@Automovil.Status1.Nombre
-    <br />
-    <b>Fecha de entrada: </b>@Automovil.FechaEntrada
-    <br />
-    <b>Precio de Venta: </b>@Automovil.PrecioVenta
-    <br />
+    <div class="row">
+        <div class="col-lg-3">
+            <b>Datos del Automovil: </b>@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Automovil.Id)
+            <br />
+            <b>Showroom: </b>@Automovil.Showrooms.Nombre
+            <br />
+            <b>Status: </b>@Automovil.Status1.Nombre
+            <br />
+            <b>Fecha de entrada: </b>@Automovil.FechaEntrada
+            <br />
+            <b>Fecha de salida: </b>@Automovil.FechaSalida
+            <br />
+            
+        </div>
+        <div class="col-lg-3">
+            <b>Suplidor:</b> @AutoDealer.Models.Personas.GetPersonaNombre(@Automovil.Suplidor)
+            <br />
+            <b>Color: </b>@Automovil.Colores.Nombre
+            <br />
+            <b>Placa: </b>@Automovil.Placa
+            <br />
+            <b>VIN: </b>@Automovil.Vin
+            <br />
+            <b>Referencia: </b>@Automovil.Referencia
+            <br />
+        </div>
+        <div class="col-lg-3">
+            <b>Precio de Venta: </b>@String.Format("{0:C}", @Automovil.PrecioVenta)
+            <br />
+            <b>Precio Minimo: </b>@String.Format("{0:C}",  @Automovil.PrecioMinimo)
+            <br />
+            <b>Costo: </b>@String.Format("{0:C}", @Automovil.Costo)
+            <br />
+        </div>
+    </div>
     <br />
     <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Nuevo Gasto</a>
 }
@@ -43,10 +68,10 @@
                                 @Html.DisplayNameFor(model => model.Precio)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FechaCreacion)
+                                Fecha de creacion
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.PagadoA)
+                                Pagado a
                             </th>
                             <th></th>
                         </tr>
@@ -86,7 +111,15 @@
             string AutomovilId = Request.QueryString["AutomovilId"];
             <br />
             <b>Total gastos: RD</b>
-            @String.Format("{0:C}", @AutoDealer.Models.Gastos.TotalGastos(AutomovilId))
+            if (AutoDealer.Models.Gastos.TieneGastos(AutomovilId))
+            {
+                @String.Format("{0:C}", @AutoDealer.Models.Gastos.TotalGastos(AutomovilId))
+            }
+            else
+            {
+                @String.Format("{0:C}", "$0.00")
+            }
+            
         }
     </div>
 </div>

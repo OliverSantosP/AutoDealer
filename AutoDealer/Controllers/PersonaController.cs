@@ -17,7 +17,8 @@ namespace AutoDealer.Controllers
         // GET: /Comprador/
 
         /// <summary>
-        /// Este metodo cuando recibe un parametro String hace una busqueda. Esta busqueda se hace tanto en el Nombre como en el Apellido.
+        /// Este metodo cuando recibe un parametro String hace una busqueda. 
+        /// Esta busqueda se hace tanto en el Nombre como en el Apellido.
         /// </summary>
         /// <param name="Buscar">String para buscar.</param>
         /// <returns>ActionResult</returns>

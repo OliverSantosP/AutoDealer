@@ -74,6 +74,15 @@
                                 <h3 class="panel-title">Precio de Venta</h3>
                             </th>
                             <th>
+                                <h3 class="panel-title">Precio minimo</h3>
+                            </th>
+                            <th>
+                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Costo)</h3>
+                            </th>
+                            <th>
+                                <h3 class="panel-title">@Html.DisplayNameFor(model => model.Color)</h3>
+                            </th>
+                            <th>
                                 <h3 class="panel-title">@Html.DisplayNameFor(model => model.Status)</h3>
                             </th>
                             <th>
@@ -99,6 +108,15 @@
 
                                 <td>
                                     @item.PrecioVenta
+                                </td>
+                                <td>
+                                    @item.PrecioMinimo
+                                </td>
+                                <td>
+                                    @item.Costo
+                                </td>
+                                <td>
+                                    @item.Colores.Nombre
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status1.Nombre)
