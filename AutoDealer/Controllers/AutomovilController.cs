@@ -24,14 +24,14 @@ namespace AutoDealer.Controllers
         // GET: /Automovil/1
         public ActionResult Index(string Id, FormCollection FormData)
         {
-            if (FormData.Keys.Count>0)
+            if (FormData.Keys.Count > 0)
             {
                 string Fabricante = FormData["Fabricantes"];
                 string Modelo = FormData["Modelos"];
                 int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
                 return View(db.Automoviles.Where(x => x.TipoAutomovil == TipoAutomovil).ToList());
             }
-            return View(db.Automoviles.Where(x=>x.Status==3).OrderByDescending(x=>x.FechaCreacion).ToList());
+            return View(db.Automoviles.Where(x => x.Status == 3).OrderByDescending(x => x.FechaCreacion).ToList());
         }
 
 
@@ -186,37 +186,20 @@ namespace AutoDealer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Automoviles automoviles, FormCollection FormData)
         {
-            //Aun falta por implementar completamente.
-            //Hay que lograr que se valide el modelo correctamente.
-
-            automoviles.Showroom = Int32.Parse(FormData["Showrooms"]);
+            //Todavia se esta implementando este metodo.
+            automoviles.Showroom = Int32.Parse(FormData["Showroom"]); ;
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
-            automoviles.FechaEntrada = DateTime.Now;
-            //Modificar esto para que traiga la fecha correcta.
-            automoviles.FechaCreacion = DateTime.Now;
-            automoviles.Status = 1;
-            string Year = FormData["Year"];
-            string FormatedYear = "01/01/YYYY";
-            FormatedYear = FormatedYear.Replace("YYYY", Year);
-            DateTime FormatedYear2 = DateTime.Parse(FormatedYear);
-            var Test = automoviles.Year.GetDateTimeFormats();
-            automoviles.Year = System.DateTime.Now;
-            foreach (ModelState modelState in ViewData.ModelState.Values)
+            automoviles.FechaModificacion = System.DateTime.Now;
+            automoviles.Status = 3;
+            if (ModelState.IsValid)
             {
-                foreach (ModelError error in modelState.Errors)
-                {
-
-                }
-            }
-            //if (ModelState.IsValid)
-            //{
 
                 db.Automoviles.Add(automoviles);
                 db.SaveChanges();
                 return View(automoviles);
-            //}
-            //return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
 
         //
