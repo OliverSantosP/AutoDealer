@@ -31,7 +31,7 @@ namespace AutoDealer.Controllers
                 int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
                 return View(db.Automoviles.Where(x => x.TipoAutomovil == TipoAutomovil).ToList());
             }
-            return View(db.Automoviles.Where(x=>x.Status==3).ToList());
+            return View(db.Automoviles.Where(x=>x.Status==3).OrderByDescending(x=>x.FechaCreacion).ToList());
         }
 
 
@@ -148,21 +148,13 @@ namespace AutoDealer.Controllers
         public ActionResult Create(Automoviles automoviles, FormCollection FormData)
         {
             //Todavia se esta implementando este metodo.
-            //Pendiente: Hacer que pase la validacion de modelo.
-
             automoviles.Showroom = Int32.Parse(FormData["Showroom"]); ;
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
-            automoviles.FechaCreacion = DateTime.Now;
-            automoviles.FechaEntrada = DateTime.Now;
+            automoviles.FechaCreacion = System.DateTime.Now;
 
             //Por default status es "En Venta" para nuevos Automoviles.
             automoviles.Status = 3;
-
-            foreach (var modelErrors in ModelState)
-            {
-                string propertyName = modelErrors.Key;
-            }
 
             if (ModelState.IsValid)
             {

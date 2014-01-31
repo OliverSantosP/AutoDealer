@@ -97,6 +97,14 @@
                     </div>
                     <br />
                     <div class="editor-label">
+                        @Html.LabelFor(model => model.FechaEntrada)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FechaEntrada)
+                        @Html.ValidationMessageFor(model => model.FechaEntrada)
+                    </div>
+                    <br />
+                    <div class="editor-label">
                         @Html.LabelFor(model => model.Placa)
                     </div>
                     <div class="editor-field">
