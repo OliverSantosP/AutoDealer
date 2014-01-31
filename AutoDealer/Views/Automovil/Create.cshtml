@@ -28,7 +28,7 @@
                     <br />
                     Showroom<br />
                     <div class="btn-group">
-                        <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
+                        <select id="Showroom" name="Showroom" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
                     </div>
                     <br />
                     <br />
@@ -42,7 +42,12 @@
                                 <option>Modelo</option>
                             </select>
                         </div>
-                        <input type="text" placeholder="Año" id="Year" name="Year">
+                        <br />
+                        <div class="editor-field">
+                            <br/>
+                            @Html.EditorFor(Model => Model.Year)
+                            @Html.ValidationMessageFor(Model => Model.Year)
+                        </div>
                     </div>
                     <br />
                     <div class="editor-label">
@@ -87,12 +92,8 @@
                         @Html.LabelFor(model => model.Color)
                     </div>
                     <div class="editor-field">
-                        <select id="Colores" name="Colores">
-                            @foreach (var item in AutoDealer.Models.Colores.GetColors())
-                            {
-                                <option value="@item.ID">@item.Nombre</option>
-                            }
-                        </select>
+                        @Html.DropDownListFor(m => m.Color, new SelectList(AutoDealer.Models.Colores.GetColors(), "Id", "Nombre", AutoDealer.Models.Colores.GetColors().First()))
+                        @Html.ValidationMessageFor(m => m.Colores)
                     </div>
                     <br />
                     <div class="editor-label">
@@ -144,10 +145,10 @@
             $("#Empresas").change(function () {
                 $.getJSON("/Automovil/ShowroomsList/" + $("#Empresas > option:selected").attr("value"), function (data) {
                     var items = "<option></option>";
-                    $.each(data, function (i, modelo) {
-                        items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
+                    $.each(data, function (i, showroom) {
+                        items += "<option value='" + showroom.Value + "'>" + showroom.Text + "</option>";
                     });
-                    $("#Showrooms").html(items);
+                    $("#Showroom").html(items);
                 });
             });
 

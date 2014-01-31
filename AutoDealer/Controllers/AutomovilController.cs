@@ -150,19 +150,14 @@ namespace AutoDealer.Controllers
             //Todavia se esta implementando este metodo.
             //Pendiente: Hacer que pase la validacion de modelo.
 
-            automoviles.Showroom = Int32.Parse(FormData["Showrooms"]);
+            automoviles.Showroom = Int32.Parse(FormData["Showroom"]); ;
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
             automoviles.FechaCreacion = DateTime.Now;
             automoviles.FechaEntrada = DateTime.Now;
-            automoviles.Color = Int32.Parse(FormData["Colores"]);
 
             //Por default status es "En Venta" para nuevos Automoviles.
-            automoviles.Status = 13;
-            string Year = FormData["Year"];
-            string FormatedYear = "01/01/YYYY";
-            FormatedYear = FormatedYear.Replace("YYYY", Year);
-            automoviles.Year = DateTime.Now;
+            automoviles.Status = 3;
 
             foreach (var modelErrors in ModelState)
             {

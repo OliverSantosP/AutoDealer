@@ -28,6 +28,14 @@ namespace AutoDealer.Models
             return Lista;
         }
 
+        public static int GetShowroom2(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Showrooms Lista = new Showrooms();
+            Lista = db.Showrooms.Where(Showroom => Showroom.Id == Id).First();
+            return Lista.Id;
+        }
+
         /// <summary>
         /// Este metodo retorna un modelo, dado un fabricante.
         /// </summary>

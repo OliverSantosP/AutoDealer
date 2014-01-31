@@ -32,6 +32,18 @@ namespace AutoDealer.Models
             ListaColores = db.Colores.Where(x=>x.Status==1).ToList();
             return ListaColores;
         }
+
+        /// <summary>
+        /// Retorna una lista de colores activos usando un Id.
+        /// </summary>
+        /// <returns>Lista de Colores.</returns>
+        public static Colores GetColor(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Colores ListaColores = new Colores();
+            ListaColores = db.Colores.Where(x => x.ID == Id).FirstOrDefault();
+            return ListaColores;
+        }
     
         public int ID { get; set; }
         public string Nombre { get; set; }
