@@ -8,42 +8,45 @@
     string AutomovilId = Request.QueryString["AutomovilId"];
     var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(Int32.Parse(AutomovilId));
     <div class="row">
-        <div class="col-lg-3">
-            <b>Datos del Automovil: </b>@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Automovil.Id)
-            <br />
-            <b>Showroom: </b>@Automovil.Showrooms.Nombre
-            <br />
-            <b>Status: </b>@Automovil.Status1.Nombre
-            <br />
-            <b>Fecha de entrada: </b>@Automovil.FechaEntrada
-            <br />
-            <b>Fecha de salida: </b>@Automovil.FechaSalida
-            <br />
-            
+        <div class="col-lg-1">
         </div>
         <div class="col-lg-3">
-            <b>Suplidor:</b> @AutoDealer.Models.Personas.GetPersonaNombre(@Automovil.Suplidor)
+            <b>Datos del Automovil: </b>@AutoDealer.Models.TiposAutomoviles.NombreTipoAutomovil(Automovil.Id)
             <br />
             <b>Color: </b>@Automovil.Colores.Nombre
             <br />
             <b>Placa: </b>@Automovil.Placa
             <br />
+            
+        </div>
+        <div class="col-lg-3">
             <b>VIN: </b>@Automovil.Vin
             <br />
             <b>Referencia: </b>@Automovil.Referencia
             <br />
+            <b>Status: </b>@Automovil.Status1.Nombre
         </div>
         <div class="col-lg-3">
             <b>Precio de Venta: </b>@String.Format("{0:C}", @Automovil.PrecioVenta)
             <br />
             <b>Precio Minimo: </b>@String.Format("{0:C}",  @Automovil.PrecioMinimo)
             <br />
-            <b>Costo: </b>@String.Format("{0:C}", @Automovil.Costo)
+            <b>Fecha de entrada: </b>@Automovil.FechaEntrada
             <br />
+        </div>
+        <div class="col-lg-1">
         </div>
     </div>
     <br />
-    <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Nuevo Gasto</a>
+    <div class="row">
+        <div class="col-lg-2">
+            <a class="btn btn-info" href="/Gasto/Create?AutomovilId=@AutomovilId">Crear Nuevo Gasto</a>
+        </div>
+        <div class="col-lg-8"></div>
+        <div class="col-lg-2">
+            <b>Showroom: </b>@Automovil.Showrooms.Nombre
+        </div>
+    </div>
 }
 <div class="col-md-12">
     <div class="widget worange">
