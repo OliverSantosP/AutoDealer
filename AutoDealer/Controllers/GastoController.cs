@@ -67,7 +67,7 @@ namespace AutoDealer.Controllers
                 gastos.FechaCreacion = DateTime.Now;
                 db.Gastos.Add(gastos);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("?AutomovilId=" + Request.QueryString["AutomovilId"]);
             }
 
             ViewBag.Tipo = new SelectList(db.TiposDeGastos, "Id", "Nombre", gastos.Tipo);
