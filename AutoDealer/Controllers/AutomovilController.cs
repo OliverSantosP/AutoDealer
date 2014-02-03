@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoDealer.Models;
+using System.Data.Entity.Validation;
 
 namespace AutoDealer.Controllers
 {
@@ -191,15 +192,15 @@ namespace AutoDealer.Controllers
             automoviles.TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(FormData["Fabricantes"], FormData["Modelos"]);
             automoviles.Suplidor = Int32.Parse(FormData["Suplidores"]);
             automoviles.FechaModificacion = System.DateTime.Now;
+            automoviles.FechaCreacion = System.DateTime.Now;
             automoviles.Status = 3;
             if (ModelState.IsValid)
             {
-
-                db.Automoviles.Add(automoviles);
+                db.Entry(automoviles).State = EntityState.Modified;
                 db.SaveChanges();
-                return View(automoviles);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(automoviles);
         }
 
         //

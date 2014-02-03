@@ -26,16 +26,21 @@
                     Empresa<br />
                     <div class="btn-group">
                         <div class="editor-field">
-                            @Html.DropDownListFor(m => m.Showrooms.Empresas, new SelectList(AutoDealer.Models.Empresas.GetEmpresas(), "Id", "Nombre", AutoDealer.Models.Empresas.GetEmpresa(Model.Showrooms.Empresas.Id).FirstOrDefault()))
-                            @Html.ValidationMessageFor(m => m.Showrooms.Empresas)
+                            <select id="Showrooms_Empresas" name="Showrooms_Empresas">
+                                @foreach (var item in AutoDealer.Models.Empresas.GetEmpresas())
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+
+                            </select>
                         </div>
                     </div>
                     <br />
                     <br />
                     Showroom<br />
                     <div class="btn-group">
-                        @Html.DropDownListFor(m => m.Showrooms, new SelectList(AutoDealer.Models.Showrooms.GetShowrooms(Model.Showrooms.Empresas.Id), "Id", "Nombre", AutoDealer.Models.Showrooms.GetShowroom(Model.Showrooms.Id)))
-                        @Html.ValidationMessageFor(m => m.Showrooms)
+                        @Html.DropDownListFor(m => m.Showroom, new SelectList(AutoDealer.Models.Showrooms.GetShowrooms(Model.Showrooms.Empresas.Id), "Id", "Nombre", AutoDealer.Models.Showrooms.GetShowroom(Model.Showrooms.Id)))
+
                     </div>
                     <br />
                     <br />
@@ -185,7 +190,7 @@
                 $.each(data, function (i, modelo) {
                     items += "<option value='" + modelo.Value + "'>" + modelo.Text + "</option>";
                 });
-                $("#Showrooms").html(items);
+                $("#Showroom").html(items);
             });
         });
 
