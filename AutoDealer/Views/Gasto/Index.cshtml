@@ -48,6 +48,22 @@
         </div>
     </div>
 }
+else
+{
+        <div class="row">
+            <div class="col-lg-6">
+                @using (Html.BeginForm())
+{
+                @Html.Label("Desde:")
+                <input type="text" class="dateinput" name="Desde" id="Desde">
+                @Html.Label("Hasta:")
+                <input type="text" class="dateinput" name="Hasta">
+                <input type="submit" value="Filtrar" id="Filtrar" name="Filtrar" class="btn btn-default">
+                }
+            </div>
+        </div>
+}
+
 <div class="col-md-12">
     <div class="widget worange">
         <div class="widget-head">
@@ -123,6 +139,11 @@
                 @String.Format("{0:C}", "$0.00")
             }
             
+        }
+        @if (ViewBag.Total!=0 && ViewBag.Total!=null)
+        {
+            <br/>
+            <b>Total gastos: RD</b>@String.Format("{0:C}", ViewBag.Total)
         }
     </div>
 </div>

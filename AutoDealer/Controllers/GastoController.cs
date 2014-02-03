@@ -16,15 +16,30 @@ namespace AutoDealer.Controllers
         //
         // GET: /Gasto/
 
-        public ActionResult Index(String AutomovilId)
+        public ActionResult Index(string AutomovilId,  FormCollection Form)
         {
             var gastos = db.Gastos.Include(g => g.TiposDeGastos);
             
             if (!String.IsNullOrEmpty(AutomovilId))
             {
                 int AutomovilIdInt =Int32.Parse(AutomovilId);
-                gastos = db.Gastos.Include(g => g.TiposDeGastos).Where(x=>x.Automovil==AutomovilIdInt);
+                gastos = db.Gastos.Include(g => g.TiposDeGastos).Where(x => x.Automovil == AutomovilIdInt);
                 return View(gastos.ToList());
+            }
+            else
+
+            {
+                if (Form.Count>0)
+                {
+                    if (Form["Desde"]!="" && Form["Hasta"]!="")
+                    {
+                        DateTime DesdeDT = DateTime.Parse(Form["Desde"]);
+                        DateTime HastaDT = DateTime.Parse(Form["Hasta"]);
+                        ViewBag.Total = AutoDealer.Models.Gastos.TotalGastos(DesdeDT, HastaDT);
+                        return View(gastos.Where(x => x.FechaCreacion >= DesdeDT && x.FechaCreacion <= HastaDT).ToList());
+                    }  
+                }
+                
             }
 
             return View(gastos.ToList());

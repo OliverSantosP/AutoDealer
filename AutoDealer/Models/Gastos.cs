@@ -44,6 +44,22 @@ namespace AutoDealer.Models
             int Total = (from a in db.Gastos where a.Automovil == AutomovilIdInt select a.Precio).Sum();
             return Total;
         }
+
+        public static int TotalGastos(DateTime Desde, DateTime Hasta)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            int Total = 0;
+            try
+            {
+                Total = (from a in db.Gastos where (a.FechaCreacion >= Desde && a.FechaCreacion <= Hasta) select a.Precio).Sum();
+            }
+            catch (Exception)
+            {
+                Total = 0;
+            }
+            
+            return Total;
+        }
     
         public int Id { get; set; }
         public int Tipo { get; set; }
