@@ -15,24 +15,24 @@
         </div>
         <div class="btn-group">
             <select id="Modelos" name="Modelos" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <option>Modelo</option>
+                <option value="0">Modelo</option>
             </select>
         </div>
         <div class="btn-group">
-            <select id="Year" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <select id="Year" name="Year" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <option value="0">Año</option>
                 @foreach (var item in AutoDealer.Models.Automoviles.GetAllYears())
                 {
-                    <option value="value">@item.Year</option>
+                    <option value="@item.Year">@item.Year</option>
                 }
             </select>
         </div>
         <div class="btn-group">
-            <select id="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <select id="Showrooms" name="Showrooms" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <option value="0">Showroom</option>
                 @foreach (var item in AutoDealer.Models.Showrooms.GetAllShowrooms())
                 {
-                    <option value="value">@item.Nombre</option>
+                    <option value="@item.Id">@item.Nombre</option>
                 }
             </select>
         </div>

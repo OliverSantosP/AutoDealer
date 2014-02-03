@@ -35,11 +35,16 @@ namespace AutoDealer.Models
         {
             int TipoAutomovil;
             int FabricanteInt = Int32.Parse(Fabricante);
-            int ModeloInt = Int32.Parse(Modelo);
+             
             AutoDealerEntities db = new AutoDealerEntities();
             List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
             ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Fabricante == FabricanteInt).ToList();
-            ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == ModeloInt).ToList();
+            
+            if (Modelo!="Modelo")
+            {
+                int ModeloInt = Int32.Parse(Modelo);
+                ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == ModeloInt).ToList();
+            }
             return TipoAutomovil = ListaTiposAutomoviles.First().Id;
         }
 

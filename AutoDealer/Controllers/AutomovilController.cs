@@ -29,8 +29,28 @@ namespace AutoDealer.Controllers
             {
                 string Fabricante = FormData["Fabricantes"];
                 string Modelo = FormData["Modelos"];
-                int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
-                return View(db.Automoviles.Where(x => x.TipoAutomovil == TipoAutomovil).ToList());
+                string Showroom = FormData["Showrooms"];
+                string Year = FormData["Year"];
+
+                var Results = db.Automoviles.ToList();
+
+                if (Fabricante!="Fabricante")
+                {
+                    int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
+                    Results = Results.Where(x => x.TipoAutomovil == TipoAutomovil).ToList();
+                }
+                if (Showroom !="0")
+                {
+                    int ShowroomId = Int32.Parse(Showroom);
+                    Results = Results.Where(x => x.Showroom == ShowroomId).ToList();
+                }
+                if (Year != "0")
+                {
+                    Year = "01/01/" + Year;
+                    DateTime YearId = DateTime.Parse(Year);
+                    Results = Results.Where(x => x.Year.Year == YearId.Year).ToList();
+                }
+                return View(Results);
             }
             return View(db.Automoviles.Where(x => x.Status == 3).OrderByDescending(x => x.FechaCreacion).ToList());
         }
