@@ -8,7 +8,7 @@
     <a class="btn btn-info" href="/Automovil/Create">Crear Automovil</a>
 
     <!--Options List-->
-    @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "Form", id = "Form" }))
+    @using (Html.BeginForm())
     {
         <div class="btn-group">
             <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></select>
@@ -196,7 +196,6 @@
             });
 
             $("#Fabricantes").change(function () {
-                //$("#Form").submit();
                 $.getJSON("/Automovil/ModelosList/" + $("#Fabricantes > option:selected").attr("value"), function (data) {
                     var items = "<option>Modelo</option>";
                     $.each(data, function (i, modelo) {
