@@ -199,10 +199,9 @@
     <Compile Include="Controllers\AutomovilController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\GastoController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\ShowroomController.cs" />
-    <Compile Include="Controllers\TiposGastoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -457,9 +456,6 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -489,6 +485,11 @@
     <Content Include="Views\Factura\Create.cshtml" />
     <Content Include="Views\Factura\Edit.cshtml" />
     <Content Include="Views\Factura\Delete.cshtml" />
+    <Content Include="Views\Liquidacion\Index.cshtml" />
+    <Content Include="Views\Liquidacion\Details.cshtml" />
+    <Content Include="Views\Liquidacion\Create.cshtml" />
+    <Content Include="Views\Liquidacion\Edit.cshtml" />
+    <Content Include="Views\Liquidacion\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

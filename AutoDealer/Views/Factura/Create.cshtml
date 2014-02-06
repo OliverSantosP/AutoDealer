@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="editor-label">
-                            @Html.Label("Cliente")
+                            @Html.Label("Cliente:")
                         </div>
                         <div class="editor-field">
                             <select>
@@ -34,12 +34,12 @@
                             </select>
                         </div>
                         <br />
-                        @Html.Label("Direccion")
+                        @Html.Label("Direccion:")
                     </div>
                     <div class="col-lg-6">
 
                         <div class="editor-label">
-                            @Html.Label("Vendedor")
+                            @Html.Label("Vendedor:")
                         </div>
                         <div class="editor-field">
                             <select>
@@ -54,7 +54,7 @@
                     <div class="col-lg-4">
                         <div class="right">
                             <div class="editor-label">
-                                @Html.LabelFor(model => model.Empresa, "Empresas")
+                                @Html.Label("Empresa:")
                             </div>
                             <div class="editor-field">
                                 @Html.DropDownList("Empresa", String.Empty)
@@ -78,17 +78,17 @@
                     int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
                     var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
                     
-                    <table class="table-bordered">
+                    <table>
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.Label("Id")
+                                    <b>Id</b>
                                 </th>
                                 <th>
-                                    @Html.Label("Descripcion")
+                                    <b>Descripcion</b>
                                 </th>
                                 <th>
-                                    @Html.Label("Precio")
+                                    <b>Precio</b>
                                 </th>
                             </tr>
                         </thead>
@@ -96,6 +96,7 @@
                             <tr>
                                 <td>@Automovil.Id</td>
                                 <td>@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</td>
+                                
                                 <td>RD @String.Format("{0:C}", @Automovil.PrecioVenta)</td>
                             </tr>
                         </tbody>
