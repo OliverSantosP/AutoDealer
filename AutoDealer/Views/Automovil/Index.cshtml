@@ -107,13 +107,23 @@
                                 </td>
 
                                 <td>
-                                    RD @String.Format("{0:C}", @item.PrecioVenta)
+                                    @if (item.PrecioVenta > 0)
+                                    {
+                                        @String.Format("{0:C}", item.PrecioVenta)
+                                    }
+
                                 </td>
                                 <td>
-                                    RD @String.Format("{0:C}", @item.PrecioMinimo)
+                                    @if (item.PrecioMinimo > 0)
+                                    {
+                                        @String.Format("{0:C}", item.PrecioMinimo);
+                                    }
                                 </td>
                                 <td>
-                                    RD @String.Format("{0:C}", @item.Costo)
+                                    @if (item.Costo > 0)
+                                    {
+                                        @String.Format("{0:C}", item.Costo);
+                                    }
                                 </td>
                                 <td>
                                     @item.Colores.Nombre
@@ -182,7 +192,7 @@
                     items += "<option value='" + fabricante.Value + "'>" + fabricante.Text + "</option>";
                 });
                 $("#Fabricantes").html(items);
-                
+
             });
 
             $("#Fabricantes").change(function () {
