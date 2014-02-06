@@ -37,6 +37,15 @@ namespace AutoDealer.Models
             return Existe = false;
         }
 
+        public static List<Gastos> GetGastosOf(string AutomovilId)
+        {
+            int AutomovilIdInt = Int32.Parse(AutomovilId);
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Gastos> ListaGastos = new List<Gastos>();
+            ListaGastos = (from a in db.Gastos where a.Automovil == AutomovilIdInt select a).ToList();
+            return ListaGastos;
+        }
+
         public static int TotalGastos(string AutomovilId)
         {
             int AutomovilIdInt = Int32.Parse(AutomovilId);

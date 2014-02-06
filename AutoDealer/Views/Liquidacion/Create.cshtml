@@ -1,98 +1,155 @@
 ﻿@model AutoDealer.Models.Liquidaciones
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "AutoDealer - Crear Liquidacion";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Liquidaciones</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Detalle)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Detalle)
-            @Html.ValidationMessageFor(model => model.Detalle)
+    <div class="widget wblue">
+        <div class="widget-head">
+            <div class="pull-left">Liquidaciones</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.Label("Suplidor:")
+                        </div>
+                        <div class="editor-field">
+                            <select>
+                                @foreach (var item in @AutoDealer.Models.Personas.GetSuplidores())
+                                {
+                                    <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaModificacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaModificacion)
-            @Html.ValidationMessageFor(model => model.FechaModificacion)
-        </div>
+                        <div class="editor-label">
+                            @Html.Label("Precio de Venta:")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.MontoVenta)
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PagadoCon)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.PagadoCon)
+                            @Html.ValidationMessageFor(model => model.PagadoCon)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <hr />
+                    @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+                    {
+                        string AutomovilId = Request.QueryString["AutomovilId"];
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MontoVenta)
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="padd"><b>Id</b></div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Descripcion</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Precio</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Pagado a</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Fecha Creacion</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd"><b>Fecha Modificacion</b></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                                {
+                                    <tr>
+                                        <td><div class="padd">@item.Id</div></td>
+                                        <td><div class="padd">@item.TiposDeGastos.Nombre</div></td>
+                                        <td><div class="padd">@item.Precio</div></td>
+                                        <td><div class="padd">@item.PagadoA</div></td>
+                                        <td><div class="padd">@item.FechaCreacion</div></td>
+                                        <td><div class="padd">@item.FechaModificacion</div></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    <br />
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="editor-label">
+                                Detalles de Venta:
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.Detalle)
+                                @Html.ValidationMessageFor(model => model.Detalle)
+                            </div>
+                        </div>
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <div class="right">
+                                <br />
+                                <b>Total:</b>
+                                <br />
+                                <div class="editor-field">
+                                    RD $100.00
+                                </div>
+                                <br />
+                                <b>Comision:</b>
+                                <br />
+                                RD $100.00
+                                <br />
+                                <br />
+                                <b>Total a pagar:</b>
+                                <br />
+                                RD $100.00
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MontoVenta)
-            @Html.ValidationMessageFor(model => model.MontoVenta)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Suplidor, "Personas1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Suplidor", String.Empty)
-            @Html.ValidationMessageFor(model => model.Suplidor)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Comprador, "Personas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Comprador", String.Empty)
-            @Html.ValidationMessageFor(model => model.Comprador)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PagadoCon)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PagadoCon)
-            @Html.ValidationMessageFor(model => model.PagadoCon)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Factura, "Facturas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Factura", String.Empty)
-            @Html.ValidationMessageFor(model => model.Factura)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gastos, "Gastos1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Gastos", String.Empty)
-            @Html.ValidationMessageFor(model => model.Gastos)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a lista completa", "Index")
 </div>
 
 @section Scripts {
