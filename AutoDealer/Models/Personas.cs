@@ -59,6 +59,42 @@ namespace AutoDealer.Models
             return ListaPersonas;
         }
 
+        public static List<Personas> GetVendedores()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Personas> ListaPersonas = new List<Personas>();
+
+
+            List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
+            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == 1).ToList();
+
+            foreach (var item in ListaPersonasRoles)
+            {
+                Personas Personita = new Personas();
+                Personita = db.Personas.Where(x => x.Id == item.Persona).First();
+                ListaPersonas.Add(Personita);
+            }
+            return ListaPersonas;
+        }
+
+        public static List<Personas> GetCompradores()
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Personas> ListaPersonas = new List<Personas>();
+
+
+            List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
+            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == 2).ToList();
+
+            foreach (var item in ListaPersonasRoles)
+            {
+                Personas Personita = new Personas();
+                Personita = db.Personas.Where(x => x.Id == item.Persona).First();
+                ListaPersonas.Add(Personita);
+            }
+            return ListaPersonas;
+        }
+
         public static string GetPersonaNombre(int Id)
         {
             AutoDealerEntities db = new AutoDealerEntities();

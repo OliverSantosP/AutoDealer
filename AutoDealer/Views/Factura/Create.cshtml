@@ -4,77 +4,132 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Facturas</legend>
+    <div class="widget wred">
+        <div class="widget-head">
+            <div class="pull-left">Crear Factura</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.Label("Cliente")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownListFor(m => m.Personas, new SelectList(AutoDealer.Models.Personas.GetCompradores(), "Id", "Nombre", AutoDealer.Models.Personas.GetCompradores().First()))
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaModificacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaModificacion)
-            @Html.ValidationMessageFor(model => model.FechaModificacion)
-        </div>
+                        </div>
+                        <br />
+                        @Html.Label("Direccion")
+                    </div>
+                    <div class="col-lg-6">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Vendedor, "Personas1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Vendedor", String.Empty)
-            @Html.ValidationMessageFor(model => model.Vendedor)
-        </div>
+                        <div class="editor-label">
+                            @Html.Label("Vendedor")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownListFor(m => m.Personas, new SelectList(AutoDealer.Models.Personas.GetVendedores(), "Id", "Nombre", AutoDealer.Models.Personas.GetVendedores().First()))
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Comprador, "Personas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Comprador", String.Empty)
-            @Html.ValidationMessageFor(model => model.Comprador)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NCF)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NCF)
-            @Html.ValidationMessageFor(model => model.NCF)
-        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.Empresa, "Empresas")
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("Empresa", String.Empty)
+                                @Html.ValidationMessageFor(model => model.Empresa)
+                            </div>
+                            <br />
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.NCF)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.NCF)
+                                @Html.ValidationMessageFor(model => model.NCF)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <hr />
+                @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+                {
+                    int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
+                    var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
+                    
+                    <table class="table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.Label("Id")
+                                </th>
+                                <th>
+                                    @Html.Label("Descripcion")
+                                </th>
+                                <th>
+                                    @Html.Label("Precio")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Automovil.Id</td>
+                                <td>@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</td>
+                                <td>RD @String.Format("{0:C}", @Automovil.PrecioVenta)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                <br />
+                <hr />
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            @Html.Label("Total:")
+                            <br />
+                            <br />
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CostoTraspaso)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CostoTraspaso)
+                                @Html.ValidationMessageFor(model => model.CostoTraspaso)
+                            </div>
+                            <br/>
+                            @Html.Label("Descuento:")
+                            <br/>
+                            @Html.TextBox("Descuento")
+                            <br />
+                            <br />
+                            @Html.Label("Total General:")
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <p>
+                    <input type="submit" value="Crear" />
+                </p>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CostoTraspaso)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CostoTraspaso)
-            @Html.ValidationMessageFor(model => model.CostoTraspaso)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Empresa, "Empresas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Empresa", String.Empty)
-            @Html.ValidationMessageFor(model => model.Empresa)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

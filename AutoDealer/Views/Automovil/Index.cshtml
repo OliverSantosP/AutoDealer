@@ -107,13 +107,13 @@
                                 </td>
 
                                 <td>
-                                    @item.PrecioVenta
+                                    RD @String.Format("{0:C}", @item.PrecioVenta)
                                 </td>
                                 <td>
-                                    @item.PrecioMinimo
+                                    RD @String.Format("{0:C}", @item.PrecioMinimo)
                                 </td>
                                 <td>
-                                    @item.Costo
+                                    RD @String.Format("{0:C}", @item.Costo)
                                 </td>
                                 <td>
                                     @item.Colores.Nombre
@@ -124,7 +124,7 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="/Automovil/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
-                                        <a href="Factura/Create" class="btn btn-sm btn-default">Facturar</a>
+                                        <a href="/Factura/Create?AutomovilId=@item.Id" class="btn btn-sm btn-default">Facturar</a>
                                         <a href="/Automovil/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i></a>
                                     </div>
                             </tr>

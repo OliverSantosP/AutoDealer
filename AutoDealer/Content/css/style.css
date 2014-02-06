@@ -17,6 +17,12 @@ form *{
 	font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
+.right{
+ position:relative;
+    float:right;
+    padding: -70px;
+}
+
 input, textarea{
 	background-image: none !important;
 	border: 1px solid #ccc !important;
