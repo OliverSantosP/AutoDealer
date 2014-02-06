@@ -43,30 +43,22 @@ namespace AutoDealer.Models
 
         public static List<Personas> GetSuplidores()
         {
-            AutoDealerEntities db = new AutoDealerEntities();
-            List<Personas> ListaPersonas = new List<Personas>();
-
-
-            List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
-            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == 3).ToList();
-
-            foreach (var item in ListaPersonasRoles)
-            {
-                Personas Personita = new Personas();
-                Personita = db.Personas.Where(x => x.Id == item.Persona).First();
-                ListaPersonas.Add(Personita);
-            }
-            return ListaPersonas;
+            return GetPersonasWithRole(3);
         }
 
         public static List<Personas> GetVendedores()
         {
+            return GetPersonasWithRole(1);
+        }
+
+        public static List<Personas> GetPersonasWithRole(int RoleId)
+        {
             AutoDealerEntities db = new AutoDealerEntities();
             List<Personas> ListaPersonas = new List<Personas>();
 
 
             List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
-            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == 1).ToList();
+            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == RoleId).ToList();
 
             foreach (var item in ListaPersonasRoles)
             {
@@ -76,23 +68,9 @@ namespace AutoDealer.Models
             }
             return ListaPersonas;
         }
-
         public static List<Personas> GetCompradores()
         {
-            AutoDealerEntities db = new AutoDealerEntities();
-            List<Personas> ListaPersonas = new List<Personas>();
-
-
-            List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
-            ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == 2).ToList();
-
-            foreach (var item in ListaPersonasRoles)
-            {
-                Personas Personita = new Personas();
-                Personita = db.Personas.Where(x => x.Id == item.Persona).First();
-                ListaPersonas.Add(Personita);
-            }
-            return ListaPersonas;
+            return GetPersonasWithRole(2);
         }
 
         public static string GetPersonaNombre(int Id)

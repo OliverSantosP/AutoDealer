@@ -26,9 +26,12 @@
                             @Html.Label("Cliente")
                         </div>
                         <div class="editor-field">
-                            @Html.DropDownListFor(m => m.Personas, new SelectList(AutoDealer.Models.Personas.GetCompradores(), "Id", "Nombre", AutoDealer.Models.Personas.GetCompradores().First()))
-
-
+                            <select>
+                                @foreach (var item in @AutoDealer.Models.Personas.GetCompradores())
+                                {
+                                    <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                }
+                            </select>
                         </div>
                         <br />
                         @Html.Label("Direccion")
