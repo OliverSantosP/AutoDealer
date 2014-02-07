@@ -1,13 +1,14 @@
 ﻿@model AutoDealer.Models.Facturas
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "AutoDealer - Crear Factura";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+
 
     <div class="widget wred">
         <div class="widget-head">
@@ -26,29 +27,25 @@
                             @Html.Label("Cliente:")
                         </div>
                         <div class="editor-field">
-                            <select>
+                            <select id="Compradores" name="Compradores">
                                 @foreach (var item in @AutoDealer.Models.Personas.GetCompradores())
                                 {
                                     <option value="@item.Id">@item.Nombre @item.Apellido</option>
                                 }
                             </select>
                         </div>
-                        <br />
-                        @Html.Label("Direccion:")
                     </div>
                     <div class="col-lg-6">
-
                         <div class="editor-label">
                             @Html.Label("Vendedor:")
                         </div>
                         <div class="editor-field">
-                            <select>
+                            <select id="Vendedores" name="Vendedores">
                                 @foreach (var item in @AutoDealer.Models.Personas.GetVendedores())
                                 {
-                                    <option value="@item.Id">@item.Nombre @item.Apellido</option>         
+                                    <option value="@item.Id">@item.Nombre @item.Apellido</option>
                                 }
                             </select>
-
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -71,33 +68,32 @@
                         </div>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <hr />
                 @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
                 {
                     int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
                     var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
-                    
+
                     <table>
                         <thead>
                             <tr>
                                 <th>
-                                    <b>Id</b>
+                                    <div class="padd"><b>Id</b></div>
                                 </th>
                                 <th>
-                                    <b>Descripcion</b>
+                                    <div class="padd"><b>Descripcion</b></div>
                                 </th>
                                 <th>
-                                    <b>Precio</b>
+                                    <div class="padd"><b>Precio</b></div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>@Automovil.Id</td>
-                                <td>@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</td>
-                                
-                                <td>RD @String.Format("{0:C}", @Automovil.PrecioVenta)</td>
+                                <td><div class="padd">@Automovil.Id</div></td>
+                                <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
+                                <td><div class="padd">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
                             </tr>
                         </tbody>
                     </table>
@@ -119,9 +115,9 @@
                                 @Html.EditorFor(model => model.CostoTraspaso)
                                 @Html.ValidationMessageFor(model => model.CostoTraspaso)
                             </div>
-                            <br/>
+                            <br />
                             @Html.Label("Descuento:")
-                            <br/>
+                            <br />
                             @Html.TextBox("Descuento")
                             <br />
                             <br />

@@ -56,7 +56,6 @@ namespace AutoDealer.Models
             AutoDealerEntities db = new AutoDealerEntities();
             List<Personas> ListaPersonas = new List<Personas>();
 
-
             List<PersonasRoles> ListaPersonasRoles = new List<PersonasRoles>();
             ListaPersonasRoles = db.PersonasRoles.Where(x => x.Rol == RoleId).ToList();
 
@@ -68,6 +67,7 @@ namespace AutoDealer.Models
             }
             return ListaPersonas;
         }
+
         public static List<Personas> GetCompradores()
         {
             return GetPersonasWithRole(2);
@@ -81,6 +81,22 @@ namespace AutoDealer.Models
             return Persona.Nombre + " " + Persona.Apellido;
         }
 
+        public static Personas GetPersona(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Personas Persona = new Personas();
+            Persona = db.Personas.Where(x => x.Id == Id).First();
+            return Persona;
+        }
+
+        public static Personas GetPersona(string Id)
+        {
+            Int32 IntId = Int32.Parse(Id);
+            AutoDealerEntities db = new AutoDealerEntities();
+            Personas Persona = new Personas();
+            Persona = db.Personas.Where(x => x.Id == IntId).First();
+            return Persona;
+        }
 
     }
 }

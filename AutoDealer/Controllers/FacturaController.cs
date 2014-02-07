@@ -51,8 +51,18 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Facturas facturas)
+        public ActionResult Create(Facturas facturas, FormCollection FormData)
         {
+            if (FormData.Keys.Count > 0)
+            {
+                int Comprador = Int32.Parse(FormData["Compradores"]);
+                int Vendedor = Int32.Parse(FormData["Vendedores"]);
+                int Automovil = Int32.Parse(Request.QueryString["AutomovilId"]);
+                facturas.Comprador = Comprador;
+                facturas.Vendedor = Vendedor;
+            }
+            facturas.FechaCreacion = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.Facturas.Add(facturas);

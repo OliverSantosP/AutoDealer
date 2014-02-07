@@ -215,5 +215,11 @@ namespace AutoDealer.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult GetAddress(string Id)
+        {
+            string Address = Personas.GetPersona(Id).Direccion;
+            return Json(new { Address }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
