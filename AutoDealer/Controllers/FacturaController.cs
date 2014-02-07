@@ -57,9 +57,10 @@ namespace AutoDealer.Controllers
             {
                 int Comprador = Int32.Parse(FormData["Compradores"]);
                 int Vendedor = Int32.Parse(FormData["Vendedores"]);
-                int Automovil = Int32.Parse(Request.QueryString["AutomovilId"]);
+                
                 facturas.Comprador = Comprador;
                 facturas.Vendedor = Vendedor;
+                
             }
             facturas.FechaCreacion = DateTime.Now;
 
@@ -67,6 +68,14 @@ namespace AutoDealer.Controllers
             {
                 db.Facturas.Add(facturas);
                 db.SaveChanges();
+
+                int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
+                Automoviles Automovil = new Automoviles();
+                Automovil = db.Automoviles.Find(AutomovilId);
+                Automovil.Factura = facturas.Id;
+                db.Entry(Automovil).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
