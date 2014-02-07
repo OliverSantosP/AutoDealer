@@ -11,7 +11,8 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Facturas
     {
         public Facturas()
@@ -19,6 +20,23 @@ namespace AutoDealer.Models
             this.Automoviles = new HashSet<Automoviles>();
             this.FacturasDetalles = new HashSet<FacturasDetalles>();
             this.Liquidaciones = new HashSet<Liquidaciones>();
+        }
+
+        public static Facturas GetFactura(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Facturas Factura = new Facturas();
+            Factura = db.Facturas.Where(x => x.Id == Id).FirstOrDefault();
+            return Factura;
+        }
+
+        public static Facturas GetFactura(string Id)
+        {
+            int IdInt = Int32.Parse(Id);
+            AutoDealerEntities db = new AutoDealerEntities();
+            Facturas Factura = new Facturas();
+            Factura = db.Facturas.Where(x => x.Id == IdInt).FirstOrDefault();
+            return Factura;
         }
     
         public int Id { get; set; }

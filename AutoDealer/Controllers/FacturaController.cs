@@ -19,7 +19,7 @@ namespace AutoDealer.Controllers
         public ActionResult Index()
         {
             var facturas = db.Facturas.Include(f => f.Empresas).Include(f => f.Personas).Include(f => f.Personas1);
-            return View(facturas.ToList());
+            return View(facturas.OrderByDescending(x=>x.FechaModificacion).ToList());
         }
 
         //
