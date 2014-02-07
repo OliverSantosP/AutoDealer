@@ -69,9 +69,11 @@
                                     @Html.DisplayFor(modelItem => item.Empresas.Nombre)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    <div class="btn-group">
+                                        <a href="/Factura/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
+                                        <a href="/Factura/Imprimir?FacturaId=@item.Id" class="btn btn-sm btn-default">Imprimir</a>
+                                        <a href="/Automovil/Delete/@item.Id" class="btn btn-sm btn-default"><i class="icon-remove"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         }
