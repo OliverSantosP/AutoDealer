@@ -34,12 +34,12 @@ namespace AutoDealer.Controllers
 
                 var Results = db.Automoviles.ToList();
 
-                if (Fabricante!="Fabricante")
+                if (Fabricante != "Fabricante")
                 {
                     int TipoAutomovil = TiposAutomoviles.GetTipoAutomovil(Fabricante, Modelo);
                     Results = Results.Where(x => x.TipoAutomovil == TipoAutomovil).ToList();
                 }
-                if (Showroom !="0")
+                if (Showroom != "0")
                 {
                     int ShowroomId = Int32.Parse(Showroom);
                     Results = Results.Where(x => x.Showroom == ShowroomId).ToList();
@@ -138,6 +138,24 @@ namespace AutoDealer.Controllers
             }
 
             return View(modelos);
+        }
+
+        public ActionResult AutomovilData(int Id)
+        {
+            Automoviles Automovil = Automoviles.GetAutomovil(Id);
+
+            if (HttpContext.Request.IsAjaxRequest())
+            {
+                return Json(new
+                {
+                    Id = Automovil.Id,
+                    Nombre = TiposAutomoviles.NombreTipoAutomovil(Id),
+                    Year = Automovil.Year.Year,
+                    Color = Automovil.Colores.Nombre,
+                    Precio = Automovil.PrecioVenta,
+                },JsonRequestBehavior.AllowGet);
+            }
+            return View(Automovil);
         }
 
         //

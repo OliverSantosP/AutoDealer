@@ -83,5 +83,6 @@ namespace AutoDealer.Models
             Automoviles = db.Automoviles.Where(x => x.Year == Year2).ToList();
             return Automoviles;
         }
+
     }
 }
