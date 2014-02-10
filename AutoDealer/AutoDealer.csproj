@@ -324,6 +324,7 @@
     <Content Include="Content\js\html5shim.js" />
     <Content Include="Content\js\html5shiv.js" />
     <Content Include="Content\js\jquery-ui-1.10.2.custom.min.js" />
+    <Content Include="Content\js\jquery.calculation.js" />
     <Content Include="Content\js\jquery.cleditor.min.js" />
     <Content Include="Content\js\jquery.flot.js" />
     <Content Include="Content\js\jquery.flot.pie.js" />

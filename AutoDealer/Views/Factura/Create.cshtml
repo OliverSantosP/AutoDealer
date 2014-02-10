@@ -93,7 +93,8 @@
                             <tr>
                                 <td><div class="padd">@Automovil.Id</div></td>
                                 <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
-                                <td><div class="padd">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
+                                <td><div class="padd" id="sum">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -107,7 +108,7 @@
                         <div class="right">
                             @Html.Label("Total:")
                             <br />
-                            <br />
+                            <h5 id="subtotal"></h5>
                             <div class="editor-label">
                                 @Html.LabelFor(model => model.CostoTraspaso)
                             </div>
@@ -118,18 +119,18 @@
                             <br />
                             @Html.Label("Descuento:")
                             <br />
-                            @Html.TextBox("Descuento")
+                            <input type="text" id="disc" name="disc" />
+
                             <br />
                             <br />
                             @Html.Label("Total General:")
+                            <h4 id="total_item"></h4>
                         </div>
                     </div>
                 </div>
-                <hr />
                 <p>
                     <input type="submit" value="Crear" />
                 </p>
-
             </div>
         </div>
     </div>
@@ -140,4 +141,68 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+        $(document).ready(
+            function () {
+                $("input[id^=disc]").bind("keyup", TotalGeneral);
+                $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
+                // run the calculation function now
+                TotalGeneral();            });
+
+
+        function TotalGeneral() {
+            $("[id^=total_item]").calc(
+            // the equation to use for the calculation
+            "Sum + CostoTraspaso - Discount",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("div[id^=sum]"),
+                CostoTraspaso: $("input[id^=CostoTraspaso]"),
+                Discount: $("[id^=disc]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "$" + s.toFixed(2);
+            },
+            // define the finish callback, this runs after the calculation has been complete
+            function ($this) {
+                // sum the total of the $("[id^=total_item]") selector
+                var sum = $this.sum();
+
+                $("#totalSum").text(
+                    // round the results to 2 digits
+                    "$" + sum.toFixed(2)
+                );
+            }
+        )
+
+            $("[id^=subtotal]").calc(
+            // the equation to use for the calculation
+            "Sum",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("div[id^=sum]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "$" + s.toFixed(2);
+            },
+            // define the finish callback, this runs after the calculation has been complete
+            function ($this) {
+                // sum the total of the $("[id^=total_item]") selector
+                var sum = $this.sum();
+
+                $("#totalSum").text(
+                    // round the results to 2 digits
+                    "$" + sum.toFixed(2)
+                );
+            }
+        )
+        };
+    </script>
 }
