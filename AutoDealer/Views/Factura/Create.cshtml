@@ -75,7 +75,7 @@
     int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
     var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
 
-    <table id="VehicleTable" class="order-list">
+    <table id="AutomovilTable" class="order-list">
         <thead>
             <tr>
                 <th>
@@ -123,13 +123,21 @@
                                 <h4 class="modal-title">Agregar Automovil</h4>
                             </div>
                             <div class="modal-body">
-                                    <p>Digite el Id del Automovil que busca.</p>
+                                <p>Digite el Id del Automovil que busca.</p>
                                 <input type="text" name="IdAutomovil" id="IdAutomovil" value="" class="form-control" />
                                 <button type="button" class="btn btn-primary" id="BuscarAutomovil">Buscar</button>
-                               </div>
+                                <br />
+                                <br />
+                                <div class="padd">
+                                    <table id="ModalTable">
+
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                <button type="button" class="btn btn-primary">Aceptar</button>
+                                <button type="button" class="btn btn-primary" id="Aceptar" name="Aceptar" data-dismiss="modal">Aceptar</button>
                             </div>
                         </div>
                     </div>
@@ -246,7 +254,7 @@
 
         $("#addrow").on("click", function () {
 
-            counter = $('#VehicleTable tr').length - 2;
+            counter = $('#AutomovilTable tr').length - 2;
 
             var newRow = $("<tr>");
             var cols = "";
@@ -275,16 +283,31 @@
 
     $("#BuscarAutomovil").click(function () {
         $.getJSON("/Automovil/AutomovilData/" + $("#IdAutomovil").val(), function (data) {
-            
-                var row='<tr><td><div class="padd">'+data.Id+'</div></td>'+
+            if (data.length == 0) {
+                console.log("NO DATA!")
+            }
+
+            var row = '<thead><tr><th>' +
+                '<div class="padd"><b>Id</b></div></th>' +
+                '<th><div class="padd"><b>Descripcion</b></div></th>'+
+                '<th><div class="padd"><b>Precio</b></div></th>'+
+                '<th></th></tr></thead>'+
+                '<tr><td><div class="padd">'+data.Id+'</div></td>'+
                     '<td><div class="padd">'+ data.Nombre +' '+ data.Year +' ' + data.Color +'</div></td>'+
-                    '<td><div class="padd" id="sum">'+data.Precio+'</div></td></tr>'
-                $('#VehicleTable > tbody').append(row);
+                    '<td><div class="padd" id="sum">' + data.Precio + '</div></td></tr>'
+            $("#ModalTable").find("th").remove();
+            $("#ModalTable").find("tr:gt(0)").remove();
+                $('#ModalTable > tbody').append(row);
                 TotalGeneral();
-                
         });
-        
     })
+
+        
+    $("#Aceptar").click(function () {
+        var row = $("#ModalTable").find("tr:gt(0)").html();
+        $('#AutomovilTable tbody').append('<tr>' + row + '</tr>');
+        $('#myModal').hide();
+    });
 
     </script>
 }
