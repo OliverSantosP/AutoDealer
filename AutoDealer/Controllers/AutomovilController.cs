@@ -146,21 +146,16 @@ namespace AutoDealer.Controllers
 
             if (HttpContext.Request.IsAjaxRequest())
             {
-                if (Automoviles.GetAutomovil(Id) != null)
+                return Json(new
                 {
-                    return Json(new
-                    {
-                        Id = Automovil.Id,
-                        Nombre = TiposAutomoviles.NombreTipoAutomovil(Id),
-                        Year = Automovil.Year.Year,
-                        Color = Automovil.Colores.Nombre,
-                        Precio = Automovil.PrecioVenta,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-
+                    Id = Automovil.Id,
+                    Nombre = TiposAutomoviles.NombreTipoAutomovil(Id),
+                    Year = Automovil.Year.Year,
+                    Color = Automovil.Colores.Nombre,
+                    Precio = Automovil.PrecioVenta,
+                },JsonRequestBehavior.AllowGet);
             }
-            return Json(new { });
-
+            return View(Automovil);
         }
 
         //
