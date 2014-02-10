@@ -184,13 +184,11 @@
         $(document).ready(
             function () {
                 $("input[id^=disc]").bind("keyup", TotalGeneral);
+                $("input[id^=sum]").bind("keyup", TotalGeneral);
                 $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
-                // run the calculation function now
                 TotalGeneral();
             });
-
-
-
+        
         function TotalGeneral() {
             $("[id^=total_item]").calc(
             // the equation to use for the calculation
@@ -242,9 +240,7 @@
             }
         )
         };
-    </script>
 
-    <script type="text/javascript">
     $(document).ready(function () {
         var counter = 0;
 
@@ -285,7 +281,10 @@
                     '<td><div class="padd" id="sum">'+data.Precio+'</div></td></tr>'
                 $('#VehicleTable > tbody').append(row);
                 TotalGeneral();
-            });
+                
         });
+        
+    })
+
     </script>
 }
