@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                <button type="button" class="btn btn-default" id="Cancelar" name="Cancelar" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                 <button type="button" class="btn btn-primary" id="Aceptar" name="Aceptar" data-dismiss="modal">Aceptar</button>
                             </div>
                         </div>
@@ -207,9 +207,21 @@
                 $("input[id^=disc]").bind("keyup", TotalGeneral);
                 $("input[id^=sum]").bind("keyup", TotalGeneral);
                 $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
+                colSum();
                 TotalGeneral();
 
             });
+
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#subtotal').html("RD " + accounting.formatMoney(sum));
+        }
+
 
         function TotalGeneral() {
             $("[id^=total_item]").calc(
@@ -217,7 +229,7 @@
             "Sum + CostoTraspaso - Discount",
             // define the variables used in the equation, these can be a jQuery object
             {
-                Sum: $("div[id^=sum]"),
+                Sum: $("h5[id^=subtotal]"),
                 CostoTraspaso: $("input[id^=CostoTraspaso]"),
                 Discount: $("[id^=disc]")
             },
@@ -225,92 +237,72 @@
             function (s) {
                 // return the number as a dollar amount
                 return "RD " + accounting.formatMoney(s);
-            },
-            // define the finish callback, this runs after the calculation has been complete
-            function ($this) {
-                // sum the total of the $("[id^=total_item]") selector
-                var sum = $this.sum();
-
-                $("#totalSum").text(
-                    // round the results to 2 digits
-                    "RD " + accounting.formatMoney(sum)
-                );
             }
-        )
+        );
 
-            $("[id^=subtotal]").calc(
-            // the equation to use for the calculation
-            "Sum",
-            // define the variables used in the equation, these can be a jQuery object
-            {
-                Sum: $("div[id^=sum]")
-            },
-            // define the formatting callback, the results of the calculation are passed to this function
-            function (s) {
-                // return the number as a dollar amount
-                return "RD " + accounting.formatMoney(s)
-            },
-            // define the finish callback, this runs after the calculation has been complete
-            function ($this) {
-                // sum the total of the $("[id^=total_item]") selector
-                var sum = $this.sum();
 
-                $("#totalSum").text(
-                    // round the results to 2 digits
-                    "RD " + accounting.formatMoney(sum)
-                );
-            }
-        )
+
         };
 
         $("#Agregar").click(function () {
-            $("#ModalTable").hide()
+            $("#ModalTable").hide();
+            $("#Aceptar").hide();
         });
 
         $("#BuscarAutomovil").click(function () {
-
+           
             $.getJSON("/Automovil/AutomovilData/" + $("#IdAutomovil").val(), function (data) {
-                if (data.length == 0) {
-                    console.log("NO DATA!")
-                }
                 //Formateando Precio
                 var Number = parseInt(data.Precio);
-                var Price = accounting.formatMoney(Number);
-                var row = '<tr><td><div class="padd">' + data.Id + '</div></td>' +
-                        '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
-                        '<td><div class="padd" id="sum"> RD ' + Price + '</div></td>';
+                if ($(data.Id.text).is(':empty')) {
+                    var row = "<tr><td>No existe un Automovil con este Id.</td></tr>";
+                    $("#ModalTable").find("tr:gt(0)").remove();
+                    $('#ModalTable > tbody').append(row);
+                    $("#ModalTable").show();
 
-                $("#ModalTable").find("tr:gt(0)").remove();
-                $('#ModalTable > tbody').append(row);
-                $("#ModalTable").show();
-
-        })
-
-        $("#AutomovilTable").on("click", ".ibtnDel", function (event) {
-            $(this).closest("tr").remove();
-        });
-
-        $("#Aceptar").click(function () {
-            var row = $("#ModalTable").find("tr:gt(0)").html();
-            $('#AutomovilTable tbody').append('<tr>' + row + '<td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /></td></tr>');
-            $("#ModalTable").find("th").remove();
-            $("#ModalTable").find("tr:gt(0)").remove();
-            $('#myModal').hide();
-            TotalGeneral();
-
-            var sum = 0;
-            // iterate through each td based on class and add the values
-            $("div[id^=sum]").each(function() {
-
-                var value = $(this).text().replace("$","").replace(".00","");
-                // add only if the value is number
-                if(!isNaN(value) && value.length != 0) {
-                    sum += parseFloat(value);
-                    
                 }
-                console.log(sum);
+                else {
+                    var Price = accounting.formatMoney(Number);
+                    var row = '<td><div class="padd">' + data.Id + '</div></td>' +
+                            '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
+                            '<td><div class="padd" id="sum"> RD ' + Price + '</div></td><td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /></td>';
+
+                    $('#ModalTable > tbody').append("<tr>" + row + '</tr>');
+                    $("#ModalTable").show();
+                    $("#Aceptar").show();
+                }
+
+            });
+
+            $("#AutomovilTable").on("click", ".ibtnDel", function (event) {
+                $(this).closest("tr").remove();
+                colSum();
+                TotalGeneral();
+            });
+
+            $("#ModalTable").on("click", ".ibtnDel", function (event) {
+                $(this).closest("tr").remove();
+                $(this).closest("th").remove();
+            });
+
+
+            $("#Aceptar").click(function () {
+                var rows = document.getElementById('ModalTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                for (i = 0; i < rows.length; i++) {
+                    var row = rows[i].innerHTML;
+                    $('#AutomovilTable tbody').append('<tr>' + row + '<td></tr>');
+                }
+            
+                $("#ModalTable").find("tr:gt(0)").remove();
+                $('#myModal').hide();
+
+                colSum();
+                TotalGeneral();
+            });
+
+            $("#Cancelar").click(function () {
+                $("#ModalTable").find("tr:gt(0)").remove();
             });
         });
-
     </script>
 }
