@@ -183,12 +183,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Content/js/accounting.js"></script>
     <script src="~/Content/js/jquery.calculation.js"></script>
     <script type="text/javascript">
         var bIsFirebugReady = (!!window.console && !!window.console.log);
 
         $(document).ready(
             function () {
+                
                 $("input[id^=disc]").bind("keyup", TotalGeneral);
                 $("input[id^=sum]").bind("keyup", TotalGeneral);
                 $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
@@ -208,7 +210,7 @@
             // define the formatting callback, the results of the calculation are passed to this function
             function (s) {
                 // return the number as a dollar amount
-                return "$" + s.toFixed(2);
+                return "RD " + accounting.formatMoney(s);
             },
             // define the finish callback, this runs after the calculation has been complete
             function ($this) {
@@ -217,7 +219,7 @@
 
                 $("#totalSum").text(
                     // round the results to 2 digits
-                    "$" + sum.toFixed(2)
+                    "RD " + accounting.formatMoney(sum)
                 );
             }
         )
@@ -232,7 +234,7 @@
             // define the formatting callback, the results of the calculation are passed to this function
             function (s) {
                 // return the number as a dollar amount
-                return "$" + s.toFixed(2);
+                return "RD " + accounting.formatMoney(s)
             },
             // define the finish callback, this runs after the calculation has been complete
             function ($this) {
@@ -241,7 +243,7 @@
 
                 $("#totalSum").text(
                     // round the results to 2 digits
-                    "$" + sum.toFixed(2)
+                    "RD " + accounting.formatMoney(sum)
                 );
             }
         )
@@ -284,7 +286,9 @@
                 if (data.length == 0) {
                     console.log("NO DATA!")
                 }
-
+                //Formateando Precio
+                var Number = parseInt(data.Precio);
+                var Price = accounting.formatMoney(Number);
                 var row = '<thead><tr><th>' +
                     '<div class="padd"><b>Id</b></div></th>' +
                     '<th><div class="padd"><b>Descripcion</b></div></th>' +
@@ -292,12 +296,14 @@
                     '<th></th></tr></thead>' +
                     '<tr><td><div class="padd">' + data.Id + '</div></td>' +
                         '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
-                        '<td><div class="padd" id="sum">' + data.Precio + '</div></td></tr>'
+                        '<td><div class="padd" id="sum"> RD ' + Price + '</div></td></tr>';
+         
                 $("#ModalTable").find("th").remove();
                 $("#ModalTable").find("tr:gt(0)").remove();
                 $('#ModalTable > tbody').append(row);
                 TotalGeneral();
             });
+
         })
 
 
