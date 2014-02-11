@@ -103,7 +103,7 @@
                             <tr>
                                 <td colspan="5" style="text-align: left;">
                                     <!-- Button to trigger modal -->
-                                    <a href="#myModal" class="btn btn-default" data-toggle="modal">Agregar</a>
+                                    <a href="#myModal" class="btn btn-default" data-toggle="modal" id="Agregar" name="Agregar">Agregar</a>
                                 </td>
                             </tr>
                         </tfoot>
@@ -123,12 +123,25 @@
                             <div class="modal-body">
                                 <p>Digite el Id del Automovil que busca.</p>
                                 <input type="text" name="IdAutomovil" id="IdAutomovil" value="" class="form-control" />
-                                <button type="button" class="btn btn-primary" id="BuscarAutomovil">Buscar</button>
+                                <button type="button" class="btn btn-default" id="BuscarAutomovil">Buscar</button>
                                 <br />
                                 <br />
                                 <div class="padd">
                                     <table id="ModalTable">
-
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="padd"><b>Id</b></div>
+                                                </th>
+                                                <th>
+                                                    <div class="padd"><b>Descripcion</b></div>
+                                                </th>
+                                                <th>
+                                                    <div class="padd"><b>Precio</b></div>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
                                         <tbody></tbody>
                                     </table>
                                 </div>
@@ -183,18 +196,19 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/accounting.js"></script>
     <script src="~/Content/js/jquery.calculation.js"></script>
     <script type="text/javascript">
         var bIsFirebugReady = (!!window.console && !!window.console.log);
 
         $(document).ready(
             function () {
-                
+
                 $("input[id^=disc]").bind("keyup", TotalGeneral);
                 $("input[id^=sum]").bind("keyup", TotalGeneral);
                 $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
                 TotalGeneral();
+
             });
 
         function TotalGeneral() {
@@ -249,39 +263,12 @@
         )
         };
 
-        $(document).ready(function () {
-            var counter = 0;
-
-            $("#addrow").on("click", function () {
-
-                counter = $('#AutomovilTable tr').length - 2;
-
-                var newRow = $("<tr>");
-                var cols = "";
-
-                cols += '<td><input type="text" name="name" id="sum" ' + counter + '"/></td>';
-                cols += '<td><input type="text" name="price" id="sum" ' + counter + '"/></td>';
-
-                cols += '<td><input type="button" class="ibtnDel"  value="Borrar Automovil"></td>';
-                newRow.append(cols);
-                $("table.order-list").append(newRow);
-            });
-
-            $("table.order-list").on("change", 'input[name^="price"]', function (event) {
-
-            });
-
-
-            $("table.order-list").on("click", ".ibtnDel", function (event) {
-                $(this).closest("tr").remove();
-
-                $('#addrow').attr('disabled', false).prop('value', "Agregar");
-            });
-
-
+        $("#Agregar").click(function () {
+            $("#ModalTable").hide()
         });
 
         $("#BuscarAutomovil").click(function () {
+
             $.getJSON("/Automovil/AutomovilData/" + $("#IdAutomovil").val(), function (data) {
                 if (data.length == 0) {
                     console.log("NO DATA!")
@@ -289,28 +276,40 @@
                 //Formateando Precio
                 var Number = parseInt(data.Precio);
                 var Price = accounting.formatMoney(Number);
-                var row = '<thead><tr><th>' +
-                    '<div class="padd"><b>Id</b></div></th>' +
-                    '<th><div class="padd"><b>Descripcion</b></div></th>' +
-                    '<th><div class="padd"><b>Precio</b></div></th>' +
-                    '<th></th></tr></thead>' +
-                    '<tr><td><div class="padd">' + data.Id + '</div></td>' +
+                var row = '<tr><td><div class="padd">' + data.Id + '</div></td>' +
                         '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
-                        '<td><div class="padd" id="sum"> RD ' + Price + '</div></td></tr>';
-         
-                $("#ModalTable").find("th").remove();
+                        '<td><div class="padd" id="sum"> RD ' + Price + '</div></td>';
+
                 $("#ModalTable").find("tr:gt(0)").remove();
                 $('#ModalTable > tbody').append(row);
-                TotalGeneral();
-            });
+                $("#ModalTable").show();
 
         })
 
+        $("#AutomovilTable").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+        });
 
         $("#Aceptar").click(function () {
             var row = $("#ModalTable").find("tr:gt(0)").html();
-            $('#AutomovilTable tbody').append('<tr>' + row + '</tr>');
+            $('#AutomovilTable tbody').append('<tr>' + row + '<td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /></td></tr>');
+            $("#ModalTable").find("th").remove();
+            $("#ModalTable").find("tr:gt(0)").remove();
             $('#myModal').hide();
+            TotalGeneral();
+
+            var sum = 0;
+            // iterate through each td based on class and add the values
+            $("div[id^=sum]").each(function() {
+
+                var value = $(this).text().replace("$","").replace(".00","");
+                // add only if the value is number
+                if(!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                    
+                }
+                console.log(sum);
+            });
         });
 
     </script>
