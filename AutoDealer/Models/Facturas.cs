@@ -38,6 +38,15 @@ namespace AutoDealer.Models
             Factura = db.Facturas.Where(x => x.Id == IdInt).FirstOrDefault();
             return Factura;
         }
+
+        public static List<Facturas> GetFacturaInDateRange(DateTime Desde, DateTime Hasta)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Facturas> ListaFacturas = new List<Facturas>();
+            ListaFacturas = (from a in db.Facturas where (a.FechaCreacion >= Desde && a.FechaCreacion <= Hasta) select a).ToList();
+            return ListaFacturas;
+
+        }
     
         public int Id { get; set; }
         public System.DateTime FechaCreacion { get; set; }
