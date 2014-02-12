@@ -1,64 +1,191 @@
 ﻿@model AutoDealer.Models.Facturas
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "AutoDealer - Detalles Factura";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="widget wred">
+        <div class="widget-head">
+            <div class="pull-left">Detalles Factura</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.Label("Cliente:")
+                        </div>
+                        <div class="editor-field">
+                            @Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Model.Comprador))
+                        </div>
+                        <br />
+                        <div>
+                            @Html.Label(AutoDealer.Models.Personas.GetPersona(Model.Comprador).Direccion)
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="editor-label">
+                            @Html.Label("Vendedor:")
+                        </div>
+                        <div class="editor-field">
+                            @Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Model.Vendedor))
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            <div class="editor-label">
+                                @Html.Label("Empresa:")
+                            </div>
+                            <div class="editor-field">
+                                @Html.DisplayFor(model => model.Empresas.Nombre)
+                                @Html.ValidationMessageFor(model => model.Empresa)
+                            </div>
+                            <br />
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.NCF)
+                            </div>
+                            <div class="editor-field">
+                               @Html.DisplayFor(model => model.NCF)
+                                @Html.ValidationMessageFor(model => model.NCF)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+
+
+                <table id="AutomovilTable" class="order-list">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="padd"><b>Id</b></div>
+                            </th>
+                            <th>
+                                <div class="padd"><b>Descripcion</b></div>
+                            </th>
+                            <th>
+                                <div class="padd"><b>Precio</b></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in AutoDealer.Models.Automoviles.GetAutomovilOfFactura(Model.Id))
+                        {
+                            int AutomovilId = item.Id;
+                            var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
+                            <tr>
+                                <td><div class="padd">@Automovil.Id</div></td>
+                                <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
+                                <td><div class="padd" id="sum">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: left;">
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <br />
+
+                <hr />
+                <br />
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            @Html.Label("Total:")
+                            <br />
+                            <h5 id="subtotal"></h5>
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CostoTraspaso)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DisplayFor(model => model.CostoTraspaso)
+                                @Html.ValidationMessageFor(model => model.CostoTraspaso)
+                            </div>
+                            <br />
+                            @Html.Label("Descuento:")
+                            <br />
+                            @*@Html.LabelFor(model => model.Descuento)*@
+
+                            <br />
+                            <br />
+                            @Html.Label("Total General:")
+                            <h4 id="total_item"></h4>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 }
 
-<h2>Details</h2>
+<div>
+    @Html.ActionLink("Volver a la lista completa", "Index")
+</div>
 
-<fieldset>
-    <legend>Facturas</legend>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaCreacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaCreacion)
-    </div>
+        $(document).ready(
+            function () {
+                colSum();
+                TotalGeneral();
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaModificacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaModificacion)
-    </div>
+            });
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Personas1.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Personas1.Nombre)
-    </div>
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#subtotal').html("RD " + accounting.formatMoney(sum));
+        }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Personas.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Personas.Nombre)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.NCF)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NCF)
-    </div>
+        function TotalGeneral() {
+            $("[id^=total_item]").calc(
+            // the equation to use for the calculation
+            "Sum + CostoTraspaso - Discount",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("h5[id^=subtotal]"),
+                CostoTraspaso: $("input[id^=CostoTraspaso]"),
+                Discount: $("[id^=disc]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "RD " + accounting.formatMoney(s);
+            }
+        );
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CostoTraspaso)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CostoTraspaso)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Empresas.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Empresas.Nombre)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+        };
+
+    </script>
+}
