@@ -50,19 +50,20 @@
 }
 else
 {
-        <div class="row">
-            <div class="col-lg-6">
-                @using (Html.BeginForm())
-{
+    <div class="row">
+        <div class="col-lg-6">
+            @using (Html.BeginForm())
+            {
                 @Html.Label("Desde:")
                 <input type="text" class="dateinput" name="Desde" id="Desde">
                 @Html.Label("Hasta:")
                 <input type="text" class="dateinput" name="Hasta">
                 <input type="submit" value="Filtrar" id="Filtrar" name="Filtrar" class="btn btn-default">
-                }
-            </div>
+            }
         </div>
+    </div>
 }
+    
 
 <div class="col-md-12">
     <div class="widget worange">

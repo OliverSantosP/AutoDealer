@@ -16,9 +16,18 @@ namespace AutoDealer.Controllers
         //
         // GET: /Factura/
 
-        public ActionResult Index()
+        public ActionResult Index(FormCollection Form)
         {
             var facturas = db.Facturas.Include(f => f.Empresas).Include(f => f.Personas).Include(f => f.Personas1);
+            if (Form.Count > 0)
+            {
+                if (Form["Desde"] != "" && Form["Hasta"] != "")
+                {
+                    DateTime DesdeDT = DateTime.Parse(Form["Desde"]);
+                    DateTime HastaDT = DateTime.Parse(Form["Hasta"]);
+                    return View((from a in db.Facturas where (a.FechaCreacion >= DesdeDT && a.FechaCreacion <= HastaDT) select a).ToList());
+                }
+            }
             return View(facturas.OrderByDescending(x=>x.FechaModificacion).ToList());
         }
 

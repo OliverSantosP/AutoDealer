@@ -55,7 +55,6 @@
                             <td class="pull-right"><strong>Direccion</strong></td>
                             <td>@Html.Label(AutoDealer.Models.Personas.GetPersona(Model.Comprador).Direccion)</td>
                         </tr>
-                        <br />
                         <tr>
                             <td class="pull-right"><strong>Vendedor</strong></td>
                             <td>@Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Model.Vendedor))</td>
@@ -96,7 +95,7 @@
                     </tbody>
                 </table>
 
-
+                <h5 id="subtotal"></h5>
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
