@@ -57,31 +57,44 @@ namespace AutoDealer.Controllers
             {
                 int Comprador = Int32.Parse(FormData["Compradores"]);
                 int Vendedor = Int32.Parse(FormData["Vendedores"]);
-                
+
                 facturas.Comprador = Comprador;
                 facturas.Vendedor = Vendedor;
-                
+                List<int> ListaAutomoviles = new List<int>();
+
+                for (int i = 0; i < FormData.Keys.Count; i++)
+                {
+                    if (FormData.Keys[i].Contains("Automovil"))
+                    {
+                        ListaAutomoviles.Add(Int32.Parse(FormData.Keys[i].Replace("AutomovilId", "")));
+                    }
+                }
+
+
+                facturas.FechaCreacion = DateTime.Now;
+
+                if (ModelState.IsValid)
+                {
+                    db.Facturas.Add(facturas);
+                    db.SaveChanges();
+                    foreach (var AutomovilId in ListaAutomoviles)
+                    {
+                        Automoviles Automovil = new Automoviles();
+                        Automovil = db.Automoviles.Find(AutomovilId);
+                        Automovil.Factura = facturas.Id;
+                        db.Entry(Automovil).State = EntityState.Modified;
+                    }
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.Empresa = new SelectList(db.Empresas, "Id", "Nombre", facturas.Empresa);
+                ViewBag.Comprador = new SelectList(db.Personas, "Id", "Nombre", facturas.Comprador);
+                ViewBag.Vendedor = new SelectList(db.Personas, "Id", "Nombre", facturas.Vendedor);
+                return View(facturas);
             }
-            facturas.FechaCreacion = DateTime.Now;
-
-            if (ModelState.IsValid)
-            {
-                db.Facturas.Add(facturas);
-                db.SaveChanges();
-
-                int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
-                Automoviles Automovil = new Automoviles();
-                Automovil = db.Automoviles.Find(AutomovilId);
-                Automovil.Factura = facturas.Id;
-                db.Entry(Automovil).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Empresa = new SelectList(db.Empresas, "Id", "Nombre", facturas.Empresa);
-            ViewBag.Comprador = new SelectList(db.Personas, "Id", "Nombre", facturas.Comprador);
-            ViewBag.Vendedor = new SelectList(db.Personas, "Id", "Nombre", facturas.Vendedor);
             return View(facturas);
         }
 

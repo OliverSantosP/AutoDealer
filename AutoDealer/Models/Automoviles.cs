@@ -84,5 +84,26 @@ namespace AutoDealer.Models
             return Automoviles;
         }
 
+        /// <summary>
+        /// Retorna todos los Automoviles que tienen una factura especifica.
+        /// </summary>
+        /// <param name="Id">Id de la factura.</param>
+        /// <returns>Lista de Automoviles</returns>
+        public static List<Automoviles> GetAutomovilOfFactura(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Automoviles> Automoviles = new List<Automoviles>();
+            Automoviles = db.Automoviles.Where(x => x.Factura == Id).ToList();
+            return Automoviles;
+        }
+        public static List<Automoviles> GetAutomovilOfFactura(string Id)
+        {
+            int IdInt = Int32.Parse(Id);
+            AutoDealerEntities db = new AutoDealerEntities();
+            List<Automoviles> Automoviles = new List<Automoviles>();
+            Automoviles = db.Automoviles.Where(x => x.Factura == IdInt).ToList();
+            return Automoviles;
+        }
+
     }
 }

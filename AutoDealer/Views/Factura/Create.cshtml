@@ -90,12 +90,12 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody> 
                             <tr>
                                 <td><div class="padd">@Automovil.Id</div></td>
                                 <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
                                 <td><div class="padd" id="sum">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
-                                <td><a class="deleteRow"></a></td>
+                                <td><input type="hidden" name="AutomovilId@(Automovil.Id)" value="@Automovil.Id"></td>
 
                             </tr>
                         </tbody>
@@ -180,6 +180,7 @@
                             <br />
                             @Html.Label("Total General:")
                             <h4 id="total_item"></h4>
+                            
                         </div>
                     </div>
                 </div>
@@ -265,7 +266,7 @@
                     var Price = accounting.formatMoney(Number);
                     var row = '<td><div class="padd">' + data.Id + '</div></td>' +
                             '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
-                            '<td><div class="padd" id="sum"> RD ' + Price + '</div></td><td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /></td>';
+                            '<td><div class="padd" id="sum"> RD ' + Price + '</div></td><td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /><input type="hidden" name="AutomovilId' + data.Id + '" value="' + data.Id + '"></td>';
 
                     $('#ModalTable > tbody').append("<tr>" + row + '</tr>');
                     $("#ModalTable").show();
@@ -285,13 +286,13 @@
                 $(this).closest("th").remove();
             });
 
-
             $("#Aceptar").click(function () {
                 var rows = document.getElementById('ModalTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
                 for (i = 0; i < rows.length; i++) {
                     var row = rows[i].innerHTML;
                     $('#AutomovilTable tbody').append('<tr>' + row + '<td></tr>');
                 }
+
             
                 $("#ModalTable").find("tr:gt(0)").remove();
                 $('#myModal').hide();
