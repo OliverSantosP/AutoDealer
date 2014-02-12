@@ -305,6 +305,7 @@
     <Content Include="Content\css\jquery.gritter.css" />
     <Content Include="Content\css\navbar.css" />
     <Content Include="Content\css\prettyPhoto.css" />
+    <Content Include="Content\css\print.css" />
     <Content Include="Content\css\rateit.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\widgets.css" />
@@ -492,6 +493,7 @@
     <Content Include="Views\Liquidacion\Create.cshtml" />
     <Content Include="Views\Liquidacion\Edit.cshtml" />
     <Content Include="Views\Liquidacion\Delete.cshtml" />
+    <Content Include="Views\Factura\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

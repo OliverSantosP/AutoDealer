@@ -1,0 +1,182 @@
+﻿@model AutoDealer.Models.Facturas
+
+@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Auto Dealer - Imprimir Factura</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/print.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <h5 id="subtotal"></h5>
+        <div class="row">
+            <div class="span4">
+                <h2><strong>@Model.Empresas.Nombre</strong></h2><br>
+                <address>
+                    @Model.Empresas.Direccion<br>
+                    @Model.Empresas.Telefono<br>
+                    @Model.Empresas.Email<br />
+                    <br />
+                    <strong>NCF:</strong>
+                    @Html.DisplayFor(x => x.NCF)
+                </address>
+            </div>
+            <div class="span4 well">
+                <table class="invoice-head">
+                    <tbody>
+                        <tr>
+                            <td class="pull-right"><strong>Cliente #</strong></td>
+                            <td>@Html.DisplayFor(x => x.Comprador)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Factura #</strong></td>
+                            <td>@Html.DisplayFor(x => x.Id)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Fecha</strong></td>
+                            <td>@Html.DisplayFor(x => x.FechaCreacion)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Cliente</strong></td>
+                            <td>@Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Model.Comprador))</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Direccion</strong></td>
+                            <td>@Html.Label(AutoDealer.Models.Personas.GetPersona(Model.Comprador).Direccion)</td>
+                        </tr>
+                        <br />
+                        <tr>
+                            <td class="pull-right"><strong>Vendedor</strong></td>
+                            <td>@Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Model.Vendedor))</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span8">
+                <h2>Factura</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span8 well invoice-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Automovil</th>
+                            <th>Precio de venta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in AutoDealer.Models.Automoviles.GetAutomovilOfFactura(Model.Id))
+                        {
+                            int AutomovilId = item.Id;
+                            var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
+                            <tr>
+                                <td><div class="padd">@Automovil.Id</div></td>
+                                <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
+                                <td><div class="padd" id="sum">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td class="pull-right"><strong>Total:</strong></td>
+                            <td><h5 id="subtotal"></h5></td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Costo Traspaso:</strong></td>
+                            <td>@Html.DisplayFor(model => model.CostoTraspaso)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Descuento:</strong></td>
+                            <td>-@*@Html.LabelFor(model => model.Descuento)*@</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Total General:</strong></td>
+                            <td><h4 id="total_item"></h4></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="span8 well invoice-thank">
+                <h5 style="text-align:center;">AutoDealer @DateTime.Now.Year</h5>
+            </div>
+        </div>
+       </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Content/js/accounting.js"></script>
+        <script src="~/Content/js/jquery.calculation.js"></script>
+        <script type="text/javascript">
+            var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+            $(document).ready(
+                function () {
+                    colSum();
+                    TotalGeneral();
+
+                });
+
+            function colSum() {
+                var sum = 0;
+                //iterate through each div and add to sum
+                $('div#sum').each(function () {
+                    sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+                });
+                //change value of total
+                $('#subtotal').html("RD " + accounting.formatMoney(sum));
+            }
+
+
+            function TotalGeneral() {
+                $("[id^=total_item]").calc(
+                // the equation to use for the calculation
+                "Sum + CostoTraspaso - Discount",
+                // define the variables used in the equation, these can be a jQuery object
+                {
+                    Sum: $("h5[id^=subtotal]"),
+                    CostoTraspaso: $("input[id^=CostoTraspaso]"),
+                    Discount: $("[id^=disc]")
+                },
+                // define the formatting callback, the results of the calculation are passed to this function
+                function (s) {
+                    // return the number as a dollar amount
+                    return "RD " + accounting.formatMoney(s);
+                }
+            );
+
+
+
+            };
+
+        </script>
+    }
+
+
+</body>
+</html>

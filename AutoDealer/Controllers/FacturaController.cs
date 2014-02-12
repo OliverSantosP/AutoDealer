@@ -35,6 +35,18 @@ namespace AutoDealer.Controllers
             return View(facturas);
         }
 
+        // GET: /Factura/Print/5
+
+        public ActionResult Print(int id = 0)
+        {
+            Facturas facturas = db.Facturas.Find(id);
+            if (facturas == null)
+            {
+                return HttpNotFound();
+            }
+            return View(facturas);
+        }
+
         //
         // GET: /Factura/Create
 
