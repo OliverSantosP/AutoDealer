@@ -60,8 +60,8 @@ namespace AutoDealer.Controllers
 
                 facturas.Comprador = Comprador;
                 facturas.Vendedor = Vendedor;
+                
                 List<int> ListaAutomoviles = new List<int>();
-
                 for (int i = 0; i < FormData.Keys.Count; i++)
                 {
                     if (FormData.Keys[i].Contains("Automovil"))
@@ -119,11 +119,47 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Facturas facturas)
+        public ActionResult Edit(Facturas facturas, FormCollection FormData)
         {
+            
+
             if (ModelState.IsValid)
             {
+                facturas.FechaCreacion = Facturas.GetFactura(facturas.Id).FechaCreacion;
+                facturas.FechaModificacion = DateTime.Now;
+                facturas.Comprador = Int32.Parse(FormData["Compradores"]);
+                facturas.Vendedor = Int32.Parse(FormData["Vendedores"]);
+
                 db.Entry(facturas).State = EntityState.Modified;
+
+                //Buscando todos los Automoviles que tienen esta factura.
+                List<Automoviles> AutomovilesConFactura = new List<Automoviles>();
+                AutomovilesConFactura = Automoviles.GetAutomovilOfFactura(facturas.Id);
+
+                //Borrando el campo Factura a todos los Automoviles de esta factura.
+                //Luego asignaremos el nuevo valor.
+                foreach (var item in AutomovilesConFactura)
+                {
+                    Automoviles Automovil = new Automoviles();
+                    Automovil = db.Automoviles.Find(item.Id);
+                    Automovil.Factura = null;
+                    db.Entry(Automovil).State = EntityState.Modified;
+                }
+
+                //Buscando todos los Automoviles que existen en esta factura al momento de editarla.
+                for (int i = 0; i < FormData.Keys.Count; i++)
+                {
+                    if (FormData.Keys[i].Contains("Automovil"))
+                    {
+                        //Asigando el valor de Factura a los Automoviles.
+                        Automoviles Automovil = new Automoviles();
+                        Automovil = db.Automoviles.Find(Int32.Parse(FormData.Keys[i].Replace("AutomovilId", "")));
+                        Automovil.Factura = facturas.Id;
+                        db.Entry(Automovil).State = EntityState.Modified;
+                    }
+
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -154,6 +190,17 @@ namespace AutoDealer.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Facturas facturas = db.Facturas.Find(id);
+
+            List<Automoviles> ListaAutomoviles = new List<Automoviles>();
+            ListaAutomoviles = Automoviles.GetAutomovilOfFactura(id);
+
+            foreach (var item in ListaAutomoviles)
+            {
+                Automoviles Automovil = new Automoviles();
+                Automovil = db.Automoviles.Find(item.Id);
+                Automovil.Factura = null;
+                db.Entry(Automovil).State = EntityState.Modified;
+            }
             db.Facturas.Remove(facturas);
             db.SaveChanges();
             return RedirectToAction("Index");

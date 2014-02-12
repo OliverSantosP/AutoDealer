@@ -3,94 +3,92 @@
 @{
     ViewBag.Title = "AutoDealer - Editar Factura";
 }
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    
+
     AutoDealer.Models.Facturas Factura = new AutoDealer.Models.Facturas();
     Factura = AutoDealer.Models.Facturas.GetFactura(Model.Id);
-    
-<div class="widget wred">
-    <div class="widget-head">
-        <div class="pull-left">Editar Factura</div>
-        <div class="widget-icons pull-right">
-            <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
-            <a href="#" class="wclose"><i class="icon-remove"></i></a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="widget-content">
-        <div class="padd">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="editor-label">
-                        @Html.Label("Cliente:")
-                    </div>
-                    <div class="editor-field">
-                        <select id="Compradores" name="Compradores">
-                            @foreach (var item in @AutoDealer.Models.Personas.GetCompradores())
-                            {
-                                if (item.Id == Model.Comprador)
-                                {
-                                    <option value="@item.Id" selected="selected">@item.Nombre @item.Apellido</option>
-                                }
-                                else
-                                {
-                                   <option value="@item.Id">@item.Nombre @item.Apellido</option> 
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="editor-label">
-                        @Html.Label("Vendedor:")
-                    </div>
-                    <div class="editor-field">
-                        <select id="Vendedores" name="Vendedores">
-                            @foreach (var item in @AutoDealer.Models.Personas.GetVendedores())
-                            {
-                                if (item.Id == Model.Vendedor)
-                                {
-                                    <option value="@item.Id" selected="selected">@item.Nombre @item.Apellido</option>
-                                }
-                                else
-                                {
-                                   <option value="@item.Id">@item.Nombre @item.Apellido</option> 
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="right">
-                        <div class="editor-label">
-                            @Html.Label("Empresa:")
-                        </div>
-                        <div class="editor-field">
-                            @Html.DropDownList("Empresa", String.Empty)
-                            @Html.ValidationMessageFor(model => model.Empresa)
-                        </div>
-                        <br />
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.NCF)
-                        </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.NCF)
-                            @Html.ValidationMessageFor(model => model.NCF)
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <hr />
-            @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
-            {
-                int AutomovilId = Int32.Parse(Request.QueryString["AutomovilId"]);
-                var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
 
-                <table>
+    <div class="widget wred">
+        <div class="widget-head">
+            <div class="pull-left">Editar Factura</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.Label("Cliente:")
+                        </div>
+                        <div class="editor-field">
+                            <select id="Compradores" name="Compradores">
+                                @foreach (var item in @AutoDealer.Models.Personas.GetCompradores())
+                                {
+                                    if (item.Id == Model.Comprador)
+                                    {
+                                        <option value="@item.Id" selected="selected">@item.Nombre @item.Apellido</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="editor-label">
+                            @Html.Label("Vendedor:")
+                        </div>
+                        <div class="editor-field">
+                            <select id="Vendedores" name="Vendedores">
+                                @foreach (var item in @AutoDealer.Models.Personas.GetVendedores())
+                                {
+                                    if (item.Id == Model.Vendedor)
+                                    {
+                                        <option value="@item.Id" selected="selected">@item.Nombre @item.Apellido</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            <div class="editor-label">
+                                @Html.Label("Empresa:")
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownList("Empresa", String.Empty)
+                                @Html.ValidationMessageFor(model => model.Empresa)
+                            </div>
+                            <br />
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.NCF)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.NCF)
+                                @Html.ValidationMessageFor(model => model.NCF)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+
+
+                <table id="AutomovilTable" class="order-list">
                     <thead>
                         <tr>
                             <th>
@@ -105,56 +103,222 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><div class="padd">@Automovil.Id</div></td>
-                            <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
-                            <td><div class="padd">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
-                        </tr>
+                        @foreach (var item in AutoDealer.Models.Automoviles.GetAutomovilOfFactura(Model.Id))
+                        {
+                            int AutomovilId = item.Id;
+                            var Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId);
+                            <tr>
+                                <td><div class="padd">@Automovil.Id</div></td>
+                                <td><div class="padd">@Automovil.TiposAutomoviles.Fabricantes.Nombre @Automovil.TiposAutomoviles.Modelos.Nombre @Automovil.Year.Year @Automovil.Colores.Nombre</div></td>
+                                <td><div class="padd" id="sum">RD @String.Format("{0:C}", @Automovil.PrecioVenta)</div></td>
+                                <td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" /><input type="hidden" name="AutomovilId@(Automovil.Id)" value="@Automovil.Id" /></td>
+                            </tr>
+                        }
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: left;">
+                                <!-- Button to trigger modal -->
+                                <a href="#myModal" class="btn btn-default" data-toggle="modal" id="Agregar" name="Agregar">Agregar</a>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
-            }
-            <br />
-            <hr />
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
-                    <div class="right">
-                        @Html.Label("Total:")
-                        <br />
-                        <br />
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.CostoTraspaso)
+                <br />
+
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Agregar Automovil</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Digite el Id del Automovil que busca.</p>
+                                <input type="text" name="IdAutomovil" id="IdAutomovil" value="" class="form-control" />
+                                <button type="button" class="btn btn-default" id="BuscarAutomovil">Buscar</button>
+                                <br />
+                                <br />
+                                <div class="padd">
+                                    <table id="ModalTable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="padd"><b>Id</b></div>
+                                                </th>
+                                                <th>
+                                                    <div class="padd"><b>Descripcion</b></div>
+                                                </th>
+                                                <th>
+                                                    <div class="padd"><b>Precio</b></div>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="Cancelar" name="Cancelar" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="Aceptar" name="Aceptar" data-dismiss="modal">Aceptar</button>
+                            </div>
                         </div>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.CostoTraspaso)
-                            @Html.ValidationMessageFor(model => model.CostoTraspaso)
-                        </div>
-                        <br />
-                        @Html.Label("Descuento:")
-                        <br />
-                        @Html.TextBox("Descuento")
-                        <br />
-                        <br />
-                        @Html.Label("Total General:")
                     </div>
                 </div>
-            </div>
-            <hr />
-            <p>
-                <input type="submit" value="Guardar" />
-            </p>
+                <hr />
+                <br />
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            @Html.Label("Total:")
+                            <br />
+                            <h5 id="subtotal"></h5>
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.CostoTraspaso)
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.CostoTraspaso)
+                                @Html.ValidationMessageFor(model => model.CostoTraspaso)
+                            </div>
+                            <br />
+                            @Html.Label("Descuento:")
+                            <br />
+                            <input type="text" id="disc" name="disc" />
 
+                            <br />
+                            <br />
+                            @Html.Label("Total General:")
+                            <h4 id="total_item"></h4>
+
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <input type="submit" value="Guardar" />
+                </p>
+
+            </div>
         </div>
     </div>
-</div>
 }
 
-    <div>
-        @Html.ActionLink("Volver a la lista completa", "Index")
-    </div>
+<div>
+    @Html.ActionLink("Volver a la lista completa", "Index")
+</div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script src="~/Content/js/jquery.calculation.js"></script>
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+        $(document).ready(
+            function () {
+
+                $("input[id^=disc]").bind("keyup", TotalGeneral);
+                $("input[id^=sum]").bind("keyup", TotalGeneral);
+                $("input[id^=CostoTraspaso]").bind("keyup", TotalGeneral);
+                $('#myModal').hide();
+                colSum();
+                TotalGeneral();
+
+            });
+
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#subtotal').html("RD " + accounting.formatMoney(sum));
+        }
+
+
+        function TotalGeneral() {
+            $("[id^=total_item]").calc(
+            // the equation to use for the calculation
+            "Sum + CostoTraspaso - Discount",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("h5[id^=subtotal]"),
+                CostoTraspaso: $("input[id^=CostoTraspaso]"),
+                Discount: $("[id^=disc]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "RD " + accounting.formatMoney(s);
+            }
+        );
+
+
+
+        };
+
+        $("#Agregar").click(function () {
+            $("#ModalTable").hide();
+            $("#Aceptar").hide();
+        });
+
+        $("#BuscarAutomovil").click(function () {
+
+            $.getJSON("/Automovil/AutomovilData/" + $("#IdAutomovil").val(), function (data) {
+                //Formateando Precio
+                var Number = parseInt(data.Precio);
+                if ($(data.Id.text).is(':empty')) {
+                    var row = "<tr><td>No existe un Automovil con este Id.</td></tr>";
+                    $("#ModalTable").find("tr:gt(0)").remove();
+                    $('#ModalTable > tbody').append(row);
+                    $("#ModalTable").show();
+
+                }
+                else {
+                    var Price = accounting.formatMoney(Number);
+                    var row = '<td><div class="padd">' + data.Id + '</div></td>' +
+                            '<td><div class="padd">' + data.Nombre + ' ' + data.Year + ' ' + data.Color + '</div></td>' +
+                            '<td><div class="padd" id="sum"> RD ' + Price + '</div></td><td><input type="button" class="ibtnDel" id="BorrarAutomovil" name="BorrarAutomovil" value="Borrar" ><input type="hidden" name="AutomovilId' + data.Id + '" value="' + data.Id + '" ></td>';
+
+                    $('#ModalTable > tbody').append("<tr>" + row + '</tr>');
+                    $("#ModalTable").show();
+                    $("#Aceptar").show();
+                }
+
+            });
+        });
+
+        $("#AutomovilTable").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            colSum();
+            TotalGeneral();
+        });
+
+        $("#ModalTable").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            $(this).closest("th").remove();
+        });
+
+        $("#Aceptar").click(function () {
+            var rows = document.getElementById('ModalTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            for (i = 0; i < rows.length; i++) {
+                var row = rows[i].innerHTML;
+                $('#AutomovilTable tbody').append('<tr>' + row + '<td></tr>');
+            }
+
+            $("#ModalTable").find("tr:gt(0)").remove();
+            $('#myModal').hide();
+
+            colSum();
+            TotalGeneral();
+        });
+
+        $("#Cancelar").click(function () {
+            $("#ModalTable").find("tr:gt(0)").remove();
+        });
+    </script>
+}

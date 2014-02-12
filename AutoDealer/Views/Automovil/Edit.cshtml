@@ -45,13 +45,6 @@
                     <br />
                     <br />
                     <div class="col-lg-12">
-                        Precio de Venta:
-                        <br />
-                        @Html.EditorFor(model => model.PrecioVenta)
-                        @Html.ValidationMessageFor(model => model.PrecioVenta)
-                    </div>
-                    <br />
-                    <div class="col-lg-12">
                         Tipo Automovil<br />
                         <select id="Fabricantes" name="Fabricantes" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             @foreach (var item in AutoDealer.Models.Fabricantes.GetFabricantes())
