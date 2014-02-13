@@ -11,6 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Liquidaciones
     {
@@ -36,5 +37,13 @@ namespace AutoDealer.Models
         public virtual Empresas Empresas { get; set; }
         public virtual Personas Personas { get; set; }
         public virtual Personas Personas1 { get; set; }
+
+        public static Liquidaciones GetLiquidacion(int Id)
+        {
+            AutoDealerEntities db = new AutoDealerEntities();
+            Liquidaciones Liquidacion = new Liquidaciones();
+            Liquidacion = db.Liquidaciones.Where(x => x.Id==Id).FirstOrDefault();
+            return Liquidacion;
+        }
     }
 }

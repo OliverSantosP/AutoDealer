@@ -4,92 +4,245 @@
     ViewBag.Title = "AutoDealer - Editar Liquidacion";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Liquidaciones</legend>
-
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DetallesDeVenta)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DetallesDeVenta)
-            @Html.ValidationMessageFor(model => model.DetallesDeVenta)
+    <div class="widget wblue">
+        <div class="widget-head">
+            <div class="pull-left">Editar Liquidacion</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="icon-remove"></i></a>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
+        <div class="widget-content">
+            <div class="padd">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaModificacion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaModificacion)
-            @Html.ValidationMessageFor(model => model.FechaModificacion)
-        </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.Label("Suplidor:")
+                        </div>
+                        <div class="editor-field">
+                            <select id="Suplidor" name="Suplidor">
+                                @foreach (var item in @AutoDealer.Models.Personas.GetSuplidores())
+                                {
+                                    if (item.Id==Model.Suplidor)
+                                    {
+                                        <option value="@item.Id" selected="selected">@item.Nombre @item.Apellido</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Nombre @item.Apellido</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MontoVenta)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MontoVenta)
-            @Html.ValidationMessageFor(model => model.MontoVenta)
-        </div>
+                        <div class="editor-label">
+                            @Html.Label("Precio de Venta:")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.MontoVenta)
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.PagadoCon)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.PagadoCon)
+                            @Html.ValidationMessageFor(model => model.PagadoCon)
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Empresa)
+                        </div>
+                        <div class="editor-field">
+                            <div class="btn-group">
+                                <select id="Empresa" name="Empresa" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    @foreach (var item in AutoDealer.Models.Empresas.GetEmpresas())
+                                    { 
+                                        if (item.Id==Model.Empresa)
+                                        {
+                                            <option value="@item.Id" selected="selected">@item.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                          <option value="@item.Id">@item.Nombre</option>      
+                                        }
+                                        
+                                    }
+                                </select>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Empresas.Nombre)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <hr />
+                    @if (AutoDealer.Models.Gastos.TieneGastos(Model.Automovil.ToString()) == true)
+                    {
+                        string AutomovilId = Model.Automovil.ToString();
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Suplidor, "Personas1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Suplidor", String.Empty)
-            @Html.ValidationMessageFor(model => model.Suplidor)
-        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="padd"><b>Id</b></div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Descripcion</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Precio</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Pagado a</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd">
+                                            <b>Fecha Creacion</b>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="padd"><b>Fecha Modificacion</b></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Comprador, "Personas")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Comprador", String.Empty)
-            @Html.ValidationMessageFor(model => model.Comprador)
-        </div>
+                                @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                                {
+                                    <tr>
+                                        <td><div class="padd">@item.Id</div></td>
+                                        <td><div class="padd">@item.TiposDeGastos.Nombre</div></td>
+                                        <td><div class="padd" id="sum">RD @String.Format("{0:C}", item.Precio)</div></td>
+                                        <td><div class="padd">@item.PagadoA</div></td>
+                                        <td><div class="padd">@item.FechaCreacion</div></td>
+                                        <td><div class="padd">@item.FechaModificacion</div></td>
+                                    </tr>
+                                }
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PagadoCon)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PagadoCon)
-            @Html.ValidationMessageFor(model => model.PagadoCon)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Comision, "Comision")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Comision)
-            @Html.ValidationMessageFor(model => model.Comision)
-        </div>
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                                          <strong>Este Automovil no tiene gastos.</strong>      
+                    }
+                    <br />
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="editor-label">
+                                Detalles de Venta:
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(model => model.DetallesDeVenta)
+                                @Html.ValidationMessageFor(model => model.DetallesDeVenta)
+                            </div>
+                        </div>
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <div class="right">
+                                <br />
+                                <b>Sub Total:</b>
+                                <br />
+                                <div class="editor-field">
+                                    @if (AutoDealer.Models.Gastos.TieneGastos(Model.Automovil.ToString()))
+                                    {
+                                        <h5 id="SubTotal"></h5>
+                                    }
+                                    else
+                                    {
+                                        <strong>RD $0.00</strong>
+                                    }
 
-        <p>
-            <input type="submit" value="Guardar" />
-        </p>
-    </fieldset>
+                                </div>
+                                <br />
+                                <b>Comision:</b>
+                                <br />
+                                @Html.TextBoxFor(model => model.Comision)
+                                @Html.ValidationMessageFor(model => model.Comision)
+                                <br />
+                                <br />
+                                <b>Total a pagar:</b>
+                                <h4 id="TotalGeneral"></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        <input type="submit" value="Editar" />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a lista completa", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+        $(document).ready(
+            function () {
+
+                $("input[id^=Comision]").bind("keyup", TotalGeneral);
+                colSum();
+                TotalGeneral();
+
+            });
+
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#SubTotal').html("RD " + accounting.formatMoney(sum));
+        }
+
+
+        function TotalGeneral() {
+            $("[id^=TotalGeneral]").calc(
+            // the equation to use for the calculation
+            "Sum + Comision",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("h5[id^=SubTotal]"),
+                Comision: $("input[id^=Comision]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "RD " + accounting.formatMoney(s);
+            }
+        );
+        }
+
+    </script>
 }

@@ -99,8 +99,15 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Liquidaciones liquidaciones)
+        public ActionResult Edit(Liquidaciones liquidaciones, FormCollection Form)
         {
+            Liquidaciones Liquidacion = AutoDealer.Models.Liquidaciones.GetLiquidacion(liquidaciones.Id);
+            liquidaciones.Automovil = Liquidacion.Automovil;
+            liquidaciones.FechaCreacion = Liquidacion.FechaCreacion;
+            liquidaciones.FechaModificacion = DateTime.Now;
+            liquidaciones.Empresa = Int32.Parse(Form["Empresa"]);
+            liquidaciones.Suplidor = Int32.Parse(Form["Suplidor"]);
+
             if (ModelState.IsValid)
             {
                 db.Entry(liquidaciones).State = EntityState.Modified;
