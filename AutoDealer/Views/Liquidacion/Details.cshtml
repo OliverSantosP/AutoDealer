@@ -1,71 +1,210 @@
 ﻿@model AutoDealer.Models.Liquidaciones
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "AutoDealer - Detalles Liquidacion";
 }
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Liquidaciones</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DetallesDeVenta)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DetallesDeVenta)
+<div class="widget wblue">
+    <div class="widget-head">
+        <div class="pull-left">Detalles Liquidacion</div>
+        <div class="widget-icons pull-right">
+            <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="wclose"><i class="icon-remove"></i></a>
+        </div>
+        <div class="clearfix"></div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaCreacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaCreacion)
-    </div>
+    <div class="widget-content">
+        <div class="padd">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FechaModificacion)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FechaModificacion)
-    </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="editor-label">
+                        <strong>@Html.Label("Suplidor:")</strong>
+                    </div>
+                    <div class="editor-field">
+                        @Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Int32.Parse(Model.Suplidor.ToString())))
+                    </div>
+                </div>
+                <div class="col-lg-2">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MontoVenta)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MontoVenta)
-    </div>
+                    <div class="editor-label">
+                        <strong>@Html.Label("Precio de Venta:")</strong>
+                    </div>
+                    <div class="editor-field">
+                        @Html.LabelFor(model => model.MontoVenta)
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="editor-label">
+                        <strong>@Html.LabelFor(model => model.PagadoCon)</strong>
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.PagadoCon)
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="editor-label">
+                        <strong>@Html.LabelFor(model => model.Empresa)</strong>
+                    </div>
+                    <div class="editor-field">
+                        @Html.Label(Model.Empresas.Nombre)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <br />
+                <hr />
+                @if (AutoDealer.Models.Gastos.TieneGastos(Model.Automovil.ToString()) == true)
+                {
+                    string AutomovilId = Model.Automovil.ToString();
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Personas1.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Personas1.Nombre)
-    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="padd"><b>Id</b></div>
+                                </th>
+                                <th>
+                                    <div class="padd">
+                                        <b>Descripcion</b>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="padd">
+                                        <b>Precio</b>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="padd">
+                                        <b>Pagado a</b>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="padd">
+                                        <b>Fecha Creacion</b>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="padd"><b>Fecha Modificacion</b></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Personas.Nombre)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Personas.Nombre)
-    </div>
+                            @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                            {
+                                <tr>
+                                    <td><div class="padd">@item.Id</div></td>
+                                    <td><div class="padd">@item.TiposDeGastos.Nombre</div></td>
+                                    <td><div class="padd" id="sum">RD @String.Format("{0:C}", item.Precio)</div></td>
+                                    <td><div class="padd">@item.PagadoA</div></td>
+                                    <td><div class="padd">@item.FechaCreacion</div></td>
+                                    <td><div class="padd">@item.FechaModificacion</div></td>
+                                </tr>
+                            }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PagadoCon)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PagadoCon)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Comision)
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <strong>Este Automovil no tiene gastos.</strong>
+                }
+                <br />
+                <hr />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            Detalles de Venta:
+                        </div>
+                        <div class="editor-field">
+                            @Html.DisplayFor(model => model.DetallesDeVenta)
+                        </div>
+                    </div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="right">
+                            <br />
+                            <b>Sub Total:</b>
+                            <br />
+                            <div class="editor-field">
+                                @if (AutoDealer.Models.Gastos.TieneGastos(Model.Automovil.ToString()))
+                                {
+                                    <h5 id="SubTotal"></h5>
+                                }
+                                else
+                                {
+                                    <strong>RD $0.00</strong>
+                                }
+
+                            </div>
+                            <br />
+                            <strong>Comision:</strong>
+                            <br />
+                            @Html.DisplayFor(model => model.Comision)
+                            <br />
+                            <br />
+                            <strong>Total a pagar:</strong>
+                            <h4 id="TotalGeneral"></h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Comision)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+</div>
+
+
+<div>
     @Html.ActionLink("Volver a lista completa", "Index")
-</p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+        $(document).ready(
+            function () {
+
+                $("input[id^=Comision]").bind("keyup", TotalGeneral);
+                colSum();
+                TotalGeneral();
+
+            });
+
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#SubTotal').html("RD " + accounting.formatMoney(sum));
+        }
+
+
+        function TotalGeneral() {
+            $("[id^=TotalGeneral]").calc(
+            // the equation to use for the calculation
+            "Sum + Comision",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("h5[id^=SubTotal]"),
+                Comision: $("input[id^=Comision]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "RD " + accounting.formatMoney(s);
+            }
+        );
+        }
+
+    </script>
+}
