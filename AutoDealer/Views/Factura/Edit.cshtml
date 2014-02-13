@@ -181,14 +181,14 @@
                                 @Html.LabelFor(model => model.CostoTraspaso)
                             </div>
                             <div class="editor-field">
-                                @Html.EditorFor(model => model.CostoTraspaso)
+                                @Html.TextBoxFor(model => model.CostoTraspaso)
                                 @Html.ValidationMessageFor(model => model.CostoTraspaso)
                             </div>
                             <br />
                             @Html.Label("Descuento:")
                             <br />
-                            <input type="text" id="disc" name="disc" />
-
+                            -@Html.TextBoxFor(model => model.Descuento, new { id = "disc" })
+                            @Html.ValidationMessageFor(model => model.Descuento)
                             <br />
                             <br />
                             @Html.Label("Total General:")

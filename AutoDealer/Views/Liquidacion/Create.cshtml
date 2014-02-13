@@ -41,7 +41,7 @@
                             @Html.Label("Precio de Venta:")
                         </div>
                         <div class="editor-field">
-                            @Html.EditorFor(model => model.MontoVenta)
+                            @Html.TextBoxFor(model => model.MontoVenta)
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -57,7 +57,7 @@
                 <div class="row">
                     <br />
                     <hr />
-                    @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]))
+                    @if (!String.IsNullOrEmpty(Request.QueryString["AutomovilId"]) && AutoDealer.Models.Gastos.TieneGastos(Request.QueryString["AutomovilId"]) == true)     
                     {
                         string AutomovilId = Request.QueryString["AutomovilId"];
 
@@ -93,9 +93,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (AutoDealer.Models.Gastos.TieneGastos(AutomovilId) != false)
-                                {
-                                    foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                                
+                                    @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
                                     {
                                         <tr>
                                             <td><div class="padd">@item.Id</div></td>
@@ -106,11 +105,12 @@
                                             <td><div class="padd">@item.FechaModificacion</div></td>
                                         </tr>
                                     }
-                                }
+                                
 
                             </tbody>
                         </table>
-
+                    }
+                    <strong>Este Automovil no tiene gastos.</strong>
                         <br />
                         <hr />
                         <div class="row">
@@ -119,7 +119,7 @@
                                     Detalles de Venta:
                                 </div>
                                 <div class="editor-field">
-                                    @Html.EditorFor(model => model.DetallesDeVenta)
+                                    @Html.TextBoxFor(model => model.DetallesDeVenta)
                                     @Html.ValidationMessageFor(model => model.DetallesDeVenta)
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     <b>Sub Total:</b>
                                     <br />
                                     <div class="editor-field">
-                                        @if (AutoDealer.Models.Gastos.TieneGastos(AutomovilId))
+                                        @if (AutoDealer.Models.Gastos.TieneGastos(Request.QueryString["AutomovilId"]))
                                         {
                                             <h5 id="SubTotal"></h5>
                                         }
@@ -143,7 +143,7 @@
                                     <br />
                                     <b>Comision:</b>
                                     <br />
-                                    @Html.EditorFor(model => model.Comision)
+                                    @Html.TextBoxFor(model => model.Comision)
                                     @Html.ValidationMessageFor(model => model.Comision)
                                     <br />
                                     <br />
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                    
                     <p>
                         <input type="submit" value="Crear" />
                     </p>

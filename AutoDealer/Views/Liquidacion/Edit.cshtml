@@ -1,7 +1,7 @@
 ﻿@model AutoDealer.Models.Liquidaciones
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "AutoDealer - Editar Liquidacion";
 }
 
 <h2>Edit</h2>
@@ -76,7 +76,7 @@
             @Html.LabelFor(model => model.Comision, "Comision")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Comision)
+            @Html.TextBoxFor(model => model.Comision)
             @Html.ValidationMessageFor(model => model.Comision)
         </div>
 
