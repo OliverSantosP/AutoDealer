@@ -6,13 +6,17 @@
 }
 
 
-
+<div class="row">
+    <div class="col-lg-1">
+        <a class="btn btn-info" href="/Persona/Create">Crear Persona</a>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-lg-12">
-        
         @using (Html.BeginForm("Index", "persona", FormMethod.Get, "Buscar"))
         {
+            
         <div class="col-lg-1">
                 <select id="TipoRol" name="TipoRol" class="TipoRol">
                     <option value=""></option>
@@ -32,7 +36,7 @@
                 </select>
             
         </div>
-            <div class="col-lg-10">
+            <div class="col-lg-11">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-search"></span>
@@ -40,9 +44,7 @@
                     <input type="text" class="form-control" placeholder="Buscar" id="Buscar" name="Buscar">
                 </div>
             </div>
-            <div class="col-lg-1">
-                <a class="btn btn-info" href="/Persona/Create">Crear Persona</a>
-            </div>
+            
         }
     </div>
 </div>

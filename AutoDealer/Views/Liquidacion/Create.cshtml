@@ -20,6 +20,7 @@
 
         <div class="widget-content">
             <div class="padd">
+
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="editor-label">
@@ -92,55 +93,68 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                                @if (AutoDealer.Models.Gastos.TieneGastos(AutomovilId) != false)
                                 {
-                                    <tr>
-                                        <td><div class="padd">@item.Id</div></td>
-                                        <td><div class="padd">@item.TiposDeGastos.Nombre</div></td>
-                                        <td><div class="padd">@item.Precio</div></td>
-                                        <td><div class="padd">@item.PagadoA</div></td>
-                                        <td><div class="padd">@item.FechaCreacion</div></td>
-                                        <td><div class="padd">@item.FechaModificacion</div></td>
-                                    </tr>
+                                    foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(AutomovilId))
+                                    {
+                                        <tr>
+                                            <td><div class="padd">@item.Id</div></td>
+                                            <td><div class="padd">@item.TiposDeGastos.Nombre</div></td>
+                                            <td><div class="padd" id="sum">RD @String.Format("{0:C}", item.Precio)</div></td>
+                                            <td><div class="padd">@item.PagadoA</div></td>
+                                            <td><div class="padd">@item.FechaCreacion</div></td>
+                                            <td><div class="padd">@item.FechaModificacion</div></td>
+                                        </tr>
+                                    }
                                 }
+
                             </tbody>
                         </table>
-                    }
-                    <br />
-                    <hr />
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="editor-label">
-                                Detalles de Venta:
-                            </div>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.Detalle)
-                                @Html.ValidationMessageFor(model => model.Detalle)
-                            </div>
-                        </div>
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
-                            <div class="right">
-                                <br />
-                                <b>Total:</b>
-                                <br />
-                                <div class="editor-field">
-                                    RD $100.00
+
+                        <br />
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="editor-label">
+                                    Detalles de Venta:
                                 </div>
-                                <br />
-                                <b>Comision:</b>
-                                <br />
-                                RD $100.00
-                                <br />
-                                <br />
-                                <b>Total a pagar:</b>
-                                <br />
-                                RD $100.00
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.Detalle)
+                                    @Html.ValidationMessageFor(model => model.Detalle)
+                                </div>
+                            </div>
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <div class="right">
+                                    <br />
+                                    <b>Sub Total:</b>
+                                    <br />
+                                    <div class="editor-field">
+                                        @if (AutoDealer.Models.Gastos.TieneGastos(AutomovilId))
+                                        {
+                                            <h5 id="SubTotal"></h5>
+                                        }
+                                        else
+                                        {
+                                            <strong>RD $0.00</strong>
+                                        }
+
+                                    </div>
+                                    <br />
+                                    <b>Comision:</b>
+                                    <br />
+                                    <br />
+                                    RD $100.00
+                                    <br />
+                                    <br />
+                                    <b>Total a pagar:</b>
+                                    <h4 id="TotalGeneral"></h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                     <p>
-                        <input type="submit" value="Create" />
+                        <input type="submit" value="Crear" />
                     </p>
                 </div>
             </div>
@@ -154,4 +168,47 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/accounting.js"></script>
+    <script src="~/Content/js/jquery.calculation.js"></script>
+    <script type="text/javascript">
+        var bIsFirebugReady = (!!window.console && !!window.console.log);
+
+        $(document).ready(
+            function () {
+
+                $("input[id^=Comision]").bind("keyup", TotalGeneral);
+                colSum();
+                TotalGeneral();
+
+            });
+
+        function colSum() {
+            var sum = 0;
+            //iterate through each input and add to sum
+            $('div#sum').each(function () {
+                sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
+            });
+            //change value of total
+            $('#SubTotal').html("RD " + accounting.formatMoney(sum));
+        }
+
+
+        function TotalGeneral() {
+            $("[id^=TotalGeneral]").calc(
+            // the equation to use for the calculation
+            "Sum + Comision",
+            // define the variables used in the equation, these can be a jQuery object
+            {
+                Sum: $("h5[id^=SubTotal]"),
+                Comision: $("input[id^=Comision]")
+            },
+            // define the formatting callback, the results of the calculation are passed to this function
+            function (s) {
+                // return the number as a dollar amount
+                return "RD " + accounting.formatMoney(s);
+            }
+        );
+        }
+        
+       </script>
 }

@@ -16,9 +16,18 @@ namespace AutoDealer.Controllers
         //
         // GET: /Liquidacion/
 
-        public ActionResult Index()
+        public ActionResult Index(FormCollection Form)
         {
             var liquidaciones = db.Liquidaciones.Include(l => l.Facturas).Include(l => l.Gastos1).Include(l => l.Personas).Include(l => l.Personas1);
+            if (Form.Count > 0)
+            {
+                if (Form["Desde"] != "" && Form["Hasta"] != "")
+                {
+                    DateTime DesdeDT = DateTime.Parse(Form["Desde"]);
+                    DateTime HastaDT = DateTime.Parse(Form["Hasta"]);
+                    return View((from a in db.Liquidaciones where (a.FechaCreacion >= DesdeDT && a.FechaCreacion <= HastaDT) select a).ToList());
+                }
+            }
             return View(liquidaciones.ToList());
         }
 
