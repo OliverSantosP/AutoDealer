@@ -113,7 +113,7 @@ AutoDealer.Models.Automoviles Automovil = AutoDealer.Models.Automoviles.GetAutom
                             <td><h5 id="subtotal">RD @String.Format("{0:C}", @SubTotal)</h5></td>
                     </tr>
                         @{int CostoTraspaso = Int32.Parse(@Model.Comision.ToString());}
-                    <tr>
+                    <tr> 
                         <td class="pull-right"><strong>Comision:</strong></td>
                         <td>RD @String.Format("{0:C}", @Model.Comision)</td>
                     </tr>
