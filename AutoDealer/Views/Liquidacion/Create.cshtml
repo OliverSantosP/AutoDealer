@@ -119,8 +119,8 @@
                                     Detalles de Venta:
                                 </div>
                                 <div class="editor-field">
-                                    @Html.EditorFor(model => model.Detalle)
-                                    @Html.ValidationMessageFor(model => model.Detalle)
+                                    @Html.EditorFor(model => model.DetallesDeVenta)
+                                    @Html.ValidationMessageFor(model => model.DetallesDeVenta)
                                 </div>
                             </div>
                             <div class="col-lg-4"></div>
@@ -143,8 +143,8 @@
                                     <br />
                                     <b>Comision:</b>
                                     <br />
-                                    <br />
-                                    RD $100.00
+                                    @Html.EditorFor(model => model.Comision)
+                                    @Html.ValidationMessageFor(model => model.Comision)
                                     <br />
                                     <br />
                                     <b>Total a pagar:</b>

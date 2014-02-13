@@ -12,13 +12,18 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Gastos
     {
-        public Gastos()
-        {
-            this.Liquidaciones = new HashSet<Liquidaciones>();
-        }
+        public int Id { get; set; }
+        public int Tipo { get; set; }
+        public int Precio { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public int Automovil { get; set; }
+        public string PagadoA { get; set; }
+    
+        public virtual TiposDeGastos TiposDeGastos { get; set; }
 
         public static bool TieneGastos(string AutomovilId)
         {
@@ -66,19 +71,8 @@ namespace AutoDealer.Models
             {
                 Total = 0;
             }
-            
+
             return Total;
         }
-    
-        public int Id { get; set; }
-        public int Tipo { get; set; }
-        public int Precio { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public int Automovil { get; set; }
-        public string PagadoA { get; set; }
-    
-        public virtual TiposDeGastos TiposDeGastos { get; set; }
-        public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
     }
 }

@@ -11,31 +11,28 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Liquidaciones
     {
         public Liquidaciones()
         {
             this.Automoviles = new HashSet<Automoviles>();
-            this.Liquidaciones_Detalles = new HashSet<Liquidaciones_Detalles>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> Detalle { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> MontoVenta { get; set; }
         public Nullable<int> Suplidor { get; set; }
         public Nullable<int> Comprador { get; set; }
-        public Nullable<int> PagadoCon { get; set; }
-        public Nullable<int> Factura { get; set; }
-        public Nullable<int> Gastos { get; set; }
+        public string PagadoCon { get; set; }
+        public string DetallesDeVenta { get; set; }
+        public Nullable<int> Empresa { get; set; }
+        public Nullable<int> Comision { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Facturas Facturas { get; set; }
-        public virtual Gastos Gastos1 { get; set; }
+        public virtual Empresas Empresas { get; set; }
         public virtual Personas Personas { get; set; }
-        public virtual ICollection<Liquidaciones_Detalles> Liquidaciones_Detalles { get; set; }
         public virtual Personas Personas1 { get; set; }
     }
 }

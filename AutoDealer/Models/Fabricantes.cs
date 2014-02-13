@@ -19,6 +19,13 @@ namespace AutoDealer.Models
         {
             this.TiposAutomoviles = new HashSet<TiposAutomoviles>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int Status { get; set; }
+    
+        public virtual Status Status1 { get; set; }
+        public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
 
         public static List<Fabricantes> GetFabricantes()
         {
@@ -36,11 +43,5 @@ namespace AutoDealer.Models
             return Lista;
         }
     
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public int Status { get; set; }
-    
-        public virtual Status Status1 { get; set; }
-        public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
     }
 }

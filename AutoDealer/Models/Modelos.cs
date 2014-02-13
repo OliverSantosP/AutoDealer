@@ -27,6 +27,7 @@ namespace AutoDealer.Models
         public virtual Status Status1 { get; set; }
         public virtual ICollection<TiposAutomoviles> TiposAutomoviles { get; set; }
 
+
         /// <summary>
         /// Este metodo retorna un modelo, dado un fabricante.
         /// </summary>

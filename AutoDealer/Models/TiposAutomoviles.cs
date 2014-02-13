@@ -35,12 +35,12 @@ namespace AutoDealer.Models
         {
             int TipoAutomovil;
             int FabricanteInt = Int32.Parse(Fabricante);
-             
+
             AutoDealerEntities db = new AutoDealerEntities();
             List<TiposAutomoviles> ListaTiposAutomoviles = new List<TiposAutomoviles>();
             ListaTiposAutomoviles = db.TiposAutomoviles.Where(x => x.Fabricante == FabricanteInt).ToList();
-            
-            if (Modelo!="Modelo")
+
+            if (Modelo != "Modelo")
             {
                 int ModeloInt = Int32.Parse(Modelo);
                 ListaTiposAutomoviles = ListaTiposAutomoviles.Where(x => x.Modelo == ModeloInt).ToList();

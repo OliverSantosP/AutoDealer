@@ -12,13 +12,24 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Showrooms
     {
         public Showrooms()
         {
             this.Automoviles = new HashSet<Automoviles>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public int Empresa { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> Status { get; set; }
+    
+        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Empresas Empresas { get; set; }
+        public virtual Status Status1 { get; set; }
 
         public static Showrooms GetShowroom(int Id)
         {
@@ -55,15 +66,5 @@ namespace AutoDealer.Models
             return Lista;
         }
     
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public int Empresa { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public Nullable<int> Status { get; set; }
-    
-        public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Empresas Empresas { get; set; }
-        public virtual Status Status1 { get; set; }
     }
 }

@@ -68,17 +68,6 @@
           <Property Name="NCF" Type="varchar" MaxLength="50" />
           <Property Name="CostoTraspaso" Type="int" />
           <Property Name="Empresa" Type="int" />
-        </EntityType>
-        <EntityType Name="FacturasDetalles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Factura" Type="int" Nullable="false" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
-          <Property Name="Descripcion" Type="text" Nullable="false" />
-          <Property Name="Precio" Type="int" />
           <Property Name="Descuento" Type="int" />
         </EntityType>
         <EntityType Name="Gastos">
@@ -98,26 +87,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Detalle" Type="int" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="MontoVenta" Type="int" />
           <Property Name="Suplidor" Type="int" />
           <Property Name="Comprador" Type="int" />
-          <Property Name="PagadoCon" Type="int" />
-          <Property Name="Factura" Type="int" />
-          <Property Name="Gastos" Type="int" />
-        </EntityType>
-        <EntityType Name="Liquidaciones_Detalles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="text" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
-          <Property Name="Liquidacion" Type="int" Nullable="false" />
+          <Property Name="PagadoCon" Type="varchar" MaxLength="200" />
+          <Property Name="DetallesDeVenta" Type="varchar(max)" />
+          <Property Name="Empresa" Type="int" />
+          <Property Name="Comision" Type="int" />
         </EntityType>
         <EntityType Name="Modelos">
           <Key>
@@ -365,18 +343,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FacturasDetalles_Factura">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FacturasDetalles">
-              <PropertyRef Name="Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Gastos_TiposGastos">
           <End Role="TiposDeGastos" Type="Self.TiposDeGastos" Multiplicity="1" />
           <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
@@ -401,39 +367,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Liquidaciones_Detalles_Liquidaciones">
-          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
-          <End Role="Liquidaciones_Detalles" Type="Self.Liquidaciones_Detalles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Liquidaciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Liquidaciones_Detalles">
-              <PropertyRef Name="Liquidacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Liquidaciones_Factura">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+        <Association Name="FK_Liquidaciones_Empresa">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
           <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Facturas">
+            <Principal Role="Empresas">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Liquidaciones">
-              <PropertyRef Name="Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Liquidaciones_Gastos">
-          <End Role="Gastos" Type="Self.Gastos" Multiplicity="0..1" />
-          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gastos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Liquidaciones">
-              <PropertyRef Name="Gastos" />
+              <PropertyRef Name="Empresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -575,10 +517,8 @@
           <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fabricantes" EntityType="Self.Fabricantes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonasRoles" EntityType="Self.PersonasRoles" Schema="dbo" store:Type="Tables" />
@@ -640,10 +580,6 @@
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_FacturasDetalles_Factura" Association="Self.FK_FacturasDetalles_Factura">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
             <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
             <End Role="Gastos" EntitySet="Gastos" />
@@ -652,16 +588,8 @@
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Detalles_Liquidaciones" Association="Self.FK_Liquidaciones_Detalles_Liquidaciones">
-            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-            <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Factura" Association="Self.FK_Liquidaciones_Factura">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Gastos" Association="Self.FK_Liquidaciones_Gastos">
-            <End Role="Gastos" EntitySet="Gastos" />
+          <AssociationSet Name="FK_Liquidaciones_Empresa" Association="Self.FK_Liquidaciones_Empresa">
+            <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Liquidaciones_Suplidor" Association="Self.FK_Liquidaciones_Suplidor">
@@ -768,6 +696,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Empresas" FromRole="Empresas" ToRole="Facturas" />
           <NavigationProperty Name="Status1" Relationship="Self.FK_Empresas_Status" FromRole="Empresas" ToRole="Status" />
+          <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Empresa" FromRole="Empresas" ToRole="Liquidaciones" />
           <NavigationProperty Name="Showrooms" Relationship="Self.FK_Showrooms_Empresas" FromRole="Empresas" ToRole="Showrooms" />
         </EntityType>
         <EntityType Name="Fabricantes">
@@ -792,25 +721,11 @@
           <Property Name="NCF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CostoTraspaso" Type="Int32" />
           <Property Name="Empresa" Type="Int32" />
+          <Property Name="Descuento" Type="Int32" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Facturas" FromRole="Facturas" ToRole="Automoviles" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Empresas" FromRole="Facturas" ToRole="Empresas" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Facturas_PersonaComprador" FromRole="Facturas" ToRole="Personas" />
           <NavigationProperty Name="Personas1" Relationship="Self.FK_Facturas_PersonaVendedor" FromRole="Facturas" ToRole="Personas" />
-          <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_FacturasDetalles_Factura" FromRole="Facturas" ToRole="FacturasDetalles" />
-          <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Factura" FromRole="Facturas" ToRole="Liquidaciones" />
-        </EntityType>
-        <EntityType Name="FacturasDetalles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Factura" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Precio" Type="Int32" />
-          <Property Name="Descuento" Type="Int32" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasDetalles_Factura" FromRole="FacturasDetalles" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="Gastos">
           <Key>
@@ -824,40 +739,25 @@
           <Property Name="Automovil" Type="Int32" Nullable="false" />
           <Property Name="PagadoA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TiposDeGastos" Relationship="Self.FK_Gastos_TiposGastos" FromRole="Gastos" ToRole="TiposDeGastos" />
-          <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Gastos" FromRole="Gastos" ToRole="Liquidaciones" />
         </EntityType>
         <EntityType Name="Liquidaciones">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Detalle" Type="Int32" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="MontoVenta" Type="Int32" />
           <Property Name="Suplidor" Type="Int32" />
           <Property Name="Comprador" Type="Int32" />
-          <Property Name="PagadoCon" Type="Int32" />
-          <Property Name="Factura" Type="Int32" />
-          <Property Name="Gastos" Type="Int32" />
+          <Property Name="PagadoCon" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DetallesDeVenta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="Int32" />
+          <Property Name="Comision" Type="Int32" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Liquidaciones" FromRole="Liquidaciones" ToRole="Automoviles" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_Liquidaciones_Factura" FromRole="Liquidaciones" ToRole="Facturas" />
-          <NavigationProperty Name="Gastos1" Relationship="Self.FK_Liquidaciones_Gastos" FromRole="Liquidaciones" ToRole="Gastos" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Liquidaciones_Empresa" FromRole="Liquidaciones" ToRole="Empresas" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Liquidaciones_Comprador" FromRole="Liquidaciones" ToRole="Personas" />
-          <NavigationProperty Name="Liquidaciones_Detalles" Relationship="Self.FK_Liquidaciones_Detalles_Liquidaciones" FromRole="Liquidaciones" ToRole="Liquidaciones_Detalles" />
           <NavigationProperty Name="Personas1" Relationship="Self.FK_Liquidaciones_Suplidor" FromRole="Liquidaciones" ToRole="Personas" />
-        </EntityType>
-        <EntityType Name="Liquidaciones_Detalles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Liquidacion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Liquidaciones" Relationship="Self.FK_Liquidaciones_Detalles_Liquidaciones" FromRole="Liquidaciones_Detalles" ToRole="Liquidaciones" />
         </EntityType>
         <EntityType Name="Modelos">
           <Key>
@@ -1098,6 +998,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Liquidaciones_Empresa">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Liquidaciones">
+              <PropertyRef Name="Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Showrooms_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
           <End Role="Showrooms" Type="Self.Showrooms" Multiplicity="*" />
@@ -1158,30 +1070,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FacturasDetalles_Factura">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FacturasDetalles">
-              <PropertyRef Name="Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Liquidaciones_Factura">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
-          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Liquidaciones">
-              <PropertyRef Name="Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Gastos_TiposGastos">
           <End Role="TiposDeGastos" Type="Self.TiposDeGastos" Multiplicity="1" />
           <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
@@ -1194,18 +1082,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Liquidaciones_Gastos">
-          <End Role="Gastos" Type="Self.Gastos" Multiplicity="0..1" />
-          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gastos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Liquidaciones">
-              <PropertyRef Name="Gastos" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Liquidaciones_Comprador">
           <End Role="Personas" Type="Self.Personas" Multiplicity="0..1" />
           <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
@@ -1215,18 +1091,6 @@
             </Principal>
             <Dependent Role="Liquidaciones">
               <PropertyRef Name="Comprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Liquidaciones_Detalles_Liquidaciones">
-          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="1" />
-          <End Role="Liquidaciones_Detalles" Type="Self.Liquidaciones_Detalles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Liquidaciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Liquidaciones_Detalles">
-              <PropertyRef Name="Liquidacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1344,10 +1208,8 @@
           <EntitySet Name="Empresas" EntityType="Self.Empresas" />
           <EntitySet Name="Fabricantes" EntityType="Self.Fabricantes" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
-          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" />
           <EntitySet Name="Gastos" EntityType="Self.Gastos" />
           <EntitySet Name="Liquidaciones" EntityType="Self.Liquidaciones" />
-          <EntitySet Name="Liquidaciones_Detalles" EntityType="Self.Liquidaciones_Detalles" />
           <EntitySet Name="Modelos" EntityType="Self.Modelos" />
           <EntitySet Name="Personas" EntityType="Self.Personas" />
           <EntitySet Name="PersonasRoles" EntityType="Self.PersonasRoles" />
@@ -1397,6 +1259,10 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Empresas" EntitySet="Empresas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Liquidaciones_Empresa" Association="Self.FK_Liquidaciones_Empresa">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_Showrooms_Empresas" Association="Self.FK_Showrooms_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Showrooms" EntitySet="Showrooms" />
@@ -1417,29 +1283,13 @@
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_FacturasDetalles_Factura" Association="Self.FK_FacturasDetalles_Factura">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Factura" Association="Self.FK_Liquidaciones_Factura">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-          </AssociationSet>
           <AssociationSet Name="FK_Gastos_TiposGastos" Association="Self.FK_Gastos_TiposGastos">
             <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
             <End Role="Gastos" EntitySet="Gastos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Gastos" Association="Self.FK_Liquidaciones_Gastos">
-            <End Role="Gastos" EntitySet="Gastos" />
-            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-          </AssociationSet>
           <AssociationSet Name="FK_Liquidaciones_Comprador" Association="Self.FK_Liquidaciones_Comprador">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Liquidaciones_Detalles_Liquidaciones" Association="Self.FK_Liquidaciones_Detalles_Liquidaciones">
-            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
-            <End Role="Liquidaciones_Detalles" EntitySet="Liquidaciones_Detalles" />
           </AssociationSet>
           <AssociationSet Name="FK_Liquidaciones_Suplidor" Association="Self.FK_Liquidaciones_Suplidor">
             <End Role="Personas" EntitySet="Personas" />
@@ -1550,18 +1400,6 @@
                 <ScalarProperty Name="NCF" ColumnName="NCF" />
                 <ScalarProperty Name="CostoTraspaso" ColumnName="CostoTraspaso" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FacturasDetalles">
-            <EntityTypeMapping TypeName="AutoDealerModel.FacturasDetalles">
-              <MappingFragment StoreEntitySet="FacturasDetalles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Descuento" ColumnName="Descuento" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1583,27 +1421,15 @@
             <EntityTypeMapping TypeName="AutoDealerModel.Liquidaciones">
               <MappingFragment StoreEntitySet="Liquidaciones">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="MontoVenta" ColumnName="MontoVenta" />
                 <ScalarProperty Name="Suplidor" ColumnName="Suplidor" />
                 <ScalarProperty Name="Comprador" ColumnName="Comprador" />
                 <ScalarProperty Name="PagadoCon" ColumnName="PagadoCon" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="Gastos" ColumnName="Gastos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Liquidaciones_Detalles">
-            <EntityTypeMapping TypeName="AutoDealerModel.Liquidaciones_Detalles">
-              <MappingFragment StoreEntitySet="Liquidaciones_Detalles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="Liquidacion" ColumnName="Liquidacion" />
+                <ScalarProperty Name="DetallesDeVenta" ColumnName="DetallesDeVenta" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Comision" ColumnName="Comision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

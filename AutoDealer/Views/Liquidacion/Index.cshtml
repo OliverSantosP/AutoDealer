@@ -3,10 +3,6 @@
 @{
     ViewBag.Title = "AutoDealer - Liquidaciones";
 }
-<div class="row">
-    <div class="col-lg-1">
-        <a class="btn btn-info" href="/Liquidacion/Create">Crear Liquidacion</a>
-    </div>
 </div>
 <div class="row">
     <div class="col-lg-6">
@@ -35,7 +31,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Detalle)
+                            @Html.DisplayNameFor(model => model.Id)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.FechaCreacion)
@@ -55,12 +51,6 @@
                         <th>
                             @Html.DisplayNameFor(model => model.PagadoCon)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Facturas.NCF)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Gastos1.PagadoA)
-                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -68,7 +58,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Detalle)
+                            @Html.DisplayFor(modelItem => item.Id)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FechaCreacion)
@@ -87,12 +77,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PagadoCon)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Facturas.NCF)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Gastos1.PagadoA)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

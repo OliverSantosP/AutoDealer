@@ -19,7 +19,14 @@ namespace AutoDealer.Models
         {
             this.Automoviles = new HashSet<Automoviles>();
         }
-        
+    
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<int> Status { get; set; }
+    
+        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Status Status1 { get; set; }
+
 
         /// <summary>
         /// Retorna una lista de colores activos.
@@ -29,7 +36,7 @@ namespace AutoDealer.Models
         {
             AutoDealerEntities db = new AutoDealerEntities();
             List<Colores> ListaColores = new List<Colores>();
-            ListaColores = db.Colores.Where(x=>x.Status==1).ToList();
+            ListaColores = db.Colores.Where(x => x.Status == 1).ToList();
             return ListaColores;
         }
 
@@ -45,11 +52,5 @@ namespace AutoDealer.Models
             return ListaColores;
         }
     
-        public int ID { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> Status { get; set; }
-    
-        public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Status Status1 { get; set; }
     }
 }

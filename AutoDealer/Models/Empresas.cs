@@ -9,18 +9,30 @@
 
 namespace AutoDealer.Models
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class Empresas
     {
         public Empresas()
         {
             this.Facturas = new HashSet<Facturas>();
+            this.Liquidaciones = new HashSet<Liquidaciones>();
             this.Showrooms = new HashSet<Showrooms>();
         }
+    
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> Telefono { get; set; }
+        public string Direccion { get; set; }
+        public int Status { get; set; }
+    
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual Status Status1 { get; set; }
+        public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
+        public virtual ICollection<Showrooms> Showrooms { get; set; }
 
         public static List<Empresas> GetEmpresas()
         {
@@ -38,15 +50,5 @@ namespace AutoDealer.Models
             return Lista;
         }
 
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Email { get; set; }
-        public Nullable<int> Telefono { get; set; }
-        public string Direccion { get; set; }
-        public int Status { get; set; }
-
-        public virtual ICollection<Facturas> Facturas { get; set; }
-        public virtual Status Status1 { get; set; }
-        public virtual ICollection<Showrooms> Showrooms { get; set; }
     }
 }

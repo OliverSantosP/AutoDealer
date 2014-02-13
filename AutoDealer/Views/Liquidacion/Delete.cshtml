@@ -11,10 +11,10 @@
     <legend>Liquidaciones</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Detalle)
+         @Html.DisplayNameFor(model => model.DetallesDeVenta)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Detalle)
+        @Html.DisplayFor(model => model.DetallesDeVenta)
     </div>
 
     <div class="display-label">
@@ -60,17 +60,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Facturas.NCF)
+         @Html.DisplayNameFor(model => model.Comision)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Facturas.NCF)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Gastos1.PagadoA)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Gastos1.PagadoA)
+        @Html.DisplayFor(model => model.Comision)
     </div>
 </fieldset>
 @using (Html.BeginForm()) {

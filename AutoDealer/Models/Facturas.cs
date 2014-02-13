@@ -12,15 +12,28 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class Facturas
     {
         public Facturas()
         {
             this.Automoviles = new HashSet<Automoviles>();
-            this.FacturasDetalles = new HashSet<FacturasDetalles>();
-            this.Liquidaciones = new HashSet<Liquidaciones>();
         }
+    
+        public int Id { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public int Vendedor { get; set; }
+        public int Comprador { get; set; }
+        public string NCF { get; set; }
+        public Nullable<int> CostoTraspaso { get; set; }
+        public Nullable<int> Empresa { get; set; }
+        public Nullable<int> Descuento { get; set; }
+    
+        public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Empresas Empresas { get; set; }
+        public virtual Personas Personas { get; set; }
+        public virtual Personas Personas1 { get; set; }
 
         public static Facturas GetFactura(int Id)
         {
@@ -47,21 +60,5 @@ namespace AutoDealer.Models
             return ListaFacturas;
 
         }
-    
-        public int Id { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public int Vendedor { get; set; }
-        public int Comprador { get; set; }
-        public string NCF { get; set; }
-        public Nullable<int> CostoTraspaso { get; set; }
-        public Nullable<int> Empresa { get; set; }
-    
-        public virtual ICollection<Automoviles> Automoviles { get; set; }
-        public virtual Empresas Empresas { get; set; }
-        public virtual Personas Personas { get; set; }
-        public virtual Personas Personas1 { get; set; }
-        public virtual ICollection<FacturasDetalles> FacturasDetalles { get; set; }
-        public virtual ICollection<Liquidaciones> Liquidaciones { get; set; }
     }
 }

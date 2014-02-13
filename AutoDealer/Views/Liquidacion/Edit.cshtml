@@ -6,7 +6,8 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -16,11 +17,11 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Detalle)
+            @Html.LabelFor(model => model.DetallesDeVenta)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Detalle)
-            @Html.ValidationMessageFor(model => model.Detalle)
+            @Html.EditorFor(model => model.DetallesDeVenta)
+            @Html.ValidationMessageFor(model => model.DetallesDeVenta)
         </div>
 
         <div class="editor-label">
@@ -72,23 +73,15 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Factura, "Facturas")
+            @Html.LabelFor(model => model.Comision, "Comision")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Factura", String.Empty)
-            @Html.ValidationMessageFor(model => model.Factura)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gastos, "Gastos1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Gastos", String.Empty)
-            @Html.ValidationMessageFor(model => model.Gastos)
+            @Html.EditorFor(model => model.Comision)
+            @Html.ValidationMessageFor(model => model.Comision)
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Guardar" />
         </p>
     </fieldset>
 }

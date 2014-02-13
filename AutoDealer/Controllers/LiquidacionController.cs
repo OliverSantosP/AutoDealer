@@ -18,7 +18,7 @@ namespace AutoDealer.Controllers
 
         public ActionResult Index(FormCollection Form)
         {
-            var liquidaciones = db.Liquidaciones.Include(l => l.Facturas).Include(l => l.Gastos1).Include(l => l.Personas).Include(l => l.Personas1);
+            var liquidaciones = db.Liquidaciones.Include(l => l.Personas).Include(l => l.Personas1);
             if (Form.Count > 0)
             {
                 if (Form["Desde"] != "" && Form["Hasta"] != "")
@@ -65,13 +65,12 @@ namespace AutoDealer.Controllers
         {
             if (ModelState.IsValid)
             {
+                liquidaciones.FechaCreacion = DateTime.Now;
                 db.Liquidaciones.Add(liquidaciones);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", liquidaciones.Factura);
-            ViewBag.Gastos = new SelectList(db.Gastos, "Id", "PagadoA", liquidaciones.Gastos);
             ViewBag.Comprador = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Comprador);
             ViewBag.Suplidor = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Suplidor);
             return View(liquidaciones);
@@ -87,8 +86,6 @@ namespace AutoDealer.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", liquidaciones.Factura);
-            ViewBag.Gastos = new SelectList(db.Gastos, "Id", "PagadoA", liquidaciones.Gastos);
             ViewBag.Comprador = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Comprador);
             ViewBag.Suplidor = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Suplidor);
             return View(liquidaciones);
@@ -107,8 +104,6 @@ namespace AutoDealer.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Factura = new SelectList(db.Facturas, "Id", "NCF", liquidaciones.Factura);
-            ViewBag.Gastos = new SelectList(db.Gastos, "Id", "PagadoA", liquidaciones.Gastos);
             ViewBag.Comprador = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Comprador);
             ViewBag.Suplidor = new SelectList(db.Personas, "Id", "Nombre", liquidaciones.Suplidor);
             return View(liquidaciones);

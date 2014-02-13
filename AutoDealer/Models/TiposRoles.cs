@@ -12,7 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public partial class TiposRoles
     {
         public TiposRoles()
@@ -45,8 +45,6 @@ namespace AutoDealer.Models
             Nombre = TipoRol.Nombre;
             return Nombre;
         }
-
-
 
     }
 }
