@@ -89,7 +89,7 @@
                                     <div class="btn-group">
                                         <a href="/Factura/Edit/@item.Id" class="btn btn-sm btn-default">Editar</a>
                                         <a href="/Factura/Print/@item.Id" class="btn btn-sm btn-default">Imprimir</a>
-                                        <a href="#" class="btn btn-sm btn-default" data-toggle="modal" id="BorrarButton" name="BorrarButton"><i class="icon-remove"></i></a>
+                                        <a href="/Factura/Delete/@item.Id" class="btn btn-sm btn-default">Borrar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -100,46 +100,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Borrar Factura</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Esta seguro que desea borrar la factura #?</p>
-                    <br />
-                    <div class="padd">
-                        <button type="button" class="btn btn-default" id="Cancelar" name="Cancelar" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                        <a href="testlink" type="button" class="btn btn-danger" id="BorrarButton2" name="BorrarButton2" data-dismiss="modal">Borrar</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr />
 
 </div>
 
-@section Scripts {
-    <script type="text/javascript">
-        
-        $('#FacturasTable').find('BorrarButton').click(function () {
-            $("#myModal.modal-body").find('#BorrarButton2').append("test");
-                row = $(this).find('td:first').text();
-                $('#myModal').show().append(row.text());
-                
-            });
-
-            $("#myModal").find('#BorrarButton2').click(function () {
-                alert('test');
-                window.location.replace("http://stackoverflow.com" + row);
-            });
-
-    </script>
-}
