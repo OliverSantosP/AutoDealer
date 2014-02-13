@@ -53,6 +53,22 @@
                             @Html.ValidationMessageFor(model => model.PagadoCon)
                         </div>
                     </div>
+                    <div class="col-lg-2">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Empresa)
+                        </div>
+                        <div class="editor-field">
+                            <div class="btn-group">
+                                <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    @foreach (var item in AutoDealer.Models.Empresas.GetEmpresas())
+                                    {
+                                        <option value="@item.Id">@item.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Empresas.Nombre)
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <br />
