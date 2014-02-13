@@ -12,7 +12,7 @@ namespace AutoDealer.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Colores
     {
         public Colores()
@@ -26,7 +26,6 @@ namespace AutoDealer.Models
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
         public virtual Status Status1 { get; set; }
-
 
         /// <summary>
         /// Retorna una lista de colores activos.

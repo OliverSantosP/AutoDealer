@@ -96,6 +96,7 @@
           <Property Name="DetallesDeVenta" Type="varchar(max)" />
           <Property Name="Empresa" Type="int" />
           <Property Name="Comision" Type="int" />
+          <Property Name="Automovil" Type="int" />
         </EntityType>
         <EntityType Name="Modelos">
           <Key>
@@ -355,6 +356,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Liquidaciones_Automovil">
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="0..1" />
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Liquidaciones">
+              <PropertyRef Name="Automovil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Liquidaciones_Comprador">
           <End Role="Personas" Type="Self.Personas" Multiplicity="0..1" />
           <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
@@ -584,6 +597,10 @@
             <End Role="TiposDeGastos" EntitySet="TiposDeGastos" />
             <End Role="Gastos" EntitySet="Gastos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Liquidaciones_Automovil" Association="Self.FK_Liquidaciones_Automovil">
+            <End Role="Automoviles" EntitySet="Automoviles" />
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_Liquidaciones_Comprador" Association="Self.FK_Liquidaciones_Comprador">
             <End Role="Personas" EntitySet="Personas" />
             <End Role="Liquidaciones" EntitySet="Liquidaciones" />
@@ -673,6 +690,7 @@
           <NavigationProperty Name="Showrooms" Relationship="Self.FK_Automoviles_Showrooms" FromRole="Automoviles" ToRole="Showrooms" />
           <NavigationProperty Name="Status1" Relationship="Self.FK_Automoviles_Status" FromRole="Automoviles" ToRole="Status" />
           <NavigationProperty Name="TiposAutomoviles" Relationship="Self.FK_Automoviles_TiposAutomoviles" FromRole="Automoviles" ToRole="TiposAutomoviles" />
+          <NavigationProperty Name="Liquidaciones2" Relationship="Self.FK_Liquidaciones_Automovil" FromRole="Automoviles" ToRole="Liquidaciones" />
         </EntityType>
         <EntityType Name="Colores">
           <Key>
@@ -754,7 +772,9 @@
           <Property Name="DetallesDeVenta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Empresa" Type="Int32" />
           <Property Name="Comision" Type="Int32" />
+          <Property Name="Automovil" Type="Int32" />
           <NavigationProperty Name="Automoviles" Relationship="Self.FK_Automoviles_Liquidaciones" FromRole="Liquidaciones" ToRole="Automoviles" />
+          <NavigationProperty Name="Automoviles1" Relationship="Self.FK_Liquidaciones_Automovil" FromRole="Liquidaciones" ToRole="Automoviles" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Liquidaciones_Empresa" FromRole="Liquidaciones" ToRole="Empresas" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Liquidaciones_Comprador" FromRole="Liquidaciones" ToRole="Personas" />
           <NavigationProperty Name="Personas1" Relationship="Self.FK_Liquidaciones_Suplidor" FromRole="Liquidaciones" ToRole="Personas" />
@@ -959,6 +979,18 @@
             </Principal>
             <Dependent Role="Automoviles">
               <PropertyRef Name="TipoAutomovil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Liquidaciones_Automovil">
+          <End Role="Automoviles" Type="Self.Automoviles" Multiplicity="0..1" />
+          <End Role="Liquidaciones" Type="Self.Liquidaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Automoviles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Liquidaciones">
+              <PropertyRef Name="Automovil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1247,6 +1279,10 @@
             <End Role="TiposAutomoviles" EntitySet="TiposAutomoviles" />
             <End Role="Automoviles" EntitySet="Automoviles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Liquidaciones_Automovil" Association="Self.FK_Liquidaciones_Automovil">
+            <End Role="Automoviles" EntitySet="Automoviles" />
+            <End Role="Liquidaciones" EntitySet="Liquidaciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_Colores_Status" Association="Self.FK_Colores_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Colores" EntitySet="Colores" />
@@ -1430,6 +1466,7 @@
                 <ScalarProperty Name="DetallesDeVenta" ColumnName="DetallesDeVenta" />
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
                 <ScalarProperty Name="Comision" ColumnName="Comision" />
+                <ScalarProperty Name="Automovil" ColumnName="Automovil" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

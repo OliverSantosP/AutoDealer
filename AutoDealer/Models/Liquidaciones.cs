@@ -11,7 +11,7 @@ namespace AutoDealer.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Liquidaciones
     {
         public Liquidaciones()
@@ -29,8 +29,10 @@ namespace AutoDealer.Models
         public string DetallesDeVenta { get; set; }
         public Nullable<int> Empresa { get; set; }
         public Nullable<int> Comision { get; set; }
+        public Nullable<int> Automovil { get; set; }
     
         public virtual ICollection<Automoviles> Automoviles { get; set; }
+        public virtual Automoviles Automoviles1 { get; set; }
         public virtual Empresas Empresas { get; set; }
         public virtual Personas Personas { get; set; }
         public virtual Personas Personas1 { get; set; }

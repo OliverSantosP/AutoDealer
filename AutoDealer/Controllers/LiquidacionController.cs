@@ -61,11 +61,14 @@ namespace AutoDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Liquidaciones liquidaciones)
+        public ActionResult Create(Liquidaciones liquidaciones, FormCollection Form)
         {
+            liquidaciones.FechaCreacion = DateTime.Now;
+            liquidaciones.Automovil = Int32.Parse(Request.QueryString["AutomovilId"]);
+            liquidaciones.Empresa = Int32.Parse(Form["Empresa"]);
+            liquidaciones.Suplidor = Int32.Parse(Form["Suplidor"]);
             if (ModelState.IsValid)
             {
-                liquidaciones.FechaCreacion = DateTime.Now;
                 db.Liquidaciones.Add(liquidaciones);
                 db.SaveChanges();
                 return RedirectToAction("Index");

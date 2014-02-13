@@ -45,6 +45,5 @@ namespace AutoDealer.Models
             Nombre = TipoRol.Nombre;
             return Nombre;
         }
-
     }
 }

@@ -49,6 +49,5 @@ namespace AutoDealer.Models
             Lista = db.Empresas.Where(x => x.Id == id).ToList();
             return Lista;
         }
-
     }
 }

@@ -15,6 +15,11 @@ namespace AutoDealer.Models
 
     public partial class Automoviles
     {
+        public Automoviles()
+        {
+            this.Liquidaciones2 = new HashSet<Liquidaciones>();
+        }
+    
         public int Id { get; set; }
         public int Suplidor { get; set; }
         public Nullable<int> Liquidaciones { get; set; }
@@ -43,6 +48,7 @@ namespace AutoDealer.Models
         public virtual Showrooms Showrooms { get; set; }
         public virtual Status Status1 { get; set; }
         public virtual TiposAutomoviles TiposAutomoviles { get; set; }
+        public virtual ICollection<Liquidaciones> Liquidaciones2 { get; set; }
 
         public static Automoviles GetAutomovil(int Id)
         {

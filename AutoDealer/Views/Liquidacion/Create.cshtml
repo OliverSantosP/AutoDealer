@@ -27,7 +27,7 @@
                             @Html.Label("Suplidor:")
                         </div>
                         <div class="editor-field">
-                            <select>
+                            <select id="Suplidor" name="Suplidor">
                                 @foreach (var item in @AutoDealer.Models.Personas.GetSuplidores())
                                 {
                                     <option value="@item.Id">@item.Nombre @item.Apellido</option>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="editor-field">
                             <div class="btn-group">
-                                <select id="Empresas" name="Empresas" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <select id="Empresa" name="Empresa" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                     @foreach (var item in AutoDealer.Models.Empresas.GetEmpresas())
                                     {
                                         <option value="@item.Id">@item.Nombre</option>
