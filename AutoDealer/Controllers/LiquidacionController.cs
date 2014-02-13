@@ -45,6 +45,19 @@ namespace AutoDealer.Controllers
         }
 
         //
+        // GET: /Liquidacion/Details/5
+
+        public ActionResult Print(int id = 0)
+        {
+            Liquidaciones liquidaciones = db.Liquidaciones.Find(id);
+            if (liquidaciones == null)
+            {
+                return HttpNotFound();
+            }
+            return View(liquidaciones);
+        }
+
+        //
         // GET: /Liquidacion/Create
 
         public ActionResult Create()

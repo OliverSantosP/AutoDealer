@@ -81,6 +81,16 @@ namespace AutoDealer.Models
             return Persona.Nombre + " " + Persona.Apellido;
         }
 
+
+        public static string GetPersonaNombre(string Id)
+        {
+            int PersonaIdInt = Int32.Parse(Id);
+            AutoDealerEntities db = new AutoDealerEntities();
+            Personas Persona = new Personas();
+            Persona = db.Personas.Where(x => x.Id == PersonaIdInt).First();
+            return Persona.Nombre + " " + Persona.Apellido;
+        }
+
         public static Personas GetPersona(int Id)
         {
             AutoDealerEntities db = new AutoDealerEntities();

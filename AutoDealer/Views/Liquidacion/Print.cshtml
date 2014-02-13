@@ -1,0 +1,144 @@
+﻿@model AutoDealer.Models.Liquidaciones
+
+@{
+    Layout = null;
+}
+
+
+@{int AutomovilId = Int32.Parse(Model.Automovil.ToString());
+AutoDealer.Models.Automoviles Automovil = AutoDealer.Models.Automoviles.GetAutomovil(AutomovilId); }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Auto Dealer - Imprimir Liquidacion</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/print.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <h5 id="subtotal"></h5>
+        <div class="row">
+            <div class="span4">
+                <h2><strong>@Model.Empresas.Nombre</strong></h2><br>
+                <address>
+                    @Model.Empresas.Direccion<br>
+                    @Model.Empresas.Telefono<br>
+                    @Model.Empresas.Email<br />
+                </address>
+            </div>
+            <div class="span4 well">
+                <table class="invoice-head">
+                    <tbody>
+                        <tr>
+                            <td class="pull-right"><strong>Suplidor #</strong></td>
+                            <td>@Html.DisplayFor(x => x.Suplidor)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Liquidacion #</strong></td>
+                            <td>@Html.DisplayFor(x => x.Id)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Automovil #</strong></td>
+                            <td>@Html.Label(Automovil.Id.ToString())</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Fecha</strong></td>
+                            <td>@Html.DisplayFor(x => x.FechaCreacion)</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Suplidor</strong></td>
+                            <td>@Html.Label(AutoDealer.Models.Personas.GetPersonaNombre(Int32.Parse(Model.Suplidor.ToString())))</td>
+                        </tr>
+                        <tr>
+                            <td class="pull-right"><strong>Vehiculo</strong></td>
+                            <td>@Html.Label(Automovil.TiposAutomoviles.Fabricantes.Nombre +" "+ Automovil.TiposAutomoviles.Modelos.Nombre +" "+Automovil.Year.Year + " " + Automovil.Colores.Nombre)</td>
+                        </tr>
+
+
+                        @{AutoDealer.Models.Personas Persona = AutoDealer.Models.Personas.GetPersona(Int32.Parse(Model.Suplidor.ToString()));}
+                        @if (Persona.Direccion != null)
+                        {
+                            <tr>
+                                <td class="pull-right"><strong>Direccion</strong></td>
+                                <td>@Html.Label(Persona.Direccion.ToString())</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span8">
+                <h2>Liquidacion</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span8 well invoice-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Gasto</th>
+                            <th>Precio</th>
+                            <th>Fecha de Creacion</th>
+                            <th>Fecha de Modificacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in AutoDealer.Models.Gastos.GetGastosOf(@Model.Automovil.ToString()))
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.TiposDeGastos.Nombre</td>
+                                <td><div class="padd" id="sum">RD @String.Format("{0:C}", item.Precio)</div></td>
+                                <td>@item.FechaCreacion</td>
+                                <td>@item.FechaModificacion</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+                <h5 id="subtotal"></h5>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>@{int SubTotal = AutoDealer.Models.Gastos.TotalGastos(Automovil.Id.ToString());}
+                            <td class="pull-right"><strong>Total:</strong></td>
+                            <td><h5 id="subtotal">RD @String.Format("{0:C}", @SubTotal)</h5></td>
+                    </tr>
+                        @{int CostoTraspaso = Int32.Parse(@Model.Comision.ToString());}
+                    <tr>
+                        <td class="pull-right"><strong>Comision:</strong></td>
+                        <td>RD @String.Format("{0:C}", @Model.Comision)</td>
+                    </tr>
+                        @{int TotalGeneral = SubTotal + CostoTraspaso;}
+                    <tr>
+                        <td class="pull-right"><strong>Total General:</strong></td>
+                        <td><strong>RD @String.Format("{0:C}", @TotalGeneral)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8 well invoice-thank">
+            <h5 style="text-align:center;">AutoDealer @DateTime.Now.Year</h5>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Content/js/jquery.js"></script>
+}
+
+
+</body>
+</html>

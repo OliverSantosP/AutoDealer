@@ -488,6 +488,7 @@
     <Content Include="Views\Liquidacion\Edit.cshtml" />
     <Content Include="Views\Liquidacion\Delete.cshtml" />
     <Content Include="Views\Factura\Print.cshtml" />
+    <Content Include="Views\Liquidacion\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
