@@ -100,19 +100,27 @@
                     <tbody>
                         <tr>
                             <td class="pull-right"><strong>Total:</strong></td>
-                            <td><h5 id="subtotal"></h5></td>
+                            <td>@{int SubTotal = 0;
+                                  
+                                  foreach (var item in AutoDealer.Models.Automoviles.GetAutomovilOfFactura(Model.Id))
+                                  {
+                                     SubTotal += Int32.Parse(item.PrecioVenta.ToString());
+                                      
+                                  }
+                                  }
+                            <h5 id="subtotal">RD @String.Format("{0:C}", @SubTotal)</h5></td>
                         </tr>
-                        <tr>
+                        <tr>@{int CostoTraspaso = Int32.Parse(@Model.CostoTraspaso.ToString());}
                             <td class="pull-right"><strong>Costo Traspaso:</strong></td>
-                            <td>@Html.DisplayFor(model => model.CostoTraspaso)</td>
+                            <td>RD @String.Format("{0:C}", @Model.CostoTraspaso)</td>
                         </tr>
-                        <tr>
+                        <tr>@{Int32 Descuento = 100;}
                             <td class="pull-right"><strong>Descuento:</strong></td>
-                            <td>-@*@Html.LabelFor(model => model.Descuento)*@</td>
+                            <td>-@*RD @String.Format("{0:C}", @Model.Descuento)*@</td>
                         </tr>
-                        <tr>
+                        <tr>@{int TotalGeneral = SubTotal + CostoTraspaso - Descuento;}
                             <td class="pull-right"><strong>Total General:</strong></td>
-                            <td><h4 id="total_item"></h4></td>
+                            <td><strong>RD @String.Format("{0:C}", @TotalGeneral)</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -129,51 +137,6 @@
 
     @section Scripts {
     <script src="~/Content/js/jquery.js"></script>
-        <script src="~/Content/js/accounting.js"></script>
-        <script src="~/Content/js/jquery.calculation.js"></script>
-        <script type="text/javascript">
-            var bIsFirebugReady = (!!window.console && !!window.console.log);
-
-            $(document).ready(
-                function () {
-                    colSum();
-                    TotalGeneral();
-
-                });
-
-            function colSum() {
-                var sum = 0;
-                //iterate through each div and add to sum
-                $('div#sum').each(function () {
-                    sum += parseInt($(this).text().replace("RD $", "").replace(".00", "").replace(",", ""));
-                });
-                //change value of total
-                $('#subtotal').html("RD " + accounting.formatMoney(sum));
-            }
-
-
-            function TotalGeneral() {
-                $("[id^=total_item]").calc(
-                // the equation to use for the calculation
-                "Sum + CostoTraspaso - Discount",
-                // define the variables used in the equation, these can be a jQuery object
-                {
-                    Sum: $("h5[id^=subtotal]"),
-                    CostoTraspaso: $("input[id^=CostoTraspaso]"),
-                    Discount: $("[id^=disc]")
-                },
-                // define the formatting callback, the results of the calculation are passed to this function
-                function (s) {
-                    // return the number as a dollar amount
-                    return "RD " + accounting.formatMoney(s);
-                }
-            );
-
-
-
-            };
-
-        </script>
     }
 
 
